@@ -1,0 +1,4 @@
+<!--pages/http-test/index.wxml-->
+<button bindtap="http">支付</button>
+<button bindtap="receive">退款</button>
+<button bindtap="notice">退款通知</button>

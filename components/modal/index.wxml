@@ -1,0 +1,8 @@
+<!--components/modal.wxml-->
+<view class='mask' wx:if='{{show}}' bindtap='clickMask'>
+  <view class='modal-content'>
+    <scroll-view scroll-y class='main-content'>
+      <slot></slot>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<!--components/card/index.wxml-->
+<view class="lz-card">
+  <view class="lz-card__title">
+    <slot name="title"></slot>
+  </view>
+  <view class="lz-card__body">
+    <slot name="body"></slot>
+  </view>
+</view>

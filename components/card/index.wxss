@@ -1,0 +1,14 @@
+/* components/card/index.wxss */
+.lz-card{
+  box-shadow: 0px 4px 10px #dcdcdc;
+  border-radius: 16rpx;
+}
+.lz-card__title{
+  border-bottom: 1px solid #dddddd;
+  padding: 20rpx 32rpx;
+  display: flex;
+  align-items: center;
+}
+.lz-card__body{
+  padding: 24rpx 32rpx 32rpx 32rpx;
+}

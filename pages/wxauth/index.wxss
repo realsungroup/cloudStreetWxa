@@ -1,0 +1,10 @@
+/* pages/wxauth/index.wxss */
+.wx-auth-page{
+  justify-content: center;
+}
+.tip-text{
+  margin-bottom: 24rpx;
+  color: #666666;
+  text-align: center;
+  font-size: 24rpx;
+}

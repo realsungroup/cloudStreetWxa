@@ -1,0 +1,61 @@
+<!--pages/user-info/index.wxml-->
+<view class="user-info-page">
+  <view class="list">
+    <view class="list-item">
+      <label class="input-lable">昵称</label>
+      <input id="nickname" value="{{userInfo.nickname}}" bindinput="handleInput" type="text" class="lz-input"
+        placeholder="请输入昵称" />
+    </view>
+    <view class="list-item">
+      <label class="input-lable">性别</label>
+      <radio-group id="sex" class="lz-radio-group" bindchange="handleInput">
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd">
+            <radio value="男" checked="{{userInfo.sex === '男'}}"/>
+          </view>
+          <view class="weui-cell__bd">男</view>
+        </label>
+        <label class="weui-cell weui-check__label">
+          <view class="weui-cell__hd">
+            <radio value="女" checked="{{userInfo.sex === '女'}}"/>
+          </view>
+          <view class="weui-cell__bd">女</view>
+        </label>
+      </radio-group>
+    </view>
+    <view class="list-item">
+      <label class="input-lable">年龄</label>
+      <input id="age" value="{{userInfo.age}}" bindinput="handleInput" type="number" class="lz-input"
+        placeholder="请输入年龄" />
+    </view>
+    <view class="list-item">
+      <label class="input-lable">身高(cm)</label>
+      <input id="length" value="{{userInfo.length}}" bindinput="handleInput" type="digit" class="lz-input"
+        placeholder="请输入身高" />
+    </view>
+    <view class="list-item">
+      <label class="input-lable">体重(kg)</label>
+      <input id="weight" value="{{userInfo.weight}}" bindinput="handleInput" type="digit" class="lz-input"
+        placeholder="请输入体重" />
+    </view>
+    <view class="list-item">
+      <picker id="birthday" class="lz-picker" mode="date" value="{{userInfo.birthday}}" start="1900-01-01"
+        bindchange="handleInput">
+        <view class="picker" style="display:flex;justify-content:space-between;align-items:center">
+          <view>
+            生日
+          </view>
+          <view>
+            {{userInfo.birthday?userInfo.birthday:''}}
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="footer">
+    <view bindtap="saveUserInfo" class="save-button lz-button--primary">
+      保存
+    </view>
+  </view>
+</view>

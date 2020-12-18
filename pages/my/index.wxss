@@ -1,0 +1,97 @@
+/* pages/my/index.wxss */
+.navbar {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.navbar-title {
+  width: 100%;
+  box-sizing: border-box;
+  height: 32px;
+  line-height: 32px;
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.home-nav-business-headimg {
+  height: 64rpx;
+  width: 64rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin: 0 24rpx;
+}
+
+.home-nav .navbar-title {
+  color: #000000;
+  font-size: 36rpx;
+  padding-right: 100px;
+  display: flex;
+}
+
+.home-nav .navbar-title .navbar-title-text {
+  flex-grow: 1;
+  flex-shrink: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 150px;
+}
+
+.lz-my__header{
+  display: flex;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 24rpx;
+}
+.lz-my__header-right{
+  flex: 1;
+  margin-left: 32rpx;
+}
+.unlogin-header{
+  display: flex;
+  padding: 24rpx;
+  align-items: center;
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+}
+.unlogin-header text{
+  margin-left: 32rpx;
+}
+.user-avatar{
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+}
+.user-name{
+  font-weight: bold;
+  padding-bottom: 24rpx;
+}
+
+.list{
+
+}
+.list-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 40rpx 20rpx 32rpx;
+  color: #333333;
+  border-bottom: 1px solid #dcdcdc;
+  font-size: 32rpx;
+}
+.right-arrow{
+  height: 32rpx;
+  width: 18rpx;
+}

@@ -1,0 +1,156 @@
+<!--index.wxml-->
+<scroll-view class="container" scroll-y enable-flex="true">
+  <view class="navbar home-nav" style='height:{{navHeight}}px;'>
+    <view class='navbar-title' style='top:{{navTop}}px'>
+      <image src="{{businessInfo.business_headurl}}" class="home-nav-business-headimg" />
+      <view class="navbar-title-text">
+        {{businessInfo.business_fullname}}
+      </view>
+    </view>
+  </view>
+  <view style='margin-top:{{navHeight+6}}px;'>
+    <view class="page-section  swiper">
+      <swiper indicator-dots autoplay circular vertical interval="{{interval}}" duration="{{duration}}"
+        previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
+        <block wx:for="{{background}}" wx:key="*this">
+          <swiper-item>
+            <view class="swiper-item {{item}}"></view>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="home-tip-container">
+        <view wx:if="{{hasOrder}}" class="lz-card">
+          <view class="lz-card__title">
+            <image src="/images/warning.png" class="order-status-icon--warding" />
+            <view class="order-status-text order-status-text--warding">您有一个预约即将开始</view>
+          </view>
+          <view class="lz-card__body order-content">
+            <view class="order-content__left">
+              <view>
+                <text>{{currentOrder.good_name}}</text>
+                <text class="order-businessname">@{{currentOrder.shopname}}</text>
+              </view>
+              <view class="order-times">
+                <view>
+                  从 {{currentOrder.starttime}}
+                </view>
+                <view>
+                  至 {{currentOrder.endtime}}
+                </view>
+              </view>
+              <view style="display:flex;">
+                <button bindtap="pay" size="mini" class="lz-button--primary goods-item-button ">
+                  付款
+                </button>
+                <button bindtap="refund" size="mini" class="lz-button--primary goods-item-button ">
+                  退款
+                </button> 
+              </view>
+
+            </view>
+            <view class="order-content__right" bindtap="handleScan">
+              <image src="/images/scan_big.png" class="order-content__scan-code-icon" />
+              <view class="order-content__scan-code-text">立即扫码</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="tip-order">
+        <text>您还没有预约哦，</text>
+        <text class="tip-order-text">点击发现附近店铺</text>
+      </view> -->
+    </view>
+    <button bindtap="goRideDetail">运动详情</button>
+    <view class="goods-list">
+      <view class="list-title-tag">
+        <text>热门推荐</text>
+      </view>
+      <view>
+        <view class="goods-item" wx:for="{{goods}}" wx:key="putaway_ID">
+          <image class="goods-item-image" src="{{item.goods_img}}" />
+          <view class="goods-item__right">
+            <view>
+              <text>{{item.goods_name}}</text>
+            </view>
+            <view>
+              <text class="goods-item-price">￥{{item.sell_price}}/小时</text>
+            </view>
+            <view class="goods-item-actions">
+              <view class="lz-button--primary goods-item-button ">
+                <text>立即预约</text>
+              </view>
+              <view class="lz-button goods-item-button ">
+                <text>查看详情</text>
+              </view>
+              <view class="lz-button goods-item-button" bindtap="testOrders">
+                <text>测试指令</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <modal show="{{false}}" height='60%'>
+      <view class="lz-card">
+        <view class="lz-card__title">
+          <image src="/images/warning.png" class="order-status-icon--warding" />
+          <view class="order-status-text order-status-text--warding">您有一个预约已经开始</view>
+        </view>
+        <view class="lz-card__body order-content">
+          <view class="order-content__left">
+            <view>
+              <text>K3-212型跑步机</text>
+              <text class="order-businessname">@张三健身馆</text>
+            </view>
+            <view class="order-times">
+              <view>
+                从 2020/12/10 08:00:00
+              </view>
+              <view>
+                至 2020/12/10 09:00:00
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="order-actions">
+          <view class="lz-button--primary scan-button ">
+            <text>立即扫码</text>
+          </view>
+          <view class="lz-button wait-button ">
+            <text>等下再去</text>
+          </view>
+        </view>
+
+      </view>
+    </modal>
+    <modal show="{{scanDevice}}" height='60%'>
+      <view class="lz-card">
+        <view class="lz-card__title">
+          <view class="order-status-text order-status-text--warding">设备信息</view>
+        </view>
+        <view class="lz-card__body order-content">
+          <view class="order-content__left">
+            <view>
+              商家名称：{{scanDevice.business_name}}
+            </view>
+            <view>
+              商铺名称：{{scanDevice.shop_name}}
+            </view>
+            <view>
+              设备名称：{{scanDevice.deviceName}}
+            </view>
+          </view>
+        </view>
+        <view class="order-actions">
+          <view class="lz-button--primary scan-button " bindtap="rideRightNow">
+            <text>立即骑行</text>
+          </view>
+          <view class="lz-button wait-button" bindtap="cancelRide">
+            <text>等下再去</text>
+          </view>
+        </view>
+      </view>
+    </modal>
+  </view>
+
+</scroll-view>

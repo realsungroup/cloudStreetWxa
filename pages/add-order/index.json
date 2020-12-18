@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "time-picker": "../../../components/time-picker/index"
+  },
+  "navigationStyle": "default",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "添加订单"
+}

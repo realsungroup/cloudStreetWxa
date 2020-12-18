@@ -1,0 +1,21 @@
+<!--pages/add-order/index.wxml-->
+<!--pages/user-info/index.wxml-->
+<view class="add-order-page">
+  <view class="list">
+    <view class="list-item">
+      <view style="margin-right:16rpx">开始时间</view>
+      <time-picker mode="dateTime" class="picker" placeholder="请选择时间" bind:onPickerChange="onStartChange">
+      </time-picker>
+    </view>
+    <view class="list-item">
+      <view style="margin-right:16rpx">结束时间</view>
+      <time-picker mode="dateTime" class="picker" placeholder="请选择时间" bind:onPickerChange="onEndChange">
+      </time-picker>
+    </view>
+  </view>
+  <view class="footer">
+    <view bindtap="saveOrder" class="save-button lz-button--primary">
+      添加
+    </view>
+  </view>
+</view>

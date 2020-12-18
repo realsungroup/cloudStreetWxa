@@ -1,0 +1,12 @@
+<!--pages/wxauth/index.wxml-->
+<view class="container wx-auth-page">
+  <view>
+    <view class="tip-text">
+      请完成微信授权以继续使用
+    </view>
+    <button type="primary" size="default" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+      微信授权用户信息
+    </button>
+  </view>
+
+</view>

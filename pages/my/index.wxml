@@ -1,0 +1,52 @@
+<!--pages/my/index.wxml-->
+<view class="lz-my">
+  <view class="navbar home-nav" style='height:{{navHeight}}px;'>
+    <view class='navbar-title' style='top:{{navTop}}px'>
+      <image src="{{businessInfo.business_headurl}}" class="home-nav-business-headimg" />
+      <view class="navbar-title-text">
+        {{businessInfo.business_fullname}}123
+      </view>
+    </view>
+  </view>
+  <view style='margin-top:{{navHeight+6}}px;'>
+
+    <view wx:if="{{userLogined}}" class="lz-my__header">
+      <view class="lz-my__header-left">
+        <image class="user-avatar" src="{{avatarUrl}}" />
+      </view>
+      <view class="lz-my__header-right">
+        <view class="user-name">{{personalInfo.nickname}}</view>
+        <view class="gray-text" style="padding-bottom:16rpx">本周运动时间 12小时</view>
+        <view class="gray-text">累计运动时间 151小时</view>
+      </view>
+    </view>
+    <view wx:else class="unlogin-header" bindtap="handleLogin">
+      <image class="user-avatar" src="{{businessInfo.business_headurl}}" />
+      <text>登录</text>
+    </view>
+    <view class="list">
+      <view class="list-item" bindtap="gotoUserInfo">个人信息
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
+      <view class="list-item">查看订单 <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
+      <view class="list-item">配送地址
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
+      <view class="list-item">隐私政策
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
+      <view class="list-item">联系我们
+      </view>
+    </view>
+  </view>
+
+</view>
