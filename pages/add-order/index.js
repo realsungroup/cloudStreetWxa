@@ -8,17 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    starttime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    endtime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-    goliveid: ''
+    minutesArr: [5, 10, 20, 30, 40, 50, 60, 120, 240, 360],
+    value: [0]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.goliveid);
-    this.setData({ goliveid: options.goliveid })
   },
 
   /**
@@ -69,24 +66,28 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onStartChange: function (e) {
-    this.setData({ starttime: e.detail.value })
-  },
-  onEndChange: function (e) {
-    this.setData({ endtime: e.detail.value })
+  bindChange: function (e) {
+    const value = e.detail.value
+    this.setData({ value })
   },
   saveOrder: async function () {
-    const { starttime, endtime, goliveid } = this.data;
+    const { value, minutesArr } = this.data;
+    const starttime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    const endtime = dayjs().add(minutesArr[value[0]], 'minute').format('YYYY-MM-DD HH:mm:ss');
     try {
-      await addOrderApi({ starttime, endtime, shopname: '测试商品', good_name: '骑行' });
-      wx.showToast({ title: '添加成功', duration: 1500 })
+      await addOrderApi({ starttime, endtime, shopname: '测试商铺', good_name: '骑行' });
+      wx.showToast({ title: '添加成功', duration: 1500 });
       setTimeout(() => {
         wx.navigateBack({
-          delta: 0,
+          delta: 1,
         })
       }, 1500);
     } catch (error) {
-
+      wx.showModal({
+        showCancel: false,
+        content: error.message,
+        title: '提示'
+      })
     }
   }
 })

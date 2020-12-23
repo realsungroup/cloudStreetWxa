@@ -16,15 +16,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.navigateBack({
-            delta: 0,
-          })
-        }
-      },
-    })
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       wx.navigateTo({
+    //         url: '/pages/login/index',
+    //       });
+    //     }
+    //   },
+    // })
   },
 
   /**
@@ -41,9 +41,15 @@ Page({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          wx.navigateBack({
-            delta: 0,
-          })
+          if (app.globalData.loginedUser) {
+            wx.navigateBack({
+              delta: 0,
+            })
+          } else {
+            wx.navigateTo({
+              url: '/pages/login/index',
+            });
+          }
         }
       },
     })
@@ -118,9 +124,11 @@ Page({
                 });
               }
             } catch (error) {
+              console.log(error)
               wx.showToast({
-                title: error.message,
-                duration: 2000
+                title: '请再试一遍',
+                duration: 2000,
+                icon: 'none'
               })
             }
           }

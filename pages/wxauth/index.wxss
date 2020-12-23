@@ -1,8 +1,13 @@
 /* pages/wxauth/index.wxss */
-.wx-auth-page{
+
+.wx-auth-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
-.tip-text{
+
+.tip-text {
   margin-bottom: 24rpx;
   color: #666666;
   text-align: center;

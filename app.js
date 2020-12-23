@@ -1,5 +1,5 @@
 //app.js
-import { getBusinessInfo, getPersonalinfo, miniProgramLogin, userLogin } from './utils/http/http.services'
+import { getBusinessInfo, getPersonalinfo, miniProgramLogin, userLogin, addPersonalinfo } from './utils/http/http.services'
 
 wx.cloud.init({
   env: 'openshopwx-anj96',
@@ -16,7 +16,6 @@ App({
     personalInfo: {}
   },
   onLaunch: function () {
-   
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -40,7 +39,7 @@ App({
     this._miniProgramLogin();
     try {
       const storageUserInfo = wx.getStorageSync('userInfo');
-      storageUserInfo && this._userLogin(storageUserInfo.UserCode);
+      storageUserInfo && this._userLogin(storageUserInfo.UserInfo.EMP_OPENID);
     } catch (error) {
     }
   },
@@ -81,7 +80,7 @@ App({
         wx.showModal({
           showCancel: false,
           title: '提示',
-          content: error.message
+          content: loginResult.ErrorMsg
         });
       }
     } catch (error) {
@@ -106,16 +105,15 @@ App({
   },
   fetchUserInfo: async function () {
     try {
-      const res = await getPersonalinfo();
+      let res = await getPersonalinfo();
       if (res.data.length) {
         this.setGlobalData({
           personalInfo: res.data[0]
         })
       } else {
-        wx.showModal({
-          showCancel: false,
-          title: '提示',
-          content: '无个人信息'
+        res = await addPersonalinfo();
+        this.setGlobalData({
+          personalInfo: res.data[0]
         })
       }
     } catch (error) {

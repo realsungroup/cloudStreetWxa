@@ -1,6 +1,8 @@
 //index.js
 import { getBusinessGoods, getOrdersApi, queryDeviceByTimeId, saveDevice, modifyOrderApi } from '../../utils/http/http.services'
 import { isURL, getQueryObject } from '../../utils/util'
+import dayjs from 'dayjs';
+
 //获取应用实例
 const app = getApp()
 
@@ -16,41 +18,28 @@ Page({
     orders: [],
     currentOrder: null,
     scanDevice: null, //扫码扫到的设备信息
+    loginedUser: null,
 
-    background: ['demo-text-1', 'demo-text-2', 'demo-text-3'],
+    background: ['http://pwapp.oss-cn-beijing.aliyuncs.com/cloudstree/34021608706894_.pic_hd.jpg', 'http://pwapp.oss-cn-beijing.aliyuncs.com/cloudstree/34031608706896_.pic_hd.jpg',
+      'http://pwapp.oss-cn-beijing.aliyuncs.com/cloudstree/34041608706898_.pic_hd.jpg'],
     interval: 5000,
     duration: 500,
     previousMargin: 0,
     nextMargin: 0
   },
+  fetchOrdersTimer: null,
   onReady: function () {
+
+  },
+  onUnload: function () {
+    clearInterval(this.fetchOrdersTimer);
   },
   onLoad: function (option) {
     // console.log(decodeURIComponent(option.q));
-
-    const ws = wx.connectSocket({
-      url: 'wss://kingofdinner.realsun.me/bicycle?resid=660941167468&recid=661605903052',
-    })
-    ws.onMessage((res) => {
-      console.log('message-----', res)
-    });
-    ws.onOpen((res) => {
-      console.log('open-----', res);
-      ws.send({
-        data: 'ping'
-      })
-    });
-    ws.onClose(() => {
-      console.log('ws-close');
-    })
-    ws.onError(() => {
-      console.log('ws-onerror')
-    })
     this.setData({
       navHeight: app.globalData.navHeight,
       navTop: app.globalData.navTop,
     })
-    this.fetchOrders();
     if (app.globalData.miniProgramLogined) {
       this.fetchBusinessGoods();
     }
@@ -76,6 +65,28 @@ Page({
         this.setData({ businessInfo: val[660914792669][0] })
       }
     });
+
+    if (app.globalData.loginedUser) {
+      this.setData({ loginedUser: app.globalData.loginedUser })
+    }
+    app.$watch('loginedUser', (val) => {
+      this.setData({ loginedUser: val })
+      if (val) {
+        this.fetchOrdersTimer = setInterval(() => {
+          this.fetchOrders();
+        }, 5000);
+      } else {
+        clearInterval(this.fetchOrdersTimer);
+        this.setData({
+          hasOrder: false,
+          orders: [],
+          currentOrder: null,
+        })
+      }
+    });
+  },
+  onShow: function () {
+    this.data.loginedUser && this.fetchOrders();
   },
   fetchBusinessGoods: async function () {
     try {
@@ -97,6 +108,12 @@ Page({
           hasOrder: true,
           currentOrder: orders.data[0],
           orders: orders.data,
+        })
+      } else {
+        this.setData({
+          hasOrder: false,
+          currentOrder: null,
+          orders: [],
         })
       }
     } catch (error) {
@@ -127,10 +144,34 @@ Page({
           try {
             let res = await queryDeviceByTimeId(timeid);
             if (res.data.length) {
-              res = await saveDevice(res.data[0]);
+              // res = await saveDevice(res.data[0]);
               const data = res.data[0]
               if (data.isonline === 'Y') {
-                this.setData({ scanDevice: data })
+                // 设备当前状态
+                const deviceState = data[661964358786][0]
+                if (deviceState.devicestate === '繁忙') {
+                  if (deviceState[661964402374].length) {
+                    // 设备当前订单
+                    const deviceOrder = deviceState[661964402374][0];
+                    if (deviceOrder.userid === this.data.loginedUser.UserCode) {
+                      this.setData({ scanDevice: data });
+                    } else {
+                      wx.showModal({
+                        showCancel: false,
+                        title: '提示',
+                        content: '当前设备已占用'
+                      });
+                    }
+                  } else {
+                    wx.showModal({
+                      showCancel: false,
+                      title: '提示',
+                      content: '繁忙但无订单'
+                    });
+                  }
+                } else {
+                  this.setData({ scanDevice: data });
+                }
               } else {
                 wx.showModal({
                   showCancel: false,
@@ -171,26 +212,27 @@ Page({
       const res = await modifyOrderApi({
         ...currentOrder,
         goliveid: scanDevice.goliveid,
-        C3_658000358736: 'Y'
+        C3_658000358736: 'Y',
+        // new_starttime: dayjs().format('YYYY-MM-DD HH:mm:ss')
       });
-      console.log(res);
       this.setData({ scanDevice: null });
       wx.navigateTo({
-        url: '/pages/ride-detail/index',
+        url: '/pages/ride-detail/index?orderid='+ currentOrder.orderid,
       })
     } catch (error) {
-      console.log(error)
+      wx.showModal({
+        title: '提示',
+        content: error.message,
+        showCancel: false
+      })
     }
   },
   cancelRide: function () {
     this.setData({ scanDevice: null });
   },
   goRideDetail: function () {
-    // wx.navigateTo({
-    //   url: '/pages/ride-detail/index?orderid=' + this.data.currentOrder.orderid,
-    // })
     wx.navigateTo({
-      url: '/pages/http-test/index',
+      url: '/pages/ride-detail/index?orderid=' + this.data.currentOrder.orderid,
     })
   },
   pay: function (e) {
@@ -199,7 +241,8 @@ Page({
       name: 'wxpay',
       data: {
         goods_name: currentOrder.good_name,
-        orderid: currentOrder.orderid
+        orderid: currentOrder.orderid,
+        totalFee: currentOrder.money * 100
       },
       success: res => {
         const payment = res.result.payment
@@ -207,6 +250,11 @@ Page({
           ...payment,
           success(res) {
             console.log('pay success', res)
+            wx.showToast({
+              title: '支付成功',
+              icon: 'success',
+              duration: 1500
+            })
           },
           fail(res) {
             console.error('pay fail', res)
@@ -216,19 +264,48 @@ Page({
       fail: console.error,
     })
   },
-  refund: function (e) {
-    const { currentOrder } = this.data
+  refund: function () {
+    const { currentOrder } = this.data;
+    if (!currentOrder.paywxTransid) {
+      return wx.showToast({
+        title: '无法退款',
+        icon: 'none',
+        duration: 1500
+      });
+    }
     wx.cloud.callFunction({ //调用云函数
       name: 'refund',
       data: {
         out_refund_no: currentOrder.orderid + dayjs().valueOf(),
-        transaction_id: '4200000804202012186409047494',
-        out_trade_no: currentOrder.orderid
+        transaction_id: currentOrder.paywxTransid,
+        out_trade_no: currentOrder.orderid,
+        refund_fee: currentOrder.money * 100,
+        totalFee: currentOrder.money * 100
       },
       success: res => {
-        console.log(res)
+        wx.showToast({
+          title: '退款成功',
+          icon: 'success',
+          duration: 1500
+        });
       },
       fail: console.error,
     })
+  },
+  goGoodsDetail: function (e) {
+    wx.navigateTo({
+      url: '/pages/goods-detail/index?id=' + e.currentTarget.dataset.goods.putaway_ID,
+    })
+  },
+  goAddOrder: function () {
+    if (app.globalData.loginedUser) {
+      wx.navigateTo({
+        url: '/pages/add-order/index',
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
   },
 })

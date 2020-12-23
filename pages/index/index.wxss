@@ -63,7 +63,6 @@ page {
 
 .page-section {
   width: 100%;
-  margin-bottom: 60rpx;
 }
 
 .page-section:last-child {
@@ -124,15 +123,19 @@ page {
 .swiper-item {
   display: block;
   height: 150px;
+  width: 100%;
 }
 
 .home-tip-container {
-  margin: 24rpx;
+  position: relative;
+  top: -64rpx;
+  margin: 0 24rpx;
 }
 
 .lz-card {
   box-shadow: 0px 4px 10px #dcdcdc;
   border-radius: 16rpx;
+  background: #ffffff;
 }
 
 .lz-card__title {
@@ -214,6 +217,7 @@ page {
 /* 首页商品列表 */
 .goods-list {
   margin: 0rpx 24rpx;
+  margin-top: 24rpx;
   padding-top: 32rpx;
   border-radius: 16rpx;
   background-color: #FFFFFF;
@@ -275,7 +279,11 @@ page {
   height: 64rpx;
   border-radius: 32rpx;
 }
-
+.order-content .order-button{
+  width: 140rpx;
+  height: 64rpx;
+  border-radius: 32rpx;
+}
 .order-actions {
   display: flex;
   justify-content: space-between;

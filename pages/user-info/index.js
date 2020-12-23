@@ -16,11 +16,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (app.globalData.personalInfo) {
-      this.setData({ userInfo: { ...app.globalData.personalInfo } });
+    const { personalInfo } = app.globalData
+    if (personalInfo) {
+      this.setData({
+        userInfo: {
+          ...personalInfo,
+          birthday: personalInfo.birthday ? personalInfo.birthday.substring(0, 10) : ''
+        }
+      });
     }
     app.$watch('personalInfo', (val, old) => {
-      this.setData({ userInfo: { ...val } });
+      this.setData({
+        userInfo: {
+          ...val, birthday: val.birthday ? val.birthday.substring(0, 10) : ''
+        }
+      });
     });
   },
 

@@ -1,6 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "default",
-  "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "运动详情"
+  "usingComponents": {
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
+  },
+  "navigationBarTextStyle": "white"
 }

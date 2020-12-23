@@ -16,8 +16,8 @@
       </view>
       <view class="lz-my__header-right">
         <view class="user-name">{{personalInfo.nickname}}</view>
-        <view class="gray-text" style="padding-bottom:16rpx">本周运动时间 12小时</view>
-        <view class="gray-text">累计运动时间 151小时</view>
+        <!-- <view class="gray-text" style="padding-bottom:16rpx">本周运动时间 12小时</view>
+        <view class="gray-text">累计运动时间 151小时</view> -->
       </view>
     </view>
     <view wx:else class="unlogin-header" bindtap="handleLogin">
@@ -30,7 +30,8 @@
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
-      <view class="list-item">查看订单 <view>
+
+      <!-- <view class="list-item">查看订单 <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
@@ -45,7 +46,11 @@
         </view>
       </view>
       <view class="list-item">联系我们
-      </view>
+      </view> -->
+
+    </view>
+    <view wx:if="{{userLogined}}" class="logout" bindtap="logout">
+      退出账号
     </view>
   </view>
 

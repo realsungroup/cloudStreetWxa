@@ -14,7 +14,7 @@
         previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
         <block wx:for="{{background}}" wx:key="*this">
           <swiper-item>
-            <view class="swiper-item {{item}}"></view>
+            <image src="{{item}}" class="swiper-item " />
           </swiper-item>
         </block>
       </swiper>
@@ -39,12 +39,17 @@
                 </view>
               </view>
               <view style="display:flex;">
-                <button bindtap="pay" size="mini" class="lz-button--primary goods-item-button ">
+                <button bindtap="goRideDetail" size="mini" class="lz-button--primary order-button ">
+                  查看
+                </button>
+                <button wx:if="{{!currentOrder.paywxTransid}}" bindtap="pay" size="mini"
+                  class="lz-button--primary order-button ">
                   付款
                 </button>
-                <button bindtap="refund" size="mini" class="lz-button--primary goods-item-button ">
+                <button wx:if="{{currentOrder.paywxTransid && !currentOrder.refundwxTransid}}" bindtap="refund"
+                  size="mini" class="lz-button--primary order-button ">
                   退款
-                </button> 
+                </button>
               </view>
 
             </view>
@@ -60,7 +65,7 @@
         <text class="tip-order-text">点击发现附近店铺</text>
       </view> -->
     </view>
-    <button bindtap="goRideDetail">运动详情</button>
+    <!-- <button bindtap="goRideDetail">运动详情</button> -->
     <view class="goods-list">
       <view class="list-title-tag">
         <text>热门推荐</text>
@@ -76,15 +81,15 @@
               <text class="goods-item-price">￥{{item.sell_price}}/小时</text>
             </view>
             <view class="goods-item-actions">
-              <view class="lz-button--primary goods-item-button ">
+              <view bindtap="goAddOrder" class="lz-button--primary goods-item-button ">
                 <text>立即预约</text>
               </view>
-              <view class="lz-button goods-item-button ">
+              <view bindtap="goGoodsDetail" data-goods="{{item}}" class="lz-button goods-item-button ">
                 <text>查看详情</text>
               </view>
-              <view class="lz-button goods-item-button" bindtap="testOrders">
+              <!-- <view class="lz-button goods-item-button" bindtap="testOrders">
                 <text>测试指令</text>
-              </view>
+              </view> -->
             </view>
           </view>
         </view>

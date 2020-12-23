@@ -9,7 +9,8 @@
     "pages/user-info/index",
     "pages/add-order/index",
     "pages/ride-detail/index",
-    "pages/http-test/index"
+    "pages/http-test/index",
+    "pages/goods-detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -37,5 +38,8 @@
     "selectedColor": "#FA541C"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "weui": true
+  }
 }

@@ -1,0 +1,35 @@
+<!--pages/goods-detail/index.wxml-->
+<scroll-view>
+  <swiper indicator-dots autoplay circular interval="{{5000}}" duration="{{500}}" previous-margin="{{0}}px"
+    next-margin="{{0}}px">
+    <block wx:for="{{photos}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}" class="swiper-item" mode="heightFix"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="goods-summary">
+    <view class="goods-name">
+      {{goods.goods_name}}
+    </view>
+    <view class="shop-info">
+      <image class="shop-img" src="/images/shop@2x.png" />
+      <text>{{goods.shop_name}}</text>
+    </view>
+    <view class="goods-price">
+      <view class="goods-price-text">￥{{goods.sell_price}} /小时</view>
+      <view class="goods-device-count">设备数量：8</view>
+    </view>
+  </view>
+  <view class="goods-des">
+    <view class="goods-des__header">描述</view>
+    <view class="goods-des__text">
+      {{goods.goods_dec?goods.goods_dec : '暂无描述'}}
+    </view>
+  </view>
+  <view class="footer">
+    <view bindtap="goAddOrder" class="lz-button--primary order-button">
+      确认预约
+    </view>
+  </view>
+</scroll-view>

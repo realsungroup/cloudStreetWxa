@@ -7,8 +7,8 @@ const got = require('got'); //引用 got
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  console.log('收到微信支付结果通知', event);
   const { resultCode, outTradeNo, cashFee, transactionId, userInfo } = event;
+  console.log(event);
   if (resultCode === 'SUCCESS') {
     let postResponse = await got('https://openshopwx.realsun.me/api/account/login', {
       method: 'POST', //post请求
@@ -34,18 +34,22 @@ exports.main = async (event, context) => {
         _state: 'editoradd'
       }])
     }
-    const res = await got('https://openshopwx.realsun.me/api/100/table/Save', {
-      method: 'POST',
-      headers: {
-        'Accept': "application/json",
-        "Content-Type": "application/json;charset=utf-8",
-        'accessToken': accessToken,
-      },
-      body: JSON.stringify(data)
-    });
-    console.log(JSON.parse(res.body))
-    return {
-      errcode: 0, errmsg: ''
+    try {
+      const res = await got('https://openshopwx.realsun.me/api/100/table/Save', {
+        method: 'POST',
+        headers: {
+          'Accept': "application/json",
+          "Content-Type": "application/json;charset=utf-8",
+          'accessToken': accessToken,
+        },
+        body: JSON.stringify(data)
+      });
+      console.log(JSON.parse(res.body));
+      return {
+        errcode: 0, errmsg: ''
+      }
+    } catch (error) {
+      return {}
     }
   } else {
     return {}

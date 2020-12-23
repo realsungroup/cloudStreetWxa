@@ -1,0 +1,82 @@
+/* pages/goods-detail/index.wxss */
+
+.goods-summary {
+  padding: 32rpx;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.goods-name {
+  color: #333333;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+}
+
+.shop-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+
+}
+
+.shop-img {
+  height: 32rpx;
+  width: 32rpx;
+  margin-right: 8rpx;
+}
+
+.swiper-item {
+  display: block;
+  width: 100%;
+  height: 150px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.goods-price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goods-price-text {
+  color: #FA541C;
+  font-size: 40rpx;
+}
+
+.goods-device-count {
+  color: #666666;
+  display: flex;
+  align-items: center
+}
+
+.lz-button--primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to left, #FA541C, #FD8D3C);
+  color: #FFFFFF;
+}
+
+.goods-des {}
+
+.goods-des__header {
+  border-bottom: 1px solid #dcdcdc;
+  padding: 14rpx 28rpx;
+}
+
+.goods-des__text {
+  padding: 32rpx;
+}
+
+.footer {
+  padding: 32rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.order-button {
+  height: 80rpx;
+  border-radius: 40rpx;
+}

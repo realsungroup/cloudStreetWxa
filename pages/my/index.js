@@ -121,9 +121,18 @@ Page({
       },
     })
   },
-  gotoUserInfo:function(){
-    wx.navigateTo({
+  gotoUserInfo: function () {
+    const { userLogined } = this.data
+    userLogined && wx.navigateTo({
       url: '/pages/user-info/index',
+    })
+  },
+  logout: function () {
+    wx.removeStorageSync('userInfo');
+    app.setGlobalData({
+      userLogined: false,
+      loginedUser: null,
+      personalInfo: {}
     })
   }
 })

@@ -58,11 +58,11 @@ function getPromise(url, data, method, isBusiness = false) {
         if (res.data.error == 0 || res.data.Error == 0) {
           resolve(res.data)
         } else {
-          reject(new Error(res.data.message))
+          reject(new Error(res.data.message));
         }
       },
       fail: function (err) {
-        reject(err)
+        reject(err);
       }
     })
   })

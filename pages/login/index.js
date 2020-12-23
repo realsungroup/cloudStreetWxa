@@ -76,6 +76,11 @@ Page({
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
           if (code) {
             try {
+              wx.showToast({
+                title: '登录中',
+                icon: 'loading',
+                duration: 0
+              })
               const result = await getWXUserInfo({
                 code,
                 AppId: app.globalData.businessInfo.wxa_appid,
@@ -90,10 +95,7 @@ Page({
                 try {
                   const loginResult = await userLogin(wxUserInfo.unionId);
                   if (loginResult.OpResult === 'Y') {
-                    wx.setStorage({
-                      key: 'userInfo',
-                      data: loginResult
-                    });
+                    wx.setStorageSync('userInfo', loginResult);
                     wx.navigateBack({
                       delta: 0,
                     });
@@ -101,6 +103,7 @@ Page({
                       userLogined: true,
                       loginedUser: loginResult
                     });
+                    app.fetchUserInfo();
                   } else {
                     wx.showModal({
                       showCancel: false,
@@ -127,10 +130,7 @@ Page({
                   })
                   const loginResult = await userLogin(wxUserInfo.unionId);
                   if (loginResult.OpResult === 'Y') {
-                    wx.setStorage({
-                      key: 'userInfo',
-                      data: loginResult
-                    });
+                    wx.setStorageSync('userInfo', loginResult);
                     wx.navigateBack({
                       delta: 0,
                     });
@@ -138,14 +138,16 @@ Page({
                       userLogined: true,
                       loginedUser: loginResult
                     });
+                    app.fetchUserInfo();
                   } else {
                     wx.showModal({
                       showCancel: false,
                       title: '提示',
-                      content: error.message
+                      content: '登录失败'
                     });
                   }
                 } catch (error) {
+                  console.log(error)
                   wx.showModal({
                     showCancel: false,
                     title: '提示',
@@ -153,12 +155,16 @@ Page({
                   });
                 }
               }
+              wx.hideToast();
             } catch (error) {
+              wx.hideToast();
               wx.showToast({
-                title: error.message,
-                duration: 1500
+                title: '请再试一遍',
+                duration: 1500,
+                icon: 'none'
               })
             }
+
           }
         },
       })
