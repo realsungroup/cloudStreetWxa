@@ -27,7 +27,7 @@ const getBusinessGoods = () => {
 }
 // 根据id获取商家商品（服务）
 const getGoodsById = (id) => {
-  return http.get(retrieve200, { resid: '660856859469', cmswhere: `putaway_ID = '${id}'` }, true);
+  return http.get(retrieve200, { resid: '660856859469', subresid: '660929208133', cmswhere: `putaway_ID = '${id}'` }, true);
 }
 
 const getWXUserInfo = ({ code, iv, AppId, AppSecret, encrypteddata }) => {
@@ -89,9 +89,9 @@ const queryDeviceByTimeId = (id) => {
   return http.get(retrieve200,
     {
       resid: '661543607433',
-      subresid: '661964358786,661964402374',
+      subresid: '661964358786,661964402374,660929208133',
       cmswhere: `liveTimeid = '${id}'`
-    })
+    }, true)
 }
 const saveDevice = (data) => {
   return http.modifyRecords({

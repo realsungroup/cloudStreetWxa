@@ -18,7 +18,7 @@
     </view>
     <view class="goods-price">
       <view class="goods-price-text">￥{{goods.sell_price}} /小时</view>
-      <view class="goods-device-count">设备数量：8</view>
+      <view class="goods-device-count">设备数量：{{deviceCount}}</view>
     </view>
   </view>
   <view class="goods-des">

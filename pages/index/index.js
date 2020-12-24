@@ -1,6 +1,6 @@
 //index.js
-import { getBusinessGoods, getOrdersApi, queryDeviceByTimeId, saveDevice, modifyOrderApi } from '../../utils/http/http.services'
-import { isURL, getQueryObject } from '../../utils/util'
+import { getBusinessGoods, getOrdersApi, queryDeviceByTimeId, saveDevice, modifyOrderApi } from '../../utils/http/http.services';
+import { isURL, getQueryObject } from '../../utils/util';
 import dayjs from 'dayjs';
 
 //获取应用实例
@@ -35,7 +35,6 @@ Page({
     clearInterval(this.fetchOrdersTimer);
   },
   onLoad: function (option) {
-    // console.log(decodeURIComponent(option.q));
     this.setData({
       navHeight: app.globalData.navHeight,
       navTop: app.globalData.navTop,
@@ -72,6 +71,7 @@ Page({
     app.$watch('loginedUser', (val) => {
       this.setData({ loginedUser: val })
       if (val) {
+        this.fetchOrders();
         this.fetchOrdersTimer = setInterval(() => {
           this.fetchOrders();
         }, 5000);
@@ -153,7 +153,7 @@ Page({
                   if (deviceState[661964402374].length) {
                     // 设备当前订单
                     const deviceOrder = deviceState[661964402374][0];
-                    if (deviceOrder.userid === this.data.loginedUser.UserCode) {
+                    if (deviceOrder.userid === this.data.loginedUser.UserInfo.EMP_ID) {
                       this.setData({ scanDevice: data });
                     } else {
                       wx.showModal({
@@ -213,11 +213,10 @@ Page({
         ...currentOrder,
         goliveid: scanDevice.goliveid,
         C3_658000358736: 'Y',
-        // new_starttime: dayjs().format('YYYY-MM-DD HH:mm:ss')
       });
       this.setData({ scanDevice: null });
       wx.navigateTo({
-        url: '/pages/ride-detail/index?orderid='+ currentOrder.orderid,
+        url: '/pages/ride-detail/index?orderid=' + currentOrder.orderid,
       })
     } catch (error) {
       wx.showModal({
@@ -297,10 +296,10 @@ Page({
       url: '/pages/goods-detail/index?id=' + e.currentTarget.dataset.goods.putaway_ID,
     })
   },
-  goAddOrder: function () {
+  goAddOrder: function (e) {
     if (app.globalData.loginedUser) {
       wx.navigateTo({
-        url: '/pages/add-order/index',
+        url: '/pages/add-order/index?goods_id=' + e.currentTarget.dataset.goods.goods_id,
       });
     } else {
       wx.navigateTo({

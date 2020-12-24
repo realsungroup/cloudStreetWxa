@@ -1,5 +1,4 @@
 <!--pages/add-order/index.wxml-->
-<!--pages/user-info/index.wxml-->
 <view class="add-order-page">
   <view class="list">
     <view style="text-align:center;margin:24rpx 0;">请选择分钟数</view>

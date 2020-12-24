@@ -9,13 +9,15 @@ Page({
    */
   data: {
     minutesArr: [5, 10, 20, 30, 40, 50, 60, 120, 240, 360],
-    value: [0]
+    value: [0],
+    good_id: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({ good_id: options.goods_id })
   },
 
   /**
@@ -71,11 +73,11 @@ Page({
     this.setData({ value })
   },
   saveOrder: async function () {
-    const { value, minutesArr } = this.data;
+    const { value, minutesArr, good_id } = this.data;
     const starttime = dayjs().format('YYYY-MM-DD HH:mm:ss');
     const endtime = dayjs().add(minutesArr[value[0]], 'minute').format('YYYY-MM-DD HH:mm:ss');
     try {
-      await addOrderApi({ starttime, endtime, shopname: '测试商铺', good_name: '骑行' });
+      await addOrderApi({ starttime, endtime, good_id });
       wx.showToast({ title: '添加成功', duration: 1500 });
       setTimeout(() => {
         wx.navigateBack({

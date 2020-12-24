@@ -46,7 +46,7 @@ Page({
               delta: 0,
             })
           } else {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '/pages/login/index',
             });
           }
@@ -115,11 +115,8 @@ Page({
               const openId = result.openId;
               const unionId = result.unionId;
               if (openId && unionId) {
-                wx.setStorage({
-                  data: result,
-                  key: 'wxUserInfo',
-                });
-                wx.navigateTo({
+                wx.setStorageSync('wxUserInfo', result);
+                wx.redirectTo({
                   url: '/pages/login/index',
                 });
               }

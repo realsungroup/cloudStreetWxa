@@ -1,0 +1,17 @@
+<!--pages/add-order-byscan/index.wxml-->
+<view class="add-order-page">
+  <view class="list">
+    <mp-cells ext-class="my-cells">
+      <mp-cell value="设备编号" footer="{{scanDevice.goliveid}}"></mp-cell>
+      <mp-cell value="设备名称" footer="{{scanDevice.deviceName}}"></mp-cell>
+      <picker bindchange="minutesChange" value="{{value}}" range="{{minutesArr}}">
+        <mp-cell value="骑行时长" footer="{{minutesArr[value]}}"></mp-cell>
+      </picker>
+    </mp-cells>
+  </view>
+  <view class="footer">
+    <view bindtap="addOrder" class="save-button lz-button--primary">
+      添加
+    </view>
+  </view>
+</view>

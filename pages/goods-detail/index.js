@@ -10,7 +10,8 @@ Page({
    */
   data: {
     goods: {},
-    photos: []
+    photos: [],
+    deviceCount: 0
   },
 
   /**
@@ -73,19 +74,27 @@ Page({
       const res = await getGoodsById(id);
       if (res.data.length) {
         const data = res.data[0]
-        this.setData({ goods: data });
-        this.setData({ photos: data.goods_photos ? data.goods_photos.split(';') : [] })
+        let deviceCount = 0
+        if (data[660929208133].length) {
+          deviceCount = data[660929208133][0].bookSouceAmount
+        }
+        this.setData({
+          goods: data,
+          deviceCount,
+          photos: data.goods_photos ? data.goods_photos.split(';') : []
+        })
       } else {
-        wx.showToast({ icon: null, title: '查询不到' })
+        wx.showToast({ icon: 'none', title: '查询不到' })
       }
     } catch (error) {
 
     }
   },
-  goAddOrder: function(){
+  goAddOrder: function () {
     if (app.globalData.loginedUser) {
+      const { goods } = this.data
       wx.navigateTo({
-        url: '/pages/add-order/index',
+        url: '/pages/add-order/index?goods_id=' + goods.goods_id,
       });
     } else {
       wx.navigateTo({

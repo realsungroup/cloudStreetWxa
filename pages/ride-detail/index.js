@@ -101,7 +101,7 @@ Page({
       console.log('open');
     });
     this.ws.onMessage((res) => {
-      console.log(dayjs().format('HH:mm:ss'), res);
+      // console.log(dayjs().format('HH:mm:ss'), res);
       this.ws.send({
         data: 'pong'
       });

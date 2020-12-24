@@ -71,7 +71,7 @@
         <text>热门推荐</text>
       </view>
       <view>
-        <view class="goods-item" wx:for="{{goods}}" wx:key="putaway_ID">
+        <view class="goods-item" wx:for="{{goods}}"  wx:key="putaway_ID">
           <image class="goods-item-image" src="{{item.goods_img}}" />
           <view class="goods-item__right">
             <view>
@@ -81,7 +81,7 @@
               <text class="goods-item-price">￥{{item.sell_price}}/小时</text>
             </view>
             <view class="goods-item-actions">
-              <view bindtap="goAddOrder" class="lz-button--primary goods-item-button ">
+              <view bindtap="goAddOrder" data-goods="{{item}}" class="lz-button--primary goods-item-button ">
                 <text>立即预约</text>
               </view>
               <view bindtap="goGoodsDetail" data-goods="{{item}}" class="lz-button goods-item-button ">

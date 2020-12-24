@@ -1,0 +1,36 @@
+/* pages/add-order-byscan/index.wxss */
+.add-order-page{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.list{
+  flex: 1;
+}
+.picker{
+  flex: 1;
+}
+.list-item{
+  display: flex;
+  padding: 24rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+.list-item:first-of-type{
+  border-top: 1px solid #dcdcdc;
+}
+.footer{
+  padding: 24rpx;
+}
+.lz-button--primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to left, #FA541C, #FD8D3C);
+  color: #FFFFFF;
+}
+.save-button{
+  width: 100%;
+  height: 80rpx;
+  border-radius: 40rpx;
+}

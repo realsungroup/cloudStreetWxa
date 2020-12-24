@@ -1,4 +1,5 @@
 // pages/my/index.js
+import { isURL, getQueryObject } from '../../utils/util'
 const app = getApp();
 
 Page({
@@ -122,7 +123,7 @@ Page({
     })
   },
   gotoUserInfo: function () {
-    const { userLogined } = this.data
+    const { userLogined } = this.data;
     userLogined && wx.navigateTo({
       url: '/pages/user-info/index',
     })
@@ -133,6 +134,41 @@ Page({
       userLogined: false,
       loginedUser: null,
       personalInfo: {}
+    })
+  },
+  scanRide: function () {
+    const { userLogined } = this.data;
+    if (!userLogined) {
+      return
+    }
+    wx.scanCode({
+      onlyFromCamera: true,
+      scanType: 'QR_CODE',
+      success: async (res) => {
+        const result = res.result;
+        let qrCodeValid = false;
+        let timeid = '';
+        if (isURL(result)) {
+          const qs = getQueryObject(result);
+          if (qs.id) {
+            qrCodeValid = true;
+            timeid = qs.id;
+          }
+        }
+        if (qrCodeValid) {
+          wx.navigateTo({
+            url: '/pages/add-order-byscan/index?timeid=' + timeid,
+          })
+        } else {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: '二维码不正确'
+          })
+        }
+      },
+      fail: function () {
+      }
     })
   }
 })

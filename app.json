@@ -10,7 +10,8 @@
     "pages/add-order/index",
     "pages/ride-detail/index",
     "pages/http-test/index",
-    "pages/goods-detail/index"
+    "pages/goods-detail/index",
+    "pages/add-order-byscan/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
