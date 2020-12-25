@@ -1,6 +1,7 @@
 // pages/ride-detail/index.js
-import { getOrderByIdApi, lockDeviceApi, unlockDeviceApi, startWebSocketService } from '../../utils/http/http.services';
+import { getOrderByIdApi, lockDeviceApi, unlockDeviceApi, startWebSocketService, queryDeviceByTimeId, modifyOrderApi } from '../../utils/http/http.services';
 import dayjs from 'dayjs';
+import { isURL, getQueryObject } from '../../utils/util';
 
 const app = getApp();
 Page({
@@ -9,7 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order: null
+    order: null,
+    scanDevice: null,
   },
 
   /**
@@ -78,7 +80,7 @@ Page({
       if (res.data.length) {
         const data = res.data[0]
         this.setData({ order: data });
-
+        this.createDashboard(data.leftminutes);
         if (res.data[0].goliveid) {
           try {
             const resp = await startWebSocketService(data.certfile, data.certpass);
@@ -106,7 +108,9 @@ Page({
         data: 'pong'
       });
       if (res.data) {
-        this.setData({ order: JSON.parse(res.data) });
+        const data = JSON.parse(res.data);
+        this.createDashboard(data.leftminutes);
+        this.setData({ order: data });
       }
     });
     this.ws.onClose((e) => {
@@ -120,7 +124,7 @@ Page({
       console.log('error', e);
     })
   },
-  createDashboard: function () {
+  createDashboard: function (leftTime = 0) {
     const ctx = wx.createCanvasContext('dashboard');
     const startAng = 0.7 * Math.PI;
     ctx.lineWidth = 15;
@@ -131,7 +135,8 @@ Page({
 
     ctx.lineWidth = 15;
     ctx.beginPath();
-    ctx.arc(60, 60, 50, startAng, startAng + 1.6 * Math.PI * 0.7,);
+    const leftPercent = (leftTime / 60)
+    ctx.arc(60, 60, 50, startAng, startAng + 1.6 * Math.PI * leftPercent,);
     // ctx.strokeStyle = '#FD8D3C';
     const grd = ctx.createLinearGradient(0, 0, 120, 0)
     grd.addColorStop(0, '#FD8D3C')
@@ -143,7 +148,7 @@ Page({
     ctx.setTextAlign("center");
     ctx.setTextBaseline("middle");
     ctx.setFillStyle("#FA541C");
-    ctx.fillText('30', 60, 66);
+    ctx.fillText(leftTime, 60, 66);
 
     ctx.setFontSize(14);
     ctx.setTextAlign("center");
@@ -173,5 +178,113 @@ Page({
     } catch (error) {
 
     }
+  },
+  handleScan: function () {
+    wx.scanCode({
+      onlyFromCamera: true,
+      scanType: 'QR_CODE',
+      success: async (res) => {
+        const result = res.result;
+        let qrCodeValid = false;
+        let timeid = '';
+        if (isURL(result)) {
+          const qs = getQueryObject(result);
+          if (qs.id) {
+            qrCodeValid = true;
+            timeid = qs.id;
+          }
+        }
+        if (qrCodeValid) {
+          try {
+            let res = await queryDeviceByTimeId(timeid);
+            if (res.data.length) {
+              const data = res.data[0]
+              if (data.isonline === 'Y') {
+                // 设备当前状态
+                const deviceState = data[661964358786][0]
+                if (deviceState.devicestate === '繁忙') {
+                  if (deviceState[661964402374].length) {
+                    // 设备当前订单
+                    const deviceOrder = deviceState[661964402374][0];
+                    if (deviceOrder.userid === this.data.loginedUser.UserInfo.EMP_ID) {
+                      this.setData({ scanDevice: data });
+                    } else {
+                      wx.showModal({
+                        showCancel: false,
+                        title: '提示',
+                        content: '当前设备已占用'
+                      });
+                    }
+                  } else {
+                    wx.showModal({
+                      showCancel: false,
+                      title: '提示',
+                      content: '繁忙但无订单'
+                    });
+                  }
+                } else {
+                  this.setData({ scanDevice: data });
+                }
+              } else {
+                wx.showModal({
+                  showCancel: false,
+                  title: '提示',
+                  content: '设备不在线'
+                });
+              }
+            } else {
+              wx.showModal({
+                showCancel: false,
+                title: '提示',
+                content: '二维码已过期，请重新扫码'
+              });
+            }
+          } catch (error) {
+            wx.showModal({
+              showCancel: false,
+              title: '提示',
+              content: error.message
+            })
+          }
+        } else {
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: '二维码不正确'
+          })
+        }
+      },
+      fail: function () {
+
+      }
+    })
+  },
+  cancelRide: function () {
+    this.setData({ scanDevice: null });
+  },
+  rideRightNow: async function (e) {
+    const { order, scanDevice } = this.data
+    try {
+      await modifyOrderApi({
+        ...order,
+        goliveid: scanDevice.goliveid,
+        C3_658000358736: 'Y',
+      });
+      this.setData({ scanDevice: null });
+    } catch (error) {
+      wx.showModal({
+        title: '提示',
+        content: error.message,
+        showCancel: false
+      })
+    }
+  },
+  hanldeGoHome: function () {
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
+  },
+  handleBack: function () {
+    wx.navigateBack()
   },
 })

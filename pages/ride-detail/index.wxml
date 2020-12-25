@@ -1,7 +1,12 @@
 <!--pages/ride-detail/index.wxml-->
 <view class="ride-detail-page">
   <image src="http://pwapp.oss-cn-beijing.aliyuncs.com/cloudstree/34081608707463_.pic_hd.jpg" class="bg-image" />
-  <mp-navigation-bar background="transparent" color="#fff" title="运动详情" back="{{true}}"></mp-navigation-bar>
+  <mp-navigation-bar background="transparent" color="#fff" title="运动详情" back="{{false}}">
+    <view slot="left">
+      <image bindtap="handleBack" class="navbar-image" src="/images/back.png" />
+      <image bindtap="hanldeGoHome" class="navbar-image" src="/images/Home.png" />
+    </view>
+  </mp-navigation-bar>
 
   <view class="ride-base-info">
     <view>
@@ -18,7 +23,7 @@
       <canvas canvas-id="dashboard" id="dashboard-canvas"></canvas>
     </view>
   </view>
-  <view wx:if="{{order.goliveid}}" class="card">
+  <view wx:if="{{order.goliveid && (order.leftminutes > 0)}}" class="card">
     <view>
       <view class="riding-text">
         设备编号：{{order.goliveid ? order.goliveid : ''}}
@@ -36,7 +41,7 @@
   </view>
   <view wx:if="{{!order.goliveid}}" class="card">
     <view class="card-title">您已经可以开始扫码使用设备了</view>
-    <view class="scan-container">
+    <view bindtap="handleScan" class="scan-container">
       <image class="scan-icon" src="/images/scan_big.png" />
       <text>立即扫码</text>
     </view>
@@ -45,7 +50,7 @@
       实际结束时间会根据您的实际开始时间计算。
     </view>
   </view>
-  <!-- <view class="card">
+  <view wx:if="{{order.goliveid && (order.leftminutes == 0)}}" class="card">
     <view>
       <view class="card-title">本次预约已经结束</view>
       <view style="display:flex;justify-content:center">
@@ -54,12 +59,11 @@
 
       <view class="card-tip">
         非常感谢您的使用，期待您的再次光顾！
-        如有疑问请点击此处咨询客服
       </view>
     </view>
-  </view> -->
-  <view wx:if="{{order.goliveid}}" class="actions">
-    <view class="action">
+  </view>
+  <view wx:if="{{order.goliveid && (order.leftminutes > 0)}}" class="actions">
+    <view bindtap="handleScan" class="action">
       <image class="action-image" src="/images/change.png" />
       <view class="action-name">更换设备</view>
     </view>
@@ -71,10 +75,10 @@
       <image class="action-image" src="/images/unlock@2x.png" />
       <view class="action-name">解锁设备</view>
     </view>
-    <view class="action">
+    <!-- <view class="action">
       <image class="action-image" src="/images/quit.png" />
       <view class="action-name">结束预约</view>
-    </view>
+    </view> -->
     <!-- <view class="action">
       <image class="action-image" src="/images/swtich.png" />
       <view class="action-name">申请改期</view>
@@ -84,4 +88,32 @@
       <view class="action-name">申请退单</view>
     </view> -->
   </view>
+  <modal show="{{scanDevice}}" height='60%'>
+    <view class="lz-card">
+      <view class="lz-card__title">
+        <view class="order-status-text order-status-text--warding">设备信息</view>
+      </view>
+      <view class="lz-card__body order-content">
+        <view class="order-content__left">
+          <view>
+            商家名称：{{scanDevice.business_name}}
+          </view>
+          <view>
+            商铺名称：{{scanDevice.shop_name}}
+          </view>
+          <view>
+            设备名称：{{scanDevice.deviceName}}
+          </view>
+        </view>
+      </view>
+      <view class="order-actions">
+        <view class="lz-button--primary scan-button " bindtap="rideRightNow">
+          <text>立即更换</text>
+        </view>
+        <view class="lz-button wait-button" bindtap="cancelRide">
+          <text>取消</text>
+        </view>
+      </view>
+    </view>
+  </modal>
 </view>
