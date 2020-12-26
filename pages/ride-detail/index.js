@@ -103,14 +103,14 @@ Page({
       console.log('open');
     });
     this.ws.onMessage((res) => {
-      // console.log(dayjs().format('HH:mm:ss'), res);
       this.ws.send({
         data: 'pong'
       });
       if (res.data) {
         const data = JSON.parse(res.data);
         this.createDashboard(data.leftminutes);
-        this.setData({ order: data });
+        // console.log(dayjs().format('HH:mm:ss'), data);
+        this.setData({ order: { ...this.data.order, ...data } });
       }
     });
     this.ws.onClose((e) => {
@@ -135,7 +135,7 @@ Page({
 
     ctx.lineWidth = 15;
     ctx.beginPath();
-    const leftPercent = (leftTime / 60)
+    const leftPercent = leftTime > 60 ? 1 : (leftTime / 60);
     ctx.arc(60, 60, 50, startAng, startAng + 1.6 * Math.PI * leftPercent,);
     // ctx.strokeStyle = '#FD8D3C';
     const grd = ctx.createLinearGradient(0, 0, 120, 0)

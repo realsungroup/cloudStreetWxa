@@ -63,10 +63,10 @@
     </view>
   </view>
   <view wx:if="{{order.goliveid && (order.leftminutes > 0)}}" class="actions">
-    <view bindtap="handleScan" class="action">
+    <!-- <view bindtap="handleScan" class="action">
       <image class="action-image" src="/images/change.png" />
       <view class="action-name">更换设备</view>
-    </view>
+    </view> -->
     <view wx:if="{{order.isunlock === 'Y'}}" bindtap="lockDevice" class="action">
       <image class="action-image" src="/images/break.png" />
       <view class="action-name">暂时离开</view>
