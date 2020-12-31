@@ -68,106 +68,44 @@ Page({
 
   },
   getPhoneNumber(e) {
-    const detail = e.detail
+    const detail = e.detail;
+    const wxUserInfo = wx.getStorageSync('wxUserInfo');
+    wx.showLoading({
+      title: '登录中',
+    });
     if (detail.errMsg === 'getPhoneNumber:ok') {
-      wx.login({
-        success: async res => {
-          const code = res.code
-          // 发送 res.code 到后台换取 openId, sessionKey, unionId
-          if (code) {
-            try {
-              wx.showToast({
-                title: '登录中',
-                icon: 'loading',
-                duration: 0
-              })
-              const result = await getWXUserInfo({
-                code,
-                AppId: app.globalData.businessInfo.wxa_appid,
-                AppSecret: app.globalData.businessInfo.wxa_appsecrect,
-                iv: detail.iv,
-                encrypteddata: (detail.encryptedData)
-              });
-              const wxUserInfo = wx.getStorageSync('wxUserInfo');
-              const isExist = await unionidIsExist(wxUserInfo.unionId)
-              const business_ID = app.globalData.businessId;
-              if (isExist.data) {
-                try {
-                  const loginResult = await userLogin(wxUserInfo.unionId);
-                  if (loginResult.OpResult === 'Y') {
-                    wx.setStorageSync('userInfo', loginResult);
-                    wx.navigateBack({
-                      delta: 0,
+      if (wxUserInfo) {
+        this.loginOrRegister(detail)
+      } else {
+        wx.login({
+          success: async res => {
+            const code = res.code;
+            if (code) {
+              wx.getUserInfo({
+                success: async (res) => {
+                  const { iv, encryptedData } = res
+                  try {
+                    const result = await getWXUserInfo({
+                      code,
+                      AppId: app.globalData.businessInfo.wxa_appid,
+                      AppSecret: app.globalData.businessInfo.wxa_appsecrect,
+                      iv: iv,
+                      encrypteddata: encryptedData
                     });
-                    app.setGlobalData({
-                      userLogined: true,
-                      loginedUser: loginResult
-                    });
-                    app.fetchUserInfo();
-                  } else {
-                    wx.showModal({
-                      showCancel: false,
-                      title: '提示',
-                      content: error.message
-                    });
+                    const openId = result.openId;
+                    const unionId = result.unionId;
+                    if (openId && unionId) {
+                      wx.setStorageSync('wxUserInfo', result);
+                      this.loginOrRegister(detail);
+                    }
+                  } catch (error) {
                   }
-                } catch (error) {
-                  wx.showModal({
-                    showCancel: false,
-                    title: '提示',
-                    content: error.message
-                  });
                 }
-              } else {
-                try {
-                  await register({
-                    unionid: wxUserInfo.unionId,
-                    openid: wxUserInfo.openId,
-                    nickname: wxUserInfo.nickName,
-                    wxappid: 'wx70d3b74160c4e9af',
-                    phoneNumber: result.phoneNumber,
-                    dept_id: business_ID
-                  })
-                  const loginResult = await userLogin(wxUserInfo.unionId);
-                  if (loginResult.OpResult === 'Y') {
-                    wx.setStorageSync('userInfo', loginResult);
-                    wx.navigateBack({
-                      delta: 0,
-                    });
-                    app.setGlobalData({
-                      userLogined: true,
-                      loginedUser: loginResult
-                    });
-                    app.fetchUserInfo();
-                  } else {
-                    wx.showModal({
-                      showCancel: false,
-                      title: '提示',
-                      content: '登录失败'
-                    });
-                  }
-                } catch (error) {
-                  console.log(error)
-                  wx.showModal({
-                    showCancel: false,
-                    title: '提示',
-                    content: error.message
-                  });
-                }
-              }
-              wx.hideToast();
-            } catch (error) {
-              wx.hideToast();
-              wx.showToast({
-                title: '请再试一遍',
-                duration: 1500,
-                icon: 'none'
               })
             }
-
-          }
-        },
-      })
+          },
+        })
+      }
     } else {
       wx.showModal({
         title: '提示',
@@ -176,5 +114,98 @@ Page({
       })
     }
   },
+  loginOrRegister: function (detail) {
+    wx.login({
+      success: async res => {
+        const code = res.code
+        if (code) {
+          try {
+            const result = await getWXUserInfo({
+              code,
+              AppId: app.globalData.businessInfo.wxa_appid,
+              AppSecret: app.globalData.businessInfo.wxa_appsecrect,
+              iv: detail.iv,
+              encrypteddata: (detail.encryptedData)
+            });
+            const wxUserInfo = wx.getStorageSync('wxUserInfo');
+            const isExist = await unionidIsExist(wxUserInfo.unionId)
+            const business_ID = app.globalData.businessId;
+            if (isExist.data) {
+              try {
+                const loginResult = await userLogin(wxUserInfo.unionId);
+                if (loginResult.OpResult === 'Y') {
+                  wx.setStorageSync('userInfo', loginResult);
+                  wx.navigateBack({
+                    delta: 0,
+                  });
+                  app.setGlobalData({
+                    userLogined: true,
+                    loginedUser: loginResult
+                  });
+                  app.fetchUserInfo();
+                } else {
+                  wx.showModal({
+                    showCancel: false,
+                    title: '提示',
+                    content: error.message
+                  });
+                }
+              } catch (error) {
+                wx.showModal({
+                  showCancel: false,
+                  title: '提示',
+                  content: error.message
+                });
+              }
+            } else {
+              try {
+                await register({
+                  unionid: wxUserInfo.unionId,
+                  openid: wxUserInfo.openId,
+                  nickname: wxUserInfo.nickName,
+                  wxappid: 'wx70d3b74160c4e9af',
+                  phoneNumber: result.phoneNumber,
+                  dept_id: business_ID
+                })
+                const loginResult = await userLogin(wxUserInfo.unionId);
+                if (loginResult.OpResult === 'Y') {
+                  wx.setStorageSync('userInfo', loginResult);
+                  wx.navigateBack({
+                    delta: 0,
+                  });
+                  app.setGlobalData({
+                    userLogined: true,
+                    loginedUser: loginResult
+                  });
+                  app.fetchUserInfo();
+                } else {
+                  wx.showModal({
+                    showCancel: false,
+                    title: '提示',
+                    content: '登录失败'
+                  });
+                }
+              } catch (error) {
+                console.log(error)
+                wx.showModal({
+                  showCancel: false,
+                  title: '提示',
+                  content: error.message
+                });
+              }
+            }
+            wx.hideLoading();
+          } catch (error) {
+            wx.hideLoading();
+            wx.showToast({
+              title: '请再试一遍',
+              duration: 1500,
+              icon: 'none'
+            })
+          }
 
+        }
+      },
+    })
+  }
 })

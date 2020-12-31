@@ -1,5 +1,5 @@
 //app.js
-import { getBusinessInfo, getPersonalinfo, miniProgramLogin, userLogin, addPersonalinfo } from './utils/http/http.services'
+import { getBusinessInfo, getWXUserInfo, getPersonalinfo, miniProgramLogin, userLogin, addPersonalinfo } from './utils/http/http.services';
 
 wx.cloud.init({
   env: 'openshopwx-anj96',
@@ -19,7 +19,36 @@ App({
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
-          this.setGlobalData({ hasAuth: true })
+          this.setGlobalData({ hasAuth: true });
+          wx.login({
+            success: async res => {
+              const code = res.code;
+              if (code) {
+                wx.getUserInfo({
+                  success: async (res) => {
+                    const { iv, encryptedData } = res
+                    try {
+                      const result = await getWXUserInfo({
+                        code,
+                        AppId: this.globalData.businessInfo.wxa_appid,
+                        AppSecret: this.globalData.businessInfo.wxa_appsecrect,
+                        iv: iv,
+                        encrypteddata: encryptedData
+                      });
+                      const openId = result.openId;
+                      const unionId = result.unionId;
+                      if (openId && unionId) {
+                        wx.setStorageSync('wxUserInfo', result);
+                      }
+                    } catch (error) {
+                      console.log(error)
+                    }
+                  }
+                })
+
+              }
+            },
+          })
         } else {
           this.setGlobalData({ hasAuth: false })
         }

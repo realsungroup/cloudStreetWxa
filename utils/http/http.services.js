@@ -31,7 +31,7 @@ const getGoodsById = (id) => {
 }
 
 const getWXUserInfo = ({ code, iv, AppId, AppSecret, encrypteddata }) => {
-  return http.get(getWxUserInfo, { code, iv, AppId, AppSecret, encrypteddata });
+  return http.post(getWxUserInfo, { code, iv, AppId, AppSecret, encrypteddata });
 }
 const unionidIsExist = (unionid) => {
   return http.get(isWxUnionIdExist, { unionid })
@@ -39,7 +39,7 @@ const unionidIsExist = (unionid) => {
 const register = ({ phoneNumber, unionid, wxappid, openid, nickname, dept_id }) => {
   const registerData = {
     Handphone: phoneNumber, // 手机号
-    userid: unionid,
+    userid: openid,
     nickname, // 昵称
     validresid: 616852937051,
     unionid,
