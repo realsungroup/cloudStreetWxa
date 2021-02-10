@@ -1,0 +1,57 @@
+<!--pages/order-confirm/index.wxml-->
+<view class="container">
+  <mp-navigation-bar background="#ffffff" title="订单确认"></mp-navigation-bar>
+  <view class="content">
+    <view class="main">
+      <view class="address" bindtap="getAddress">
+        <view wx:if="{{addressInfo}}" class="address-content">
+          <view class="address__province">{{addressInfo.provinceName}}{{addressInfo.cityName}}{{addressInfo.countyName}}
+          </view>
+          <view class="address__detail">{{addressInfo.detailInfo}}</view>
+          <view class="address__userinfo">{{addressInfo.userName}} {{addressInfo.telNumber}}</view>
+        </view>
+        <view wx:else class="address-content" style="height:56rpx">
+          请选择收货地址
+        </view>
+        <view class="address-right">
+          <image style="height:32rpx;width:16rpx" src="/images/right_arrow.png" />
+        </view>
+      </view>
+      <view class="order-confirm__remark">
+        <view>备注</view>
+        <view class="remark-wrapper">
+          <textarea model:value="{{remark}}" style="width:100%" auto-height placeholder="如您购买了有规格的商品，请记得填写备注哦~" />
+          </view>
+      </view>
+      <view wx:for="{{shopGoods}}" wx:key="title" class="order-confirm__shop-goods">
+        <view class="shopinfo">
+          <image src="/images/shop@2x.png"/>{{item.title}}
+        </view>
+        <view class="shop-goods-list">
+          <view wx:for="{{item.data}}" wx:key="REC_ID" wx:for-item="goods" class="shop-goods">
+            <image src="{{goods.goods_photo}}"/>
+            <view class="shop-goods__right">
+              <view>{{goods.goods_name}}</view>
+              <view style="display:flex;justify-content:space-between">
+                  <view>
+                    <text class="price-color">￥</text >
+                    <text class="price-color">{{goods.goods_price}}</text> 
+                  </view> 
+                  <text>x{{goods.counts}}</text> 
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="logistice-price" >邮费：<text class="price-color">￥{{item.logistics_price}}</text></view>
+      </view>
+    </view>
+    <view class="footer">
+      <view class="price-color">
+        ￥<text class="total-price">{{totalPrice}}</text>
+      </view>
+      <view bindtap="handleSubmit" class="footer-btn">
+        提交订单
+      </view>
+    </view>
+  </view>
+</view>

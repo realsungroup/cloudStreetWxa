@@ -8,8 +8,8 @@ const config = {
     isWxUnionIdExist: 'api/Account/IsWxUnionIdExist',
     register: 'api/Account/Register',
     saveData: "api/100/table/Save",
-    startWebSocketService: 'api/LafitSocket/StartWebSocketService'
-
+    startWebSocketService: 'api/LafitSocket/StartWebSocketService',
+    save200Data: "api/200/table/Save",
   }
 }
 

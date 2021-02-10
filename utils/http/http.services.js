@@ -117,6 +117,107 @@ const startWebSocketService = (certfile, certpass) => {
   })
 }
 
+// 获取购物车商品信息
+const getCartGoods = () => {
+  return http.get(retrieve, { resid: '651092859825' })
+}
+//添加商品到购物车
+const addGoodsToCart = (data, goods_counts = 1, symbol = 'add') => {
+  return http.addRecords(
+    { resid: '651092859825', data: [{ ...data, symbol, goods_counts }] },
+    false,
+    true);
+}
+//删除购物车商品
+const deleteGoodsToCart = (data) => {
+  return http.deleteRecords(
+    { resid: '651092859825', data: [{ ...data, }] });
+}
+
+// 获取地址
+const getAddresses = () => {
+  return http.get(retrieve, { resid: '569101888614' })
+}
+//添加预订单
+const addOrderData = (data) => {
+  return http.add200Records(data);
+}
+//修改预订单
+const modifyPreOrder = (data) => {
+  return http.modifyRecords({
+    resid: 654539359386,
+    data,
+  })
+}
+//提交订单
+const submitOrder = (data) => {
+  return http.add200Records(data);
+}
+// 往支付表添加一条记录
+const addPayTable = (data) => {
+  return http.addRecords({
+    resid: 653652120314,
+    data,
+  })
+}
+// 修改订单的支付编号
+const modifyOrdersPayId = (data) => {
+  return http.modifyRecords({
+    resid: 652530887844,
+    data,
+  })
+}
+
+const getAllOrderData = () => {
+  return http.get(retrieve, { resid: '652530887844' })
+}
+//获取待付款订单
+const getOrderPayingData = () => {
+  return http.get(retrieve, { resid: '653409054764' })
+}
+//获取待发货订单
+const getOrderWaitSendData = () => {
+  return http.get(retrieve, { resid: '653409066642' })
+}
+//获取待收货订单
+const getOrderWaitReceiveData = () => {
+  return http.get(retrieve, { resid: '653409077320' })
+}
+//获取已完成订单
+const getOrderOrderDoneData = () => {
+  return http.get(retrieve, { resid: '653409172564' })
+}
+
+//获取订单详情
+const getOrderDetailData = (id) => {
+  return http.get(retrieve200, {
+    resid: '652530887844',
+    subresid: "652531033941",
+    cmswhere: `order_ID = '${id}'`
+  })
+}
+//删除订单
+const deleteOrderById = (id) => {
+  return http.deleteRecords({
+    resid: 652530887844,
+    data: [{ REC_ID: id }]
+  });
+}
+
+//取消订单
+const cancelOrderApi = function (id) {
+  return http.modifyRecords({
+    resid: "652530887844",
+    data: [{ REC_ID: id, isCancel: 'Y' }]
+  })
+}
+//确认收货
+const confirmReceiveOrder = function (id) {
+  return http.modifyRecords({
+    resid: "652530887844",
+    data: [{ REC_ID: id, isReceive: 'Y' }]
+  })
+}
 export {
   miniProgramLogin,
   getBusinessInfo,
@@ -139,5 +240,23 @@ export {
   addPersonalinfo,
   lockDeviceApi,
   unlockDeviceApi,
-  startWebSocketService
+  startWebSocketService,
+  getCartGoods,
+  addGoodsToCart,
+  deleteGoodsToCart,
+  getAddresses,
+  addOrderData,
+  modifyPreOrder,
+  submitOrder,
+  addPayTable,
+  modifyOrdersPayId,
+  getAllOrderData,
+  getOrderPayingData,
+  getOrderWaitSendData,
+  getOrderWaitReceiveData,
+  getOrderOrderDoneData,
+  getOrderDetailData,
+  deleteOrderById,
+  cancelOrderApi,
+  confirmReceiveOrder
 }

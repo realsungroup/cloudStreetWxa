@@ -8,3 +8,7 @@
 .gray-text{
   color: #666666;
 }
+
+.price-color{
+  color: #FA541C;
+}

@@ -1,0 +1,36 @@
+<!--pages/order-pay/index.wxml-->
+<view class="container">
+  <mp-navigation-bar background="#ffffff" title="订单支付"></mp-navigation-bar>
+  <view class="content">
+    <view class="main">
+      <view class="page-section">
+       <view class="page-section-title">
+        您的应付款金额为：<text class="price-color">￥{{totalPrice}}</text>
+       </view> 
+      </view>
+      <view class="page-section">
+        <view class="page-section-title">请选择支付方式</view>
+        <view class="weui-cells weui-cells_after-title">
+          <radio-group bindchange="radioChange">
+            <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="value">
+              <view class="weui-cell__hd">
+                <radio value="{{item.value}}" checked="{{item.value == selectedPayway}}" />
+              </view>
+              <view class="weui-cell__bd">{{item.name}}</view>
+            </label>
+          </radio-group>
+        </view>
+      </view>
+      <view wx:if="{{enterpriceAccount}}" class="page-section">
+       <view class="page-section-title">
+        您的企业账户余额：<text class="price-color">{{enterpriceAccount.C3_514933406360}}元</text>
+       </view> 
+      </view>
+    </view>
+    <view class="footer">
+      <view bindtap="handleSubmit" class="footer-btn">
+        立即支付
+      </view>
+    </view>
+  </view>
+</view>

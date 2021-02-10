@@ -1,5 +1,5 @@
 // pages/goods-detail/index.js
-import { getGoodsById } from '../../utils/http/http.services';
+import { getGoodsById, addGoodsToCart } from '../../utils/http/http.services';
 
 const app = getApp();
 
@@ -11,7 +11,9 @@ Page({
   data: {
     goods: {},
     photos: [],
-    deviceCount: 0
+    isService: false,
+    deviceCount: 0,
+    cartGoodsCount: 0
   },
 
   /**
@@ -80,6 +82,7 @@ Page({
         }
         this.setData({
           goods: data,
+          isService: data.C3_660842519689 == 'Y',
           deviceCount,
           photos: data.goods_photos ? data.goods_photos.split(';') : []
         })
@@ -101,5 +104,17 @@ Page({
         url: '/pages/wxauth/index',
       });
     }
+  },
+  addToCart: async function () {
+    await addGoodsToCart({
+      goods_ID: this.data.goods.goods_id,
+      putaway_ID: this.data.goods.putaway_ID,
+    }, 1);
+    wx.showToast({
+      title: '已添加到购物车'
+    });
+    wx.switchTab({
+      url: '/pages/cart/index',
+    })
   }
 })

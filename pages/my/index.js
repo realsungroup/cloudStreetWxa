@@ -170,5 +170,11 @@ Page({
       fail: function () {
       }
     })
+  },
+  goAddressManage: function () {
+    const { userLogined } = this.data;
+    userLogined && wx.navigateTo({
+      url: '/pages/order-list/index',
+    })
   }
 })

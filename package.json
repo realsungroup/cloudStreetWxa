@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "@miniprogram-component-plus/tabs": "^1.0.0",
     "dayjs": "^1.9.7"
   },
   "devDependencies": {},

@@ -1,0 +1,40 @@
+/* pages/order-pay/index.wxss */
+.container {
+  height: 100vh;
+  background: #f4f4f4;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  overflow: scroll;
+}
+.page-section{
+  background: #FFFFFF;
+  margin: 12rpx 0;
+}
+.page-section-title{
+  display: flex;
+  align-items: center;
+  padding: 12rpx;
+  font-size: 36rpx;
+}
+.footer {
+  padding: 12rpx 24rpx;  
+  background-color: #FFFFFF;
+  border-top: 1rpx solid #f1f1f1;
+}
+.footer-btn {
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to left, #FA541C, #FD8D3C);
+  color: #FFFFFF;
+}

@@ -1,0 +1,126 @@
+<!--pages/address-list/index.wxml-->
+<view class="container">
+  <mp-navigation-bar loading="{{loadingData}}" background="#ffffff" title="我的订单"></mp-navigation-bar>
+  <view class="content">
+    <mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" tabActiveTextColor="#FA541C" tabUnderlineColor="#FA541C"
+      swiperClass="weui-tabs-swiper" bindtabclick="onTabCLick" bindchange="onChange"
+      activeClass="tab-bar-title__selected" tabClass="lz-tabs">
+      <view class="tab-content" slot="tab-content-0">
+        <view class="empty-box" wx:if="{{!loadingData && allOrder.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>没有相关订单</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{allOrder}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+            <!-- <view catchtap="deleteOrder" data-order-id="{{item.order_ID}}">删除</view> -->
+          </view>
+        </view>
+      </view>
+      <view class="tab-content" slot="tab-content-1">
+        <view class="empty-box" wx:if="{{!loadingData && unpayOrders.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>没有相关订单</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{unpayOrders}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="tab-content" slot="tab-content-2">
+        <view class="empty-box" wx:if="{{!loadingData && waitsendOrders.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>没有相关订单</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{waitsendOrders}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="tab-content" slot="tab-content-3">
+        <view class="empty-box" wx:if="{{!loadingData && waitreceiveOrders.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>没有相关订单</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{waitreceiveOrders}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="tab-content" slot="tab-content-4">
+        <view class="empty-box" wx:if="{{!loadingData && doneOrders.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>没有相关订单</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{doneOrders}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-tabs>
+  </view>
+</view>

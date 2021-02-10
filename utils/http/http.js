@@ -2,7 +2,7 @@
 import config from './config';
 
 
-const { path: { baseURL, saveData } } = config;
+const { path: { baseURL, saveData,save200Data } } = config;
 
 const getHeader = () => {
   const headers = {
@@ -75,15 +75,18 @@ const http = {
   post: function (url, data, isBusiness = false) {
     return getPromise(url, data, 'POST', isBusiness)
   },
-  addRecords: function (data, isBusiness = false) {
+  addRecords: function (data, isBusiness = false, isEditOrAdd = false) {
     const _data = { ...data };
     _data.data = JSON.stringify(_data.data.map((item, index) => {
       return {
         ...item, _id: index,
-        _state: 'added'
+        _state: isEditOrAdd ? 'editoradd' : 'added'
       }
     }));
     return getPromise(saveData, _data, 'POST', isBusiness)
+  },
+  add200Records: function (data) {
+    return getPromise(save200Data, JSON.stringify({data}), 'POST', false)
   },
   modifyRecords: function (data, isBusiness = false) {
     const _data = { ...data };
@@ -91,6 +94,16 @@ const http = {
       return {
         ...item, _id: index,
         _state: 'modified'
+      }
+    }));
+    return getPromise(saveData, _data, 'POST', isBusiness)
+  },
+  deleteRecords: function (data, isBusiness = false) {
+    const _data = { ...data };
+    _data.data = JSON.stringify(_data.data.map((item, index) => {
+      return {
+        ...item, _id: index,
+        _state: 'removed'
       }
     }));
     return getPromise(saveData, _data, 'POST', isBusiness)

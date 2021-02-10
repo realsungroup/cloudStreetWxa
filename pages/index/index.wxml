@@ -81,8 +81,11 @@
               <text class="goods-item-price">￥{{item.sell_price}}/小时</text>
             </view>
             <view class="goods-item-actions">
-              <view bindtap="goAddOrder" data-goods="{{item}}" class="lz-button--primary goods-item-button ">
+              <view wx:if="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}" class="lz-button--primary goods-item-button ">
                 <text>立即预约</text>
+              </view>
+              <view wx:else="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}" class="lz-button--primary goods-item-button ">
+                <text>立即购买</text>
               </view>
               <view bindtap="goGoodsDetail" data-goods="{{item}}" class="lz-button goods-item-button ">
                 <text>查看详情</text>

@@ -1,0 +1,128 @@
+/* pages/order-confirm/index.wxss */
+.container {
+  height: 100vh;
+  background: #f4f4f4;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  overflow: scroll;
+}
+
+.address {
+  display: flex;
+  background: #FFFFFF;
+  background-image: linear-gradient(to right, #FA5858, #FA5858 30%, #fff 30%, #fff 50%, #81BEF7 50%, #81BEF7 80%, #fff 80%);
+  background-size: 80px 4px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  padding: 20rpx 32rpx;
+  border-bottom-right-radius: 24rpx;
+  border-bottom-left-radius: 24rpx;
+}
+
+.address-content {
+  flex: 1;
+}
+
+.address__detail {
+  margin: 12rpx 0;
+}
+
+.address__province,
+.address__userinfo {
+  color: #111111;
+  font-size: 24rpx;
+}
+
+.address-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 32rpx;
+}
+
+.order-confirm__remark {
+  background-color: #FFFFFF;
+  margin: 24rpx 0;
+  padding: 12px;
+  border-radius: 24rpx;
+}
+
+.remark-wrapper {
+  padding-top: 12rpx;
+}
+
+.order-confirm__shop-goods {
+  background: #FFFFFF;
+  margin-bottom: 24rpx;
+  border-radius: 24rpx;
+  padding: 48rpx 32rpx;
+}
+
+.order-confirm__shop-goods>.shopinfo {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #222222;
+}
+
+.order-confirm__shop-goods>.shopinfo>image {
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 12rpx;
+}
+.shop-goods{
+  display: flex;
+  margin-bottom: 8rpx;
+  padding: 12rpx 0;
+  border-bottom: 1px solid #ececec;
+}
+.shop-goods > image{
+  height: 240rpx;
+  width: 240rpx;
+}
+.shop-goods__right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  margin-left: 24rpx;
+  font-size: 28rpx;
+  color: #111111;
+  font-weight: 400;
+}
+.logistice-price{
+  display: flex;
+  justify-content: flex-end;
+}
+.footer {
+  padding: 12rpx 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-top: 1rpx solid #f1f1f1;
+}
+
+.total-price {
+  font-size: 48rpx;
+}
+
+.footer-btn {
+  width: 240rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to left, #FA541C, #FD8D3C);
+  color: #FFFFFF;
+}

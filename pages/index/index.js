@@ -71,10 +71,11 @@ Page({
     app.$watch('loginedUser', (val) => {
       this.setData({ loginedUser: val })
       if (val) {
+        this.getAccountInfo();
         this.fetchOrders();
-        this.fetchOrdersTimer = setInterval(() => {
-          this.fetchOrders();
-        }, 5000);
+        // this.fetchOrdersTimer = setInterval(() => {
+        //   this.fetchOrders();
+        // }, 5000);
       } else {
         clearInterval(this.fetchOrdersTimer);
         this.setData({
@@ -307,4 +308,25 @@ Page({
       });
     }
   },
+  getAccountInfo :function(){
+    //fetchAccountInfo()
+    const userInfo = (wx.getStorageSync('wxUserInfo'));
+    if(userInfo){
+      // wx.cloud.callFunction({ //调用云函数
+      //   name: 'enterpricePay',
+      //   data: {
+      //     unionid: userInfo.unionId,
+      //   },
+      //   success: res => {
+      //     const response =  res.result;
+      //     if(response.error == 0){
+      //       // if(response.data.length){
+      //       //   console.log(response.data[0]);
+      //       // }
+      //     }
+      //   },
+      //   fail: console.error,
+      // });
+    }
+  }
 })

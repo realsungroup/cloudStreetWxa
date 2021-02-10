@@ -1,0 +1,68 @@
+<!--pages/order-detail/index.wxml-->
+<view class="container">
+  <mp-navigation-bar loading="{{loadingData}}" background="#ffffff" title="订单详情"></mp-navigation-bar>
+  <view class="content">
+    <view class="main">
+      <view class="order-info-item">
+        <text class="order-info-item__label">订单状态</text>
+        <text>{{order.order_status}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">订单编号</text>
+        <text>{{order.order_ID}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">下单时间</text>
+        <text>{{order.order_time}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">收货人姓名</text>
+        <text>{{order.name}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">联系方式</text>
+        <text>{{order.phone}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">详细地址</text>
+        <text>{{order.address}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">快递费</text>
+        <text class="price-color">￥{{order.logistics_price}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">订单金额</text>
+        <text class="price-color">￥{{order.order_allPrice}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">订单备注</text>
+        <text>{{order.order_remark || ''}}</text>
+      </view>
+      <view>
+        <view class="shop-name">
+          <image src="/images/shop@2x.png" /> {{order.shop_name}}
+        </view>
+        <view wx:for="{{goodsList}}" wx:key="REC_ID" wx:for-item="goods" class="shop-goods">
+            <image src="{{goods.goods_photo}}"/>
+            <view class="shop-goods__right">
+              <view>{{goods.goods_name}}</view>
+              <view style="display:flex;justify-content:space-between">
+                  <view>
+                    <text class="price-color">￥</text >
+                    <text class="price-color">{{goods.goods_price}}</text> 
+                  </view> 
+                  <text>x{{goods.counts}}</text> 
+              </view>
+            </view>
+          </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view bindtap="cancelOrder" wx:if="{{cancelVisiable}}" class="footer-btn cancel-btn">取消订单</view>
+      <view wx:if="{{payVisiable}}" bindtap="orderPay" class="footer-btn">立即支付</view>
+      <view wx:if="{{afterSaleVisible}}" class="footer-btn">售后</view>
+      <view wx:if="{{confirmReceive}}" bindtap="confirmOrder" class="footer-btn">确认收货</view>
+    </view>
+  </view>
+</view>

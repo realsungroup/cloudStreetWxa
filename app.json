@@ -11,14 +11,20 @@
     "pages/ride-detail/index",
     "pages/http-test/index",
     "pages/goods-detail/index",
-    "pages/add-order-byscan/index"
+    "pages/add-order-byscan/index",
+    "pages/cart/index",
+    "pages/order-list/index",
+    "pages/order-confirm/index",
+    "pages/order-pay/index",
+    "pages/order-detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "",
     "navigationBarTextStyle": "white",
-    "navigationStyle": "custom"
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "list": [
@@ -29,6 +35,12 @@
         "selectedIconPath": "images/homepage_selected.png"
       },
       {
+        "pagePath": "pages/cart/index",
+        "text": "购物车",
+        "iconPath": "images/cart.png",
+        "selectedIconPath": "images/cart_selected.png"
+      },
+      {
         "pagePath": "pages/my/index",
         "text": "我的",
         "iconPath": "images/user.png",
@@ -36,7 +48,9 @@
       }
     ],
     "color": "#666666",
-    "selectedColor": "#FA541C"
+    "selectedColor": "#FA541C",
+    "backgroundColor": "#fafafa",
+    "borderStyle": "white"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

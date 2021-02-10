@@ -1,12 +1,9 @@
 <!--pages/goods-detail/index.wxml-->
 <scroll-view>
-  <swiper indicator-dots autoplay circular interval="{{5000}}" duration="{{500}}" previous-margin="{{0}}px"
-    next-margin="{{0}}px">
-    <block wx:for="{{photos}}" wx:key="*this">
-      <swiper-item>
-        <image src="{{item}}" class="swiper-item" mode="heightFix"></image>
-      </swiper-item>
-    </block>
+  <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+    <swiper-item wx:for="{{photos}}" wx:key="*this">
+      <image src="{{item}}" background-size="cover"></image>
+    </swiper-item>
   </swiper>
   <view class="goods-summary">
     <view class="goods-name">
@@ -17,8 +14,8 @@
       <text>{{goods.shop_name}}</text>
     </view>
     <view class="goods-price">
-      <view class="goods-price-text">￥{{goods.sell_price}} /小时</view>
-      <view class="goods-device-count">设备数量：{{deviceCount}}</view>
+      <view class="goods-price-text">￥{{goods.sell_price}} <text wx:if="{{isService}}">/小时</text></view>
+      <view wx:if="{{isService}}" class="goods-device-count">设备数量：{{deviceCount}}</view>
     </view>
   </view>
   <view class="goods-des">
@@ -27,9 +24,17 @@
       {{goods.goods_dec?goods.goods_dec : '暂无描述'}}
     </view>
   </view>
-  <view class="footer">
-    <view bindtap="goAddOrder" class="lz-button--primary order-button">
-      确认预约
+  <view class="bottom-btn" wx:if="{{isService}}" bindtap="goAddOrder" class="lz-button--primary order-button">
+    确认预约
+  </view>
+  <view wx:else class="bottom-btn">
+    <view class="l l-cart">
+      <view class="box">
+        <text class="cart-count">{{cartGoodsCount}}</text>
+        <image bindtap="openCartPage" class="icon" src="/images/cart.png"></image>
+      </view>
     </view>
+    <view class="c">立即购买</view>
+    <view class="r" bindtap="addToCart">加入购物车</view>
   </view>
 </scroll-view>
