@@ -25,7 +25,10 @@ Page({
     interval: 5000,
     duration: 500,
     previousMargin: 0,
-    nextMargin: 0
+    nextMargin: 0,
+    pageIndex: 0,
+    pageSize: 10,
+    hasMore: true
   },
   fetchOrdersTimer: null,
   onReady: function () {
@@ -45,7 +48,7 @@ Page({
     app.$watch('miniProgramLogined', (val, old) => {
       this.setData({ miniProgramLogined: val });
       if (val && !old) {
-        this.fetchBusinessGoods();
+        this.fetchBusinessGoods(0);
       }
     });
     if (app.globalData.hasAuth) {
@@ -86,15 +89,24 @@ Page({
       }
     });
   },
+  onReachBottom: function () {
+    const { hasMore } = this.data;
+    hasMore && this.fetchBusinessGoods();
+  },
   onShow: function () {
     this.data.loginedUser && this.fetchOrders();
   },
   fetchBusinessGoods: async function () {
     try {
-      const goods = await getBusinessGoods();
-      if (goods.data.length) {
+      const { pageSize, pageIndex, goods } = this.data;
+      const res = await getBusinessGoods(pageIndex);
+      const { total, data } = res;
+      if (data.length) {
+        const hasMore = total > pageSize * (pageIndex + 1);
         this.setData({
-          goods: goods.data
+          goods: goods.concat(data),
+          hasMore,
+          pageIndex: hasMore ? pageIndex + 1 : pageIndex
         })
       }
     } catch (error) {
@@ -308,10 +320,10 @@ Page({
       });
     }
   },
-  getAccountInfo :function(){
+  getAccountInfo: function () {
     //fetchAccountInfo()
     const userInfo = (wx.getStorageSync('wxUserInfo'));
-    if(userInfo){
+    if (userInfo) {
       // wx.cloud.callFunction({ //调用云函数
       //   name: 'enterpricePay',
       //   data: {

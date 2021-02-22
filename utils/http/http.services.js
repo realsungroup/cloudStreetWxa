@@ -22,8 +22,8 @@ const getBicycles = () => {
   }, true);
 }
 // 获取商家商品（服务）
-const getBusinessGoods = () => {
-  return http.get(retrieve200, { resid: '660856859469' }, true);
+const getBusinessGoods = (pageIndex = 0) => {
+  return http.get(retrieve200, { resid: '660856859469', pageSize: 10, pageIndex }, true);
 }
 // 根据id获取商家商品（服务）
 const getGoodsById = (id) => {

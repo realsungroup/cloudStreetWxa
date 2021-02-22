@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<scroll-view class="container" scroll-y enable-flex="true">
+<scroll-view scroll-y enable-flex="true">
   <view class="navbar home-nav" style='height:{{navHeight}}px;'>
     <view class='navbar-title' style='top:{{navTop}}px'>
       <image src="{{businessInfo.business_headurl}}" class="home-nav-business-headimg" />
@@ -71,20 +71,22 @@
         <text>热门推荐</text>
       </view>
       <view>
-        <view class="goods-item" wx:for="{{goods}}"  wx:key="putaway_ID">
+        <view class="goods-item" wx:for="{{goods}}" wx:key="putaway_ID">
           <image class="goods-item-image" src="{{item.goods_img}}" />
           <view class="goods-item__right">
             <view>
               <text>{{item.goods_name}}</text>
             </view>
             <view>
-              <text class="goods-item-price">￥{{item.sell_price}}/小时</text>
+              <text class="goods-item-price">￥{{item.sell_price}} {{item.C3_660842519689 == 'Y' ? '/小时':''}}</text>
             </view>
             <view class="goods-item-actions">
-              <view wx:if="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}" class="lz-button--primary goods-item-button ">
+              <view wx:if="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}"
+                class="lz-button--primary goods-item-button ">
                 <text>立即预约</text>
               </view>
-              <view wx:else="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}" class="lz-button--primary goods-item-button ">
+              <view wx:else="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}"
+                class="lz-button--primary goods-item-button ">
                 <text>立即购买</text>
               </view>
               <view bindtap="goGoodsDetail" data-goods="{{item}}" class="lz-button goods-item-button ">
