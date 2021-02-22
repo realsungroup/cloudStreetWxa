@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<scroll-view scroll-y enable-flex="true">
+<scroll-view bindscroll="handleScroll" scroll-y enable-flex="true">
   <view class="navbar home-nav" style='height:{{navHeight}}px;'>
     <view class='navbar-title' style='top:{{navTop}}px'>
       <image src="{{businessInfo.business_headurl}}" class="home-nav-business-headimg" />
@@ -72,7 +72,7 @@
       </view>
       <view>
         <view class="goods-item" wx:for="{{goods}}" wx:key="putaway_ID">
-          <image class="goods-item-image" src="{{item.goods_img}}" />
+          <image class="goods-item-image" src="{{item.goods_img}}"/>
           <view class="goods-item__right">
             <view>
               <text>{{item.goods_name}}</text>
@@ -162,5 +162,7 @@
       </view>
     </modal>
   </view>
-
+  <view bindtap="backTop" class="back-top {{backTopVisible?'visible':''}}">
+    <image src="../../images/back-top.png"></image>
+  </view>
 </scroll-view>

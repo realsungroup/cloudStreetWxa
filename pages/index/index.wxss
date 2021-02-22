@@ -5,6 +5,31 @@ page {
   line-height: 1.6;
 }
 
+.back-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+  border: 1rpx solid #dcdcdc;
+  color: #ffffff;
+  background: #ffffff;
+  position: fixed;
+  right: 10rpx;
+  bottom: 40rpx;
+  font-size: 10px;
+  visibility: hidden;
+  /* transition: visibility 1s; */
+}
+.back-top image{
+  height: 40rpx;
+  width: 40rpx;
+}
+.visible.back-top{
+  visibility: visible;
+}
+
 .navbar {
   width: 100%;
   overflow: hidden;
@@ -34,7 +59,6 @@ page {
 .home-nav {
   background-color: #2B2B2B;
   padding-bottom: 6px;
-
 }
 
 .home-nav-business-headimg {
@@ -279,11 +303,13 @@ page {
   height: 64rpx;
   border-radius: 32rpx;
 }
-.order-content .order-button{
+
+.order-content .order-button {
   width: 140rpx;
   height: 64rpx;
   border-radius: 32rpx;
 }
+
 .order-actions {
   display: flex;
   justify-content: space-between;

@@ -28,7 +28,8 @@ Page({
     nextMargin: 0,
     pageIndex: 0,
     pageSize: 10,
-    hasMore: true
+    hasMore: true,
+    backTopVisible: false
   },
   fetchOrdersTimer: null,
   onReady: function () {
@@ -38,6 +39,7 @@ Page({
     clearInterval(this.fetchOrdersTimer);
   },
   onLoad: function (option) {
+    
     this.setData({
       navHeight: app.globalData.navHeight,
       navTop: app.globalData.navTop,
@@ -96,6 +98,11 @@ Page({
   onShow: function () {
     this.data.loginedUser && this.fetchOrders();
   },
+  onPageScroll: function (e) {
+    this.setData({
+      backTopVisible: e.scrollTop > 300 ? true : false
+    })
+  },
   fetchBusinessGoods: async function () {
     try {
       const { pageSize, pageIndex, goods } = this.data;
@@ -107,7 +114,7 @@ Page({
           goods: goods.concat(data),
           hasMore,
           pageIndex: hasMore ? pageIndex + 1 : pageIndex
-        })
+        });
       }
     } catch (error) {
       console.error(error)
@@ -340,5 +347,21 @@ Page({
       //   fail: console.error,
       // });
     }
+  },
+  backTop: function () {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。',
+        showCancel: false
+      })
+    }
+  },
+  handleScroll: function (e) {
+    console.log(e)
   }
 })
