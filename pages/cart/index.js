@@ -84,7 +84,7 @@ Page({
       })
       this.setData({
         cartGoods,
-        checkedAllStatus:true,
+        checkedAllStatus: true,
         "cartTotal.checkedGoodsAmount": checkedGoodsAmount.toFixed(2)
       })
     } catch (error) {
@@ -143,9 +143,17 @@ Page({
     }, this.getCheckedAmount)
   },
   deleteGoods: async function (event) {
-    const { itemIndex } = event.target.dataset;
-    await deleteGoodsToCart(this.data.cartGoods[itemIndex]);
-    this.getCart();
+    wx.showModal({
+      title: '确认删除？',
+      success: async (res) => {
+        if (res.confirm) {
+          const { itemIndex } = event.target.dataset;
+          await deleteGoodsToCart(this.data.cartGoods[itemIndex]);
+          this.getCart();
+        }
+      }
+    })
+
   },
   checkedAll: function () {
     const { checkedAllStatus, cartGoods } = this.data;
@@ -155,37 +163,39 @@ Page({
     this.setData({ cartGoods, checkedAllStatus: !checkedAllStatus }, this.getCheckedAmount)
   },
   checkoutOrder: function () {
-    wx.navigateTo({
-      url: '/pages/order-confirm/index',
-      success: (res) => {
-        // 通过eventChannel向被打开页面传送数据
-        const cartgoods = this.data.cartGoods.filter((item=>item.checked));
-        let shopIds = [... new Set(cartgoods.map(goods => goods.shop_ID))];
-
-        const data = shopIds.map((id, index) => {
-          const goods = cartgoods.filter(_goods => _goods.shop_ID == id);
-          let TotalNum = 0;
-          goods.forEach(item => {
-            TotalNum += Number(item.goods_counts)
-          })
-          const orderInfoParams = {
-            counts: TotalNum,
-            putaway_ID: goods[0].putaway_ID,
-          };
-          return {
-            resid: 654539359386,
-            maindata: { ...orderInfoParams, _state: "added", _id: index },
-            subdata: goods.map((item, ind) => {
-              return {
-                resid: 654539372974,
-                maindata: { ...item, counts: item.goods_counts, _state: "added", _id: ind },
-              };
-            }),
-          }
-        });
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data })
-      }
-    })
+    const { cartGoods } = this.data;
+    const cartgoods = cartGoods.filter((item => item.checked));
+    if (cartgoods.length > 0) {
+      wx.navigateTo({
+        url: '/pages/order-confirm/index',
+        success: (res) => {
+          // 通过eventChannel向被打开页面传送数据
+          let shopIds = [... new Set(cartgoods.map(goods => goods.shop_ID))];
+          const data = shopIds.map((id, index) => {
+            const goods = cartgoods.filter(_goods => _goods.shop_ID == id);
+            let TotalNum = 0;
+            goods.forEach(item => {
+              TotalNum += Number(item.goods_counts)
+            })
+            const orderInfoParams = {
+              counts: TotalNum,
+              putaway_ID: goods[0].putaway_ID,
+            };
+            return {
+              resid: 654539359386,
+              maindata: { ...orderInfoParams, _state: "added", _id: index },
+              subdata: goods.map((item, ind) => {
+                return {
+                  resid: 654539372974,
+                  maindata: { ...item, counts: item.goods_counts, _state: "added", _id: ind },
+                };
+              }),
+            }
+          });
+          res.eventChannel.emit('acceptDataFromOpenerPage', { data })
+        }
+      })
+    }
   }
 
 })

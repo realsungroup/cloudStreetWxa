@@ -1,5 +1,5 @@
 // pages/goods-detail/index.js
-import { getGoodsById, addGoodsToCart } from '../../utils/http/http.services';
+import { getGoodsById, addGoodsToCart, getCartGoods } from '../../utils/http/http.services';
 
 const app = getApp();
 
@@ -20,9 +20,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.fetchGoods(options.id)
+    this._id = options.id;
+    this.fetchGoods(options.id);
+    this.fetchCart();
   },
-
+  _id: undefined,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -54,8 +56,9 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh: async function () {
+    await this.fetchGoods(this._id);
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -93,6 +96,20 @@ Page({
 
     }
   },
+  fetchCart: async function () {
+    try {
+      const res = await getCartGoods();
+      let cartCounts = 0;
+      res.data.forEach(item => {
+        cartCounts += item.goods_counts;
+      });
+      this.setData({
+        cartGoodsCount: cartCounts
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  },
   goAddOrder: function () {
     if (app.globalData.loginedUser) {
       const { goods } = this.data
@@ -106,15 +123,65 @@ Page({
     }
   },
   addToCart: async function () {
-    await addGoodsToCart({
-      goods_ID: this.data.goods.goods_id,
-      putaway_ID: this.data.goods.putaway_ID,
-    }, 1);
-    wx.showToast({
-      title: '已添加到购物车'
-    });
+    if (!app.globalData.loginedUser) {
+      return wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
+    try {
+      wx.showLoading();
+      await addGoodsToCart({
+        goods_ID: this.data.goods.goods_id,
+        putaway_ID: this.data.goods.putaway_ID,
+      }, 1);
+      this.fetchCart();
+      wx.hideLoading();
+      wx.showToast({
+        title: '已添加到购物车'
+      });
+    } catch (error) {
+      wx.hideLoading();
+      wx.showModal({
+        title: '添加购物车失败',
+        content: error.message,
+        showCancel: false
+      })
+    }
+  },
+  buy: async function () {
+    if (!app.globalData.loginedUser) {
+      return wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
+    try {
+      wx.showLoading();
+      await addGoodsToCart({
+        goods_ID: this.data.goods.goods_id,
+        putaway_ID: this.data.goods.putaway_ID,
+      }, 1);
+      this.fetchCart();
+      wx.hideLoading();
+      wx.switchTab({
+        url: '/pages/cart/index',
+      });
+    } catch (error) {
+      wx.hideLoading();
+      wx.showModal({
+        title: '添加购物车失败',
+        content: error.message,
+        showCancel: false
+      })
+    }
+  },
+  goToCart: function () {
+    if (!app.globalData.loginedUser) {
+      return wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
     wx.switchTab({
       url: '/pages/cart/index',
-    })
+    });
   }
 })

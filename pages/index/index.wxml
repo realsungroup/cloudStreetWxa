@@ -72,7 +72,7 @@
       </view>
       <view>
         <view class="goods-item" wx:for="{{goods}}" wx:key="putaway_ID">
-          <image class="goods-item-image" src="{{item.goods_img}}"/>
+          <image lazy-load="{{true}}" class="goods-item-image" src="{{item.goods_img}}"/>
           <view class="goods-item__right">
             <view>
               <text>{{item.goods_name}}</text>
