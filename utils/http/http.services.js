@@ -237,9 +237,10 @@ const getAfterSaleData = (id) => {
   })
 }
 
-const clearCache = ()=>{
+const clearCache = () => {
   http.get("api/100/table/ClearCache");
 }
+
 export {
   miniProgramLogin,
   getBusinessInfo,
@@ -284,5 +285,5 @@ export {
   getAfterSaleReasons,
   addAftersale,
   getAfterSaleData,
-  clearCache
+  clearCache,
 }

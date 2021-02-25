@@ -18,7 +18,9 @@
     "pages/order-pay/index",
     "pages/order-detail/index",
     "pages/add-aftersale/index",
-    "pages/aftersale-detail/index"
+    "pages/aftersale-detail/index",
+    "pages/account-info/index",
+    "pages/account-change-history/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

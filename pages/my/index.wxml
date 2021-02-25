@@ -25,6 +25,11 @@
       <text>登录</text>
     </view>
     <view class="list">
+      <view class="list-item" bindtap="gotoAccountInfo">账户信息
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
       <view class="list-item" bindtap="gotoUserInfo">个人信息
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />

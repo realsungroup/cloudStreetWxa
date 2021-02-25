@@ -1,0 +1,11 @@
+<!--pages/account-info/index.wxml-->
+<view class="container">
+  <mp-cells>
+    <mp-cell link hover url="/pages/account-change-history/index?type=jieyu" value="结余" footer="{{enterpriceAccount.C3_513169614411}}元">
+    </mp-cell>
+    <mp-cell link hover url="/pages/account-change-history/index?type=jizan" value="积攒" footer="{{enterpriceAccount.C3_513168220114}}元">
+    </mp-cell>
+    <mp-cell link hover url="/pages/account-change-history/index?type=xianjin" value="现金" footer="{{enterpriceAccount.C3_511317452051}}元">
+    </mp-cell>
+  </mp-cells>
+</view>

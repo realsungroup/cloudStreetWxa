@@ -1,0 +1,15 @@
+<!--pages/account-change-history/index.wxml-->
+<view class="container trade-container">
+  <section class="table-header">
+    <view class="trade-date">日期</view>
+    <view class="trade-type">操作</view>
+    <view class="trade-money">交易金额</view>
+  </section>
+  <section class="table-body">
+    <view class="table-item" wx:for="{{trades}}" wx:key="REC_ID">
+      <view class="trade-date">{{item.C3_513556649938}}</view>
+      <view class="trade-type">{{item.C3_511317786208}}</view>
+      <view class="trade-money">{{item[moneyField]}}</view>
+    </view>
+  </section>
+</view>

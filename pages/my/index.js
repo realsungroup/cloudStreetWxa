@@ -128,13 +128,19 @@ Page({
       url: '/pages/user-info/index',
     })
   },
+  gotoAccountInfo: function () {
+    const { userLogined } = this.data;
+    userLogined && wx.navigateTo({
+      url: '/pages/account-info/index',
+    });
+  },
   logout: function () {
     wx.removeStorageSync('userInfo');
     app.setGlobalData({
       userLogined: false,
       loginedUser: null,
       personalInfo: {}
-    })
+    });
   },
   scanRide: function () {
     const { userLogined } = this.data;
@@ -175,6 +181,6 @@ Page({
     const { userLogined } = this.data;
     userLogined && wx.navigateTo({
       url: '/pages/order-list/index',
-    })
+    });
   }
 })

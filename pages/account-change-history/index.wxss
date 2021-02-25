@@ -1,0 +1,33 @@
+/* pages/account-info/index.wxss */
+.trade-container{
+  height: 100vh;
+}
+.table-header {
+  display: flex;
+  padding: 24rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.table-body {
+  padding:0 24rpx;
+  flex: 1;
+  overflow: scroll;
+}
+
+.table-item {
+  display: flex;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #dcdcdc;
+}
+
+.trade-date {
+  flex: 2;
+  text-align: center;
+}
+
+.trade-type,
+.trade-money {
+  flex: 1;
+  text-align: center;
+}
