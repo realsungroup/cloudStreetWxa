@@ -18,7 +18,7 @@ Page({
   onLoad: function (options) {
     const { orderId } = options;
     this.getOrder(orderId);
-
+    this._id = orderId;
   },
 
   /**
@@ -32,7 +32,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this._id && this.getOrder(this._id);
   },
 
   /**
@@ -165,5 +165,23 @@ Page({
     wx.redirectTo({
       url: `/pages/order-pay/index?orderIds=${order.order_ID}&totalPrice=${order.order_allPrice}`,
     });
+  },
+  handleAfterSale: function () {
+    const { order, goodsList } = this.data;
+    if (order.isAfterSale === "Y") {
+      wx.navigateTo({
+        url: '/pages/aftersale-detail/index?id=' + order.afterSale_ID,
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/add-aftersale/index',
+        success: (res) => {
+          res.eventChannel.emit('acceptDataFromOpenerPage', {
+            order,
+            goodsList,
+          })
+        }
+      });
+    }
   }
 })

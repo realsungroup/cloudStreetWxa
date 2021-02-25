@@ -1,0 +1,52 @@
+<!--pages/aftersale-detail/index.wxml-->
+<view class="container">
+  <mp-navigation-bar loading="{{loading}}" background="#ffffff" title="售后申请"></mp-navigation-bar>
+  <view class="content">
+    <mp-toptips ext-class="lz-toptips" bindhide="tiphide" msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+    <view class="main">
+      <view class="order-info-item">
+        <text class="order-info-item__label">订单编号</text>
+        <text>{{order.order_ID}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">状态</text>
+        <text>{{order.afterSale_status}}</text>
+      </view>
+      <view wx:if="{{order.afterSale_status === '已拒绝'}}" class="order-info-item">
+        <text class="order-info-item__label">拒绝理由</text>
+        <text>{{order.reject_reason}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">售后类型</text>
+        <text>{{order.afterSale_type}}</text>
+      </view>
+      <view class="order-info-item">
+        <text class="order-info-item__label">申请理由</text>
+        <text>{{order.afterSale_reason}}</text>
+      </view>
+      <view>
+        <view class="shop-name">
+          商品
+        </view>
+        <view wx:for="{{goodsList}}" wx:key="REC_ID" wx:for-item="goods" class="shop-goods">
+          <image src="{{goods.goods_img}}" />
+          <view class="shop-goods__right">
+            <view>{{goods.goods_name}}</view>
+            <view style="display:flex;justify-content:space-between">
+              <view>
+                <text class="price-color">￥</text>
+                <text class="price-color">{{goods.goods_price}}</text>
+              </view>
+              <text>x{{goods.goods_num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="footer">
+      <view wx:if="{{order.afterSale_status && order.afterSale_status === '未处理'}}" class="footer-btn"
+        style="background:#aaaaaa">等待商家同意</view>
+      <!-- <view bindtap="handleSubmit" class="footer-btn">提交申请</view> -->
+    </view>
+  </view>
+</view>

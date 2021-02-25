@@ -62,7 +62,7 @@ function getPromise(url, data, method, isBusiness = false) {
         }
       },
       fail: function (err) {
-        reject(err);
+        reject(new Error(err.errMsg));
       }
     })
   })

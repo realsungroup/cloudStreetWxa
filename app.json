@@ -16,7 +16,9 @@
     "pages/order-list/index",
     "pages/order-confirm/index",
     "pages/order-pay/index",
-    "pages/order-detail/index"
+    "pages/order-detail/index",
+    "pages/add-aftersale/index",
+    "pages/aftersale-detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

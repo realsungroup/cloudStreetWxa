@@ -1,4 +1,6 @@
 // pages/cart/index.js
+const app = getApp();
+
 import {
   getCartGoods,
   addGoodsToCart,
@@ -24,6 +26,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    app.$watch('userLogined', (val) => {
+      if (!val) {
+        this.setData({
+          cartGoods: [],
+          cartTotal: {
+            "goodsCount": 0,
+            "goodsAmount": 0.00,
+            "checkedGoodsAmount": 0.00
+          },
+          checkedAllStatus: false,
+        })
+      }
+    });
   },
 
   /**
@@ -37,7 +52,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getCart()
+    app.globalData.userLogined && this.getCart()
   },
 
   /**

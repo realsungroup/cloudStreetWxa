@@ -1,0 +1,97 @@
+/* pages/aftersale-detail/index.wxss */
+.container {
+  height: 100vh;
+  background: #ffffff;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  overflow: scroll;
+}
+
+.order-info-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 24rpx;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid #ececec;
+}
+
+.shop-name {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+}
+
+.shop-name>image {
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 12rpx;
+}
+
+.checkbox {
+  height: 34rpx;
+  padding-left: 60rpx;
+  line-height: 34rpx;
+  background: url(http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/checkbox-0e09baa37e.png) no-repeat;
+  background-size: 34rpx;
+  font-size: 29rpx;
+}
+.checkbox.checked {
+  background: url(http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/checkbox-checked-822e54472a.png) no-repeat;
+  background-size: 34rpx;
+}
+.shop-goods {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8rpx;
+  padding: 12rpx 0;
+  border-bottom: 1px solid #ececec;
+  margin: 0 24rpx;
+}
+
+.shop-goods>image {
+  height: 240rpx;
+  width: 240rpx;
+}
+
+.shop-goods__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  margin-left: 24rpx;
+  font-size: 28rpx;
+  color: #111111;
+  font-weight: 400;
+}
+.order-info-item__label{
+  width: 30%;
+  flex-shrink:0;
+}
+
+.footer {
+  display: flex;
+  padding: 24rpx;
+}
+
+.footer-btn {
+  flex: 1;
+  height: 80rpx;
+  border-radius: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to left, #FA541C, #FD8D3C);
+  color: #FFFFFF;
+}
+.cancel-btn{
+  background: linear-gradient(to right, #ff4d4f, #f5222d);
+  margin-right: 12rpx;
+}

@@ -210,6 +210,13 @@ Page({
                   }
                 }
               });
+            } else {
+              wx.hideLoading();
+              wx.showModal({
+                showCancel: false,
+                title: '提示',
+                content: response.message
+              })
             }
           },
           fail: (error) => {

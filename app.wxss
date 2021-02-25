@@ -12,3 +12,7 @@
 .price-color{
   color: #FA541C;
 }
+.lz-toptips{
+  position: relative ;
+  left: 0;
+}

@@ -1,5 +1,5 @@
 //index.js
-import { getBusinessGoods, getOrdersApi, queryDeviceByTimeId, saveDevice, modifyOrderApi } from '../../utils/http/http.services';
+import { addGoodsToCart, clearCache, getBusinessGoods, getOrdersApi, queryDeviceByTimeId, saveDevice, modifyOrderApi } from '../../utils/http/http.services';
 import { isURL, getQueryObject } from '../../utils/util';
 import dayjs from 'dayjs';
 
@@ -39,7 +39,7 @@ Page({
     clearInterval(this.fetchOrdersTimer);
   },
   onLoad: function (option) {
-    
+    // clearCache();
     this.setData({
       navHeight: app.globalData.navHeight,
       navTop: app.globalData.navTop,
@@ -363,5 +363,31 @@ Page({
   },
   handleScroll: function (e) {
     console.log(e)
-  }
+  },
+  buy: async function (e) {
+    const goods = e.currentTarget.dataset.goods;
+    if (!app.globalData.loginedUser) {
+      return wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
+    try {
+      wx.showLoading();
+      await addGoodsToCart({
+        goods_ID: goods.goods_id,
+        putaway_ID: goods.putaway_ID,
+      }, 1);
+      wx.hideLoading();
+      wx.switchTab({
+        url: '/pages/cart/index',
+      });
+    } catch (error) {
+      wx.hideLoading();
+      wx.showModal({
+        title: '添加购物车失败',
+        content: error.message,
+        showCancel: false
+      })
+    }
+  },
 })

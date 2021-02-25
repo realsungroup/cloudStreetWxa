@@ -85,7 +85,7 @@
                 class="lz-button--primary goods-item-button ">
                 <text>立即预约</text>
               </view>
-              <view wx:else="{{item.C3_660842519689 == 'Y'}}" bindtap="goAddOrder" data-goods="{{item}}"
+              <view wx:else="{{item.C3_660842519689 == 'Y'}}" bindtap="buy" data-goods="{{item}}"
                 class="lz-button--primary goods-item-button ">
                 <text>立即购买</text>
               </view>

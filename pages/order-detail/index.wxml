@@ -61,7 +61,7 @@
     <view class="footer">
       <view bindtap="cancelOrder" wx:if="{{cancelVisiable}}" class="footer-btn cancel-btn">取消订单</view>
       <view wx:if="{{payVisiable}}" bindtap="orderPay" class="footer-btn">立即支付</view>
-      <view wx:if="{{afterSaleVisible}}" class="footer-btn">售后</view>
+      <view wx:if="{{afterSaleVisible}}" bindtap="handleAfterSale" class="footer-btn">售后</view>
       <view wx:if="{{confirmReceive}}" bindtap="confirmOrder" class="footer-btn">确认收货</view>
     </view>
   </view>

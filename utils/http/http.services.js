@@ -218,6 +218,28 @@ const confirmReceiveOrder = function (id) {
     data: [{ REC_ID: id, isReceive: 'Y' }]
   })
 }
+
+//获取售后理由
+const getAfterSaleReasons = () => {
+  return http.get(retrieve, { resid: 654527905458 })
+}
+
+//添加售后
+const addAftersale = (data) => {
+  return http.add200Records(data);
+}
+// 获取售后
+const getAfterSaleData = (id) => {
+  return http.get(retrieve200, {
+    resid: '654108166979',
+    subresid: "654108194889",
+    cmswhere: `afterSale_ID = '${id}'`
+  })
+}
+
+const clearCache = ()=>{
+  http.get("api/100/table/ClearCache");
+}
 export {
   miniProgramLogin,
   getBusinessInfo,
@@ -258,5 +280,9 @@ export {
   getOrderDetailData,
   deleteOrderById,
   cancelOrderApi,
-  confirmReceiveOrder
+  confirmReceiveOrder,
+  getAfterSaleReasons,
+  addAftersale,
+  getAfterSaleData,
+  clearCache
 }

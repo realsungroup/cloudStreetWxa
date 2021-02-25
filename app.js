@@ -1,5 +1,5 @@
 //app.js
-import { getBusinessInfo, getWXUserInfo, getPersonalinfo, miniProgramLogin, userLogin, addPersonalinfo } from './utils/http/http.services';
+import { getBusinessInfo, getWXUserInfo, getPersonalinfo, miniProgramLogin, userLogin, addPersonalinfo, getAfterSaleReasons } from './utils/http/http.services';
 
 wx.cloud.init({
   env: 'openshopwx-anj96',
@@ -13,7 +13,8 @@ App({
     hasAuth: false,
     userLogined: false,
     loginedUser: null,
-    personalInfo: {}
+    personalInfo: {},
+    aftersaleReasons: []
   },
   onLaunch: function () {
     wx.getSetting({
@@ -69,6 +70,7 @@ App({
     try {
       const storageUserInfo = wx.getStorageSync('userInfo');
       storageUserInfo && this._userLogin(storageUserInfo.UserInfo.EMP_OPENID);
+      this.fetchAftersaleReason();
     } catch (error) {
     }
   },
@@ -86,8 +88,8 @@ App({
           data: res,
           key: 'miniProgramInfo',
         });
-        this.setGlobalData({ miniProgramLogined: true })
-        this.fetchBusinessInfo()
+        this.setGlobalData({ miniProgramLogined: true });
+        this.fetchBusinessInfo();
       }
     } catch (error) {
     }
@@ -152,6 +154,16 @@ App({
         title: '提示',
         content: error.message
       })
+    }
+  },
+  fetchAftersaleReason: async function () {
+    try {
+      const res = await getAfterSaleReasons();
+      this.setGlobalData({
+        aftersaleReasons: res.data
+      })
+    } catch (error) {
+      console.error(error)
     }
   },
   watchCallBack: {},
