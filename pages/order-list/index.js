@@ -20,20 +20,26 @@ Page({
     waitreceiveOrders: [],
     doneOrders: [],
     loadingData: false,
-    activeTab: 0
+    activeTab: 0,
+    tabSwiperHeight: 700
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const sysInfo = wx.getSystemInfoSync();
+    const menuButtonObject = wx.getMenuButtonBoundingClientRect();
+    const statusBarHeight = sysInfo.statusBarHeight,
+      navHeight = statusBarHeight + menuButtonObject.height + (menuButtonObject.top - statusBarHeight + 2) * 2;//导航高度
+    const tabSwiperHeight = sysInfo.windowHeight - navHeight - 44;
     const tabs = [
       { title: '全部', getData: this.getAllOrder },
       { title: '待付款', getData: this.getUnpayOrders },
       { title: '待发货', getData: this.getWaitSendOrders },
       { title: '待收货', getData: this.getWaitreceiveOrders },
       { title: '已完成', getData: this.getDoneOrders }];
-    this.setData({ tabs });
+    this.setData({ tabs, tabSwiperHeight });
     this.getAllOrder();
   },
 

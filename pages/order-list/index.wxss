@@ -20,7 +20,6 @@
 }
 
 .tab-content {
-  height: 100vh;
   overflow: scroll;
   width: 100%;
   box-sizing: border-box;

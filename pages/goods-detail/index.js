@@ -83,6 +83,9 @@ Page({
         if (data[660929208133].length) {
           deviceCount = data[660929208133][0].bookSouceAmount
         }
+        wx.setNavigationBarTitle({
+          title: data.goods_name
+        });
         this.setData({
           goods: data,
           isService: data.C3_660842519689 == 'Y',
