@@ -29,7 +29,9 @@ Page({
     pageIndex: 0,
     pageSize: 10,
     hasMore: true,
-    backTopVisible: false
+    backTopVisible: false,
+    loadingMore: false,
+    refreshing: false
   },
   fetchOrdersTimer: null,
   onReady: function () {
@@ -91,6 +93,13 @@ Page({
       }
     });
   },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    this.fetchBusinessGoods(true);
+    wx.stopPullDownRefresh();
+  },
   onReachBottom: function () {
     const { hasMore } = this.data;
     hasMore && this.fetchBusinessGoods();
@@ -103,21 +112,30 @@ Page({
       backTopVisible: e.scrollTop > 300 ? true : false
     })
   },
-  fetchBusinessGoods: async function () {
+  fetchBusinessGoods: async function (isFirst = false) {
     try {
-      const { pageSize, pageIndex, goods } = this.data;
+      let { pageSize, pageIndex, goods } = this.data;
+      if (isFirst) {
+        this.setData({ refreshing: true });
+        pageIndex = 0;
+      } else {
+        this.setData({ loadingMore: true });
+      }
       const res = await getBusinessGoods(pageIndex);
       const { total, data } = res;
+      this.setData({ loadingMore: true })
       if (data.length) {
         const hasMore = total > pageSize * (pageIndex + 1);
         this.setData({
-          goods: goods.concat(data),
+          goods: isFirst ? data : goods.concat(data),
           hasMore,
-          pageIndex: hasMore ? pageIndex + 1 : pageIndex
+          pageIndex: hasMore ? pageIndex + 1 : pageIndex,
+          loadingMore: false
         });
       }
     } catch (error) {
-      console.error(error)
+      console.error(error);
+      this.setData({ loadingMore: false })
     }
   },
   fetchOrders: async function () {

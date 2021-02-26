@@ -90,7 +90,7 @@ Page({
           photos: data.goods_photos ? data.goods_photos.split(';') : []
         })
       } else {
-        wx.showToast({ icon: 'none', title: '查询不到' })
+        wx.showToast({ icon: 'none', title: '商品不见了' })
       }
     } catch (error) {
 
@@ -128,11 +128,15 @@ Page({
         url: '/pages/wxauth/index',
       });
     }
+    const { goods } = this.data;
+    if (!goods.goods_id) {
+      return;
+    }
     try {
       wx.showLoading();
       await addGoodsToCart({
-        goods_ID: this.data.goods.goods_id,
-        putaway_ID: this.data.goods.putaway_ID,
+        goods_ID: goods.goods_id,
+        putaway_ID: goods.putaway_ID,
       }, 1);
       this.fetchCart();
       wx.hideLoading();
@@ -154,11 +158,15 @@ Page({
         url: '/pages/wxauth/index',
       });
     }
+    const { goods } = this.data;
+    if (!goods.goods_id) {
+      return;
+    }
     try {
       wx.showLoading();
       await addGoodsToCart({
-        goods_ID: this.data.goods.goods_id,
-        putaway_ID: this.data.goods.putaway_ID,
+        goods_ID: goods.goods_id,
+        putaway_ID: goods.putaway_ID,
       }, 1);
       this.fetchCart();
       wx.hideLoading();

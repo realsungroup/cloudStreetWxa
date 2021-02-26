@@ -1,0 +1,29 @@
+/* pages/shops/index.wxss */
+.shop-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  border-bottom: 1rpx solid #dedede;
+}
+.shop-name-wrapper{
+  flex: 1;
+}
+.shop-logo {
+  height: 64rpx;
+  width: 64rpx;
+  margin-right: 12rpx;
+}
+.shop-des{
+  color: #999999;
+  font-size: 24rpx;
+}
+.shop-button{
+  height: 48rpx;
+  width: 100rpx;
+  border-radius: 24rpx;
+  border: 1rpx solid #FA541C;
+  color: #FA541C;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 48rpx;
+}

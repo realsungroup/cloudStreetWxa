@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "navbar": "/components/navbar/index",
-    "modal": "/components/modal/index"
+    "modal": "/components/modal/index",
+    "mp-loading": "weui-miniprogram/loading/loading"
   },
   "enablePullDownRefresh":true
 }

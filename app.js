@@ -16,7 +16,19 @@ App({
     personalInfo: {},
     aftersaleReasons: []
   },
-  onLaunch: function () {
+  onLaunch: async function () {
+    let menuButtonObject = wx.getMenuButtonBoundingClientRect();
+    wx.getSystemInfo({
+      success: res => {
+        let statusBarHeight = res.statusBarHeight,
+          navTop = menuButtonObject.top,//胶囊按钮与顶部的距离
+          navHeight = statusBarHeight + menuButtonObject.height + (menuButtonObject.top - statusBarHeight) * 2;//导航高度
+        this.globalData.navHeight = navHeight;
+        this.globalData.navTop = navTop;
+        this.globalData.windowHeight = res.windowHeight;
+      },
+    });
+    await this._miniProgramLogin();
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -46,7 +58,6 @@ App({
                     }
                   }
                 })
-
               }
             },
           })
@@ -55,23 +66,13 @@ App({
         }
       },
     });
-    let menuButtonObject = wx.getMenuButtonBoundingClientRect();
-    wx.getSystemInfo({
-      success: res => {
-        let statusBarHeight = res.statusBarHeight,
-          navTop = menuButtonObject.top,//胶囊按钮与顶部的距离
-          navHeight = statusBarHeight + menuButtonObject.height + (menuButtonObject.top - statusBarHeight) * 2;//导航高度
-        this.globalData.navHeight = navHeight;
-        this.globalData.navTop = navTop;
-        this.globalData.windowHeight = res.windowHeight;
-      },
-    });
-    this._miniProgramLogin();
+
     try {
       const storageUserInfo = wx.getStorageSync('userInfo');
       storageUserInfo && this._userLogin(storageUserInfo.UserInfo.EMP_OPENID);
       this.fetchAftersaleReason();
     } catch (error) {
+      console.error(error);
     }
   },
   _miniProgramLogin: async function () {
@@ -127,8 +128,7 @@ App({
       const businessInfo = await getBusinessInfo();
       if (businessInfo.data.length) {
         const data = businessInfo.data[0];
-        this.globalData.businessInfo = data;
-        this.globalData.businessId = data[660914792669][0].business_ID
+        this.setGlobalData({ businessInfo: data, businessId: data[660914792669][0].business_ID })
       }
     } catch (error) {
       console.error(error.message)

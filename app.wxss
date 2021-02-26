@@ -16,3 +16,36 @@
   position: relative ;
   left: 0;
 }
+.lz-loading{
+  margin: 0 auto;
+}
+.back-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+  border: 1rpx solid #dcdcdc;
+  color: #ffffff;
+  background: #ffffff;
+  position: fixed;
+  right: 10rpx;
+  bottom: 40rpx;
+  font-size: 10px;
+  visibility: hidden;
+  /* transition: visibility 1s; */
+}
+.back-top image{
+  height: 40rpx;
+  width: 40rpx;
+}
+.visible.back-top{
+  visibility: visible;
+}
+.hasNoMore{
+  font-size: 24rpx;
+  font-weight: 300;
+  color: #666666;
+  text-align: center;
+}

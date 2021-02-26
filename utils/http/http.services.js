@@ -1,7 +1,7 @@
 import config from './config';
 import http, { getHeader, getMiniProgramInfoHeader } from './http';
 
-const { path: { getWxUserInfo, login, retrieve200, isWxUnionIdExist, retrieve } } = config
+const { path: { getWxUserInfo, login, getPublicData, retrieve200, isWxUnionIdExist, retrieve } } = config
 const miniProgramLogin = ({
   data = {},
 }) => {
@@ -27,7 +27,11 @@ const getBusinessGoods = (pageIndex = 0) => {
 }
 // 根据id获取商家商品（服务）
 const getGoodsById = (id) => {
-  return http.get(retrieve200, { resid: '660856859469', subresid: '660929208133', cmswhere: `putaway_ID = '${id}'` }, true);
+  // return http.get(getPublicData, {
+  //   resid: 652530832316,
+  //   cmswhere: `goods_id = ${id}`
+  // });
+  return http.get(retrieve200, { resid: '660856859469', subresid: '660929208133', cmswhere: `putaway_ID = '${id}'` });
 }
 
 const getWXUserInfo = ({ code, iv, AppId, AppSecret, encrypteddata }) => {
@@ -241,6 +245,19 @@ const clearCache = () => {
   http.get("api/100/table/ClearCache");
 }
 
+//获取商铺
+const getShops = () => {
+  return http.get(retrieve, { resid: 667666719418 }, true)
+}
+//获取商铺的商品
+const getShopGoods = ({ id, pagesize, pageindex }) => {
+  return http.get(getPublicData, {
+    resid: 652530832316,
+    cmswhere: `shop_ID = '${id}'`,
+    pagesize,
+    pageindex
+  })
+}
 export {
   miniProgramLogin,
   getBusinessInfo,
@@ -286,4 +303,6 @@ export {
   addAftersale,
   getAfterSaleData,
   clearCache,
+  getShops,
+  getShopGoods
 }

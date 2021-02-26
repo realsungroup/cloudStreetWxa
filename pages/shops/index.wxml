@@ -1,0 +1,16 @@
+<!--pages/shops/index.wxml-->
+<view class="container">
+  <mp-navigation-bar background="#ffffff" title="商铺" back="{{false}}"></mp-navigation-bar>
+  <view>
+    <view bindtap="goShop" data-shop="{{item}}" class="shop-item" wx:for="{{shops}}" wx:key="REC_ID">
+      <image class="shop-logo" src="{{item.shop_logo}}"></image>
+      <view class="shop-name-wrapper">
+        <view>{{item.shop_name}}</view>
+        <view class="shop-des">{{item.shop_dec||""}}</view>
+      </view>
+      <view class="shop-button">
+        进店
+      </view>
+    </view>
+  </view>
+</view>
