@@ -68,9 +68,13 @@ App({
     });
 
     try {
+      this.$watch('userLogined', (val, old) => {
+        if (val && !old) {
+          this.fetchAftersaleReason();
+        }
+      });
       const storageUserInfo = wx.getStorageSync('userInfo');
       storageUserInfo && this._userLogin(storageUserInfo.UserInfo.EMP_OPENID);
-      this.fetchAftersaleReason();
     } catch (error) {
       console.error(error);
     }
@@ -173,7 +177,6 @@ App({
     Object.keys(data).map(key => {
       this.globalData[key] = data[key]
     })
-    console.log('mutation', data);
     wx.setStorageSync('store', this.globalData)// 加入缓存
   },
   $watch(key, cb) {

@@ -9,15 +9,19 @@
     </view>
   </view>
   <view style='margin-top:{{navHeight+6}}px;'>
+    <view  class="home__search-wrapper">
+      <view bindtap="goSearch" class="home__search">
+       <image style="height:48rpx;width:48rpx" src="/images/search.png"/>搜索商品</view>
+    </view>
     <view class="page-section  swiper">
-      <swiper indicator-dots autoplay circular vertical interval="{{interval}}" duration="{{duration}}"
+      <!-- <swiper indicator-dots autoplay circular vertical interval="{{interval}}" duration="{{duration}}"
         previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
         <block wx:for="{{background}}" wx:key="*this">
           <swiper-item>
             <image src="{{item}}" class="swiper-item " />
           </swiper-item>
         </block>
-      </swiper>
+      </swiper> -->
       <view class="home-tip-container">
         <view wx:if="{{hasOrder}}" class="lz-card">
           <view class="lz-card__title">

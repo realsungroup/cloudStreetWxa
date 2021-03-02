@@ -100,6 +100,9 @@ Page({
     }
   },
   fetchCart: async function () {
+    if (!app.globalData.loginedUser) {
+      return
+    }
     try {
       const res = await getCartGoods();
       let cartCounts = 0;

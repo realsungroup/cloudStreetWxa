@@ -1,0 +1,27 @@
+<!--pages/search-result/idnex.wxml-->
+<!--pages/category-goods/index.wxml-->
+<view class="container  category-goods-page-container">
+  <mp-navigation-bar loading="{{refreshing}}" background="#ffffff" title="{{searchText}}"></mp-navigation-bar>
+  <view class="empty-box" wx:if="{{!loadingMore && !refreshing&& goodsList.length==0}}">
+    <image src="/images/emptybox@2x.png" />
+    <view>没有相关商品</view>
+  </view>
+  <view class="shop-goods">
+    <view data-goods="{{item}}" bindtap="goGoodsDetail" wx:for="{{goodsList}}" wx:key="REC_ID" class="goods-item">
+      <image class="goods-img" src="{{item.goods_img}}" />
+      <view class="goods-info">
+        <view class="goods-name">{{item.goods_name}}</view>
+        <view class="price-color">￥{{item.sell_price}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="lz-loading">
+    <mp-loading extClass="lz-loading" show="{{loadingMore}}" tips="" type="circle"></mp-loading>
+  </view>
+  <view class="hasNoMore" wx:if="{{!loadingMore && !refreshing && !hasMore && goodsList.length > 0}}">
+    ~ 到底了 ~
+  </view>
+  <view bindtap="backTop" class="back-top {{backTopVisible?'visible':''}}">
+    <image src="../../images/back-top.png"></image>
+  </view>
+</view>

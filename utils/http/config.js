@@ -11,6 +11,7 @@ const config = {
     startWebSocketService: 'api/LafitSocket/StartWebSocketService',
     save200Data: "api/200/table/Save",
     getPublicData: "api/100/table/Public/Retrieve",
+    getPublic200Data: "api/200/table/Public/Retrieve",
   }
 }
 

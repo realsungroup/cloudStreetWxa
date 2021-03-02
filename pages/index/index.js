@@ -101,8 +101,8 @@ Page({
     wx.stopPullDownRefresh();
   },
   onReachBottom: function () {
-    const { hasMore } = this.data;
-    hasMore && this.fetchBusinessGoods();
+    const { hasMore,loadingMore } = this.data;
+    hasMore && !loadingMore && this.fetchBusinessGoods();
   },
   onShow: function () {
     this.data.loginedUser && this.fetchOrders();
@@ -408,4 +408,9 @@ Page({
       })
     }
   },
+  goSearch:function(){
+    wx.navigateTo({
+      url: '/pages/search/index',
+    })
+  }
 })

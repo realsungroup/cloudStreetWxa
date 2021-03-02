@@ -35,7 +35,21 @@ page {
   background-color: #2B2B2B;
   padding-bottom: 6px;
 }
-
+.home__search-wrapper{
+  padding: 24rpx;
+}
+.home__search{
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  border-radius: 32rpx;
+  background: #ffffff;
+  border: 1rpx solid #efefef;
+  padding: 0 24rpx;
+  color: #aaa;
+  font-size: 28rpx;
+  font-weight: 400;
+}
 .home-nav-business-headimg {
   height: 64rpx;
   width: 64rpx;

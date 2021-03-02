@@ -1,5 +1,5 @@
-// pages/shop/index.js
-import { getShops, getShopGoods } from '../../utils/http/http.services';
+// pages/search-result/idnex.js
+import { searchGoods } from '../../utils/http/http.services';
 
 Page({
 
@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    shop: {},
+    searchText: '',
     pagesize: 10,
     pageindex: 0,
     hasMore: true,
@@ -21,13 +21,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const eventChannel = this.getOpenerEventChannel()
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', (data) => {
-      const { shop } = data;
-      this.setData({ shop });
-      this.getGoods(shop.shopid, true);
-    })
+    const { searchText } = options;
+    this.setData({ searchText });
+    this.fetchGoodsList(searchText, true);
   },
 
   /**
@@ -62,31 +58,22 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    const { shop } = this.data;
-    this.getGoods(shop.shopid, true);
-    wx.stopPullDownRefresh();
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    const { hasMore, shop,loadingMore } = this.data;
-    hasMore && !loadingMore && this.getGoods(shop.shopid);
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    const { hasMore, searchText, loadingMore } = this.data;
+    hasMore && !loadingMore && this.fetchGoodsList(searchText);
   },
   onPageScroll: function (e) {
     this.setData({
       backTopVisible: e.scrollTop > 300 ? true : false
     })
   },
-  getGoods: async function (id, isFirst = false) {
+  fetchGoodsList: async function (searchText, isFirst = false) {
     let { pageindex, pagesize, goodsList } = this.data;
     try {
       if (isFirst) {
@@ -95,7 +82,7 @@ Page({
       } else {
         this.setData({ loadingMore: true });
       }
-      const res = await getShopGoods({ id, pagesize, pageindex });
+      const res = await searchGoods({ searchText, pagesize, pageindex });
       const { total, data } = res;
       const hasMore = total > pagesize * (pageindex + 1);
       this.setData({
@@ -113,6 +100,11 @@ Page({
       console.error(error);
     }
   },
+  goGoodsDetail: function (e) {
+    wx.navigateTo({
+      url: '/pages/goods-detail/index?id=' + e.currentTarget.dataset.goods.putaway_ID,
+    });
+  },
   backTop: function () {
     if (wx.pageScrollTo) {
       wx.pageScrollTo({
@@ -126,14 +118,4 @@ Page({
       })
     }
   },
-  goGoodsDetail: function (e) {
-    wx.navigateTo({
-      url: '/pages/goods-detail/index?id=' + e.currentTarget.dataset.goods.putaway_ID,
-    });
-  },
-  callPhone: function () {
-    wx.makePhoneCall({
-      phoneNumber: '13767267543',
-    })
-  }
 })

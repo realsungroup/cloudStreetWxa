@@ -1,0 +1,26 @@
+<!--pages/categories/index.wxml-->
+<view class="container  category-page-container">
+  <mp-navigation-bar loading="{{loading}}" background="#ffffff" title="分类" back="{{false}}"></mp-navigation-bar>
+  <view class="content">
+    <scroll-view class="left">
+      <view bindtap="changeLv1" data-index="{{index}}"
+        class="lv1Categories-item {{selectedLv1== index ? 'selected' :''}}" wx:key="REC_ID" wx:for="{{lv1Categoryies}}">
+        {{item.name}}
+      </view>
+    </scroll-view>
+    <scroll-view style="border-top-left-radius: {{selectedLv1 === 0 ? 0 :24}}rpx" scroll-y="{{true}}" class="right">
+      <view class="subCategoryie-item" wx:key="REC_ID" wx:for="{{subCategoryies}}">
+        <view class="lv2Category-name">
+          {{item.title}}
+        </view>
+        <view class="lv3Categoryies">
+          <view data-category="{{lv3Categoryie}}" bindtap="goCategoryGoods" class="lv3Categories-item" wx:key="REC_ID"
+            wx:for="{{item.data}}" wx:for-item="lv3Categoryie">
+            <image class="category-img" src="{{lv3Categoryie.photo_url}}" />
+            <view>{{lv3Categoryie.name}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

@@ -1,0 +1,21 @@
+<!--pages/search/index.wxml-->
+<view class="container search-container">
+  <mp-navigation-bar background="#ffffff" title="搜索"></mp-navigation-bar>
+  <view class="search-section">
+    <input bindconfirm="handleSearch" class="search-input" bindinput="searchValueChange" confirm-type="search"
+      placeholder="搜索商品" focus="{{true}}" value="{{searchValue}}" />
+    <view bindtap="handleSearch" class="search-btn">搜索</view>
+  </view>
+  <view class="history-section">
+    <view class="history-section-title">搜索历史</view>
+    <view class="tag-list">
+      <view bindtap="handleTagTap" data-text="{{item.word}}" class="lz-tag" wx:for="{{histories}}" wx:key="REC_ID">{{item.word}}</view>
+    </view>
+  </view>
+  <view class="hot-section">
+    <view class="hot-section-title">热门标签</view>
+    <view class="tag-list">
+      <view bindtap="handleTagTap" data-text="{{item.tag_name}}" class="lz-tag" wx:for="{{tags}}" wx:key="REC_ID">{{item.tag_name}}</view>
+    </view>
+  </view>
+</view>

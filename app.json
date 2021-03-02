@@ -21,7 +21,11 @@
     "pages/account-info/index",
     "pages/account-change-history/index",
     "pages/shops/index",
-    "pages/shop/index"
+    "pages/shop/index",
+    "pages/categories/index",
+    "pages/category-goods/index",
+    "pages/search/index",
+    "pages/search-result/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -40,10 +44,16 @@
         "selectedIconPath": "images/homepage_selected.png"
       },
       {
+        "pagePath": "pages/categories/index",
+        "text": "分类",
+        "iconPath": "images/category.png",
+        "selectedIconPath": "images/category_select.png"
+      },
+      {
         "pagePath": "pages/shops/index",
         "text": "商铺",
-        "iconPath": "images/homepage.png",
-        "selectedIconPath": "images/homepage_selected.png"
+        "iconPath": "images/shop.png",
+        "selectedIconPath": "images/shop_select.png"
       },
       {
         "pagePath": "pages/cart/index",
