@@ -182,5 +182,11 @@ Page({
     userLogined && wx.navigateTo({
       url: '/pages/order-list/index',
     });
+  },
+  goOrderingHome: function () {
+    const { userLogined } = this.data;
+    userLogined && wx.navigateTo({
+      url: '/pages/ordering-home/index',
+    });
   }
 })

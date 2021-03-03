@@ -41,8 +41,49 @@ function getQueryObject(url = '') {
   return theRequest;
 }
 
+const cloudRetrieve = (data) => {
+  const userInfo = wx.getStorageSync('wxUserInfo');
+  return new Promise((resolve, reject) => {
+    wx.cloud.callFunction({
+      name: 'retrieve',
+      data: {
+        unionid: userInfo.unionId,
+        data
+      },
+      success: res => {
+        const response = res.result;
+        if (response.error == 0 || response.Error == 0) {
+          resolve(response);
+        } else {
+          reject(new Error(response.message));
+        }
+      },
+      fail: (error) => {
+        reject(error);
+      },
+    });
+  });
+}
+/**
+ * 返回数组（数组中元素为对象）中存在值为 val 的对象的下标（类似 Array.prototype.indexOf）
+ * @param {Array} arr 数组，数组元素为对象
+ * @param {String} key 要在数组元素（对象）中寻找的键
+ * @param {基本类型} val
+ * @return -1 或 n（n 大于等于 0）
+ */
+const indexOfObj = (arr, key, val) => {
+  let index = -1;
+  arr.forEach((obj, i) => {
+    if (obj[key] === val) {
+      index = i;
+    }
+  });
+  return index;
+};
 module.exports = {
   formatTime: formatTime,
   isURL: isURL,
-  getQueryObject: getQueryObject
+  getQueryObject: getQueryObject,
+  cloudRetrieve,
+  indexOfObj
 }

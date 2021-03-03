@@ -1,0 +1,58 @@
+<!--pages/ordering-select/index.wxml-->
+<view class="container ordering-select-container">
+  <mp-navigation-bar background="#FA541C" color="#fff" title="点餐"></mp-navigation-bar>
+  <view class="header">
+    <picker range-key="label" mode="selector" bindchange="companyChange" value="{{companyIndex}}" range="{{companies}}">
+      <view class="picker">
+        <view class="picker-text">
+          {{companies[companyIndex].label}}
+        </view>
+        <image class="picker-down-icon" src="/images/down.png" />
+      </view>
+    </picker>
+    <picker range-key="label" mode="selector" bindchange="selectRoom" value="{{diningRoomIndex}}"
+      range="{{diningRooms}}">
+      <view class="picker">
+        <view class="picker-text">
+          {{diningRooms[diningRoomIndex].label}}
+        </view>
+        <image class="picker-down-icon" src="/images/down.png" />
+      </view>
+    </picker>
+  </view>
+  <view class="main">
+    <scroll-view scroll-y="{{true}}" class="categories">
+      <view bindtap="selectType" data-index="{{index}}" class="category {{item.isActive ? 'selected':''}}" wx:key="typeName" wx:for="{{foods}}">
+        {{item.typeName}}
+      </view>
+    </scroll-view>
+    <scroll-view scroll-y="{{true}}" class="foods">
+      <block wx:if="{{foods[foodIndex]}}">
+        <view class="food-item" wx:key="key" wx:for="{{foods[foodIndex].foodList}}">
+          <image class="food-img" src="{{item.imgUrl}}" />
+          <view class="food-info">
+            <view class="food-h1">
+              {{item.h1}}
+            </view>
+            <view class="food-h2">
+              {{item.h2}}
+            </view>
+            <view class="food-price price-color">
+              {{item.price}}元
+            </view>
+          </view>
+          <view class="food-right">
+            <image bindtap="decCount" data-fooddata="{{item}}" wx:if="{{item.count}}" class="food-item__action"
+              src="/images/dec.png"></image>
+            <view wx:if="{{item.count}}" class="food-count">{{item.count}}</view>
+            <image bindtap="addCount" data-fooddata="{{item}}" class="food-item__action" src="/images/add.png"></image>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="footer">
+    <view class="order-info">合计：{{allCount}}份，￥{{allPrice}}元</view>
+    <view class="next-step">下一步</view>
+  </view>
+</view>

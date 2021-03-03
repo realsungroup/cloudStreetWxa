@@ -49,3 +49,7 @@
   color: #666666;
   text-align: center;
 }
+
+button[type='primary'].lz-btn {
+  background-color: #FA541C;
+}

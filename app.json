@@ -25,7 +25,9 @@
     "pages/categories/index",
     "pages/category-goods/index",
     "pages/search/index",
-    "pages/search-result/index"
+    "pages/search-result/index",
+    "pages/ordering-home/index",
+    "pages/ordering-select/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

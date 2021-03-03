@@ -1,0 +1,42 @@
+<!--pages/ordering-home/index.wxml-->
+<view class="container ordering-home-container">
+  <mp-navigation-bar background="#ffffff" title="点餐"></mp-navigation-bar>
+  <view class="header"></view>
+  <view class="content">
+    <mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" tabActiveTextColor="#FA541C" tabUnderlineColor="#FA541C"
+      swiperClass="weui-tabs-swiper" bindchange="onTabChange" activeClass="tab-bar-title__selected" tabClass="lz-tabs">
+      <block wx:for="{{tabs}}" wx:key="title">
+        <view class="tab-content" data-set="{{item}}" slot="tab-content-{{index}}">
+          <block wx:if="{{!loading}}" wx:for="{{item.content}}" wx:key="id" wx:for-item="content">
+            <view bindtap="goOrder" data-type="{{content.typeCode}}" wx:if="{{!isOrdered}}" class="content-item">
+              <image src="{{content.imgUrl}}" />
+              <view class="content-name">{{content.type}}</view>
+              <view class="content-action">点餐</view>
+            </view>
+            <view wx:else class="content-item">
+              <image src="{{content.imgUrl}}" />
+              <view class="content-name">
+                <view>
+                  {{content.type}}
+                </view>
+                <view>
+                  ({{content.timeSlot || ""}})
+                </view>
+                <view>
+                  {{content.diningRoom || "-"}}
+                </view>
+              </view>
+              <view class="content-right">
+                <view>{{content.isPay?'支付成功' :'未支付'}}</view>
+                <view class="content-right-btn">退订</view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </mp-tabs>
+  </view>
+  <view class="footer">
+    <button wx:if="{{isOrdered}}" class="lz-btn" type="primary">继续点餐</button>
+  </view>
+</view>
