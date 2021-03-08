@@ -221,7 +221,7 @@ Page({
     const { diningRooms } = this.data;
     const diningRoomCode = diningRooms[value].value;
     // 获取以及处理菜单数据
-    wx.showLoading({title: ''});
+    wx.showLoading({ title: '' });
     const foods = await this._getDealDiningRoomMenu(diningRoomCode);
     wx.hideLoading();
     const foodIndex = 0,
@@ -233,11 +233,61 @@ Page({
         allCount,
         allPrice,
         foods,
-        diningRoomIndex:value
+        diningRoomIndex: value
       }
     );
   },
-  selectType:function(e){
-    console.log(e.currentTarget.dataset.index)
+  selectType: function (e) {
+    const foodIndex = e.currentTarget.dataset.index;
+    const { foods } = this.data;
+    foods.forEach(food => {
+      food.isActive = food.index === foodIndex ? true : false;
+    });
+    this.setData({ foodIndex });
+  },
+  nextStep: function () {
+    const {
+      foods,
+      allPrice,
+      allCount,
+      companies,
+      diningRooms,
+      companyIndex,
+      diningRoomIndex
+    } = this.data;
+    const company = companies[companyIndex];
+    const diningRoom = diningRooms[diningRoomIndex];
+    // 没点餐
+    if (!allCount) {
+      wx.showToast({
+        title: '请点餐',
+        icon: 'none',
+        duration: 1000
+      });
+      return;
+    }
+    const foodList = [];
+    foods.forEach(food => {
+      food.foodList.forEach(item => {
+        if (item.count > 0) {
+          const obj = Object.assign({}, item);
+          foodList.push(obj);
+        }
+      });
+    });
+    wx.navigateTo({
+      url: '/pages/ordering-pay/index',
+      success: (res) => {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          company,
+          diningRoom,
+          foodList,
+          allPrice,
+          typeCode: this.typeCode,
+          selectedDate: this.selectedDate
+        })
+      }
+    })
   }
 })

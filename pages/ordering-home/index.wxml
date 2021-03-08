@@ -20,7 +20,7 @@
                   {{content.type}}
                 </view>
                 <view>
-                  ({{content.timeSlot || ""}})
+                  {{content.timeSlot ||  ""}}
                 </view>
                 <view>
                   {{content.diningRoom || "-"}}
@@ -28,7 +28,7 @@
               </view>
               <view class="content-right">
                 <view>{{content.isPay?'支付成功' :'未支付'}}</view>
-                <view class="content-right-btn">退订</view>
+                <view data-recid="{{content.recId}}" bindtap="unsubscribe" class="content-right-btn">退订</view>
               </view>
             </view>
           </block>
@@ -37,6 +37,8 @@
     </mp-tabs>
   </view>
   <view class="footer">
-    <button wx:if="{{isOrdered}}" class="lz-btn" type="primary">继续点餐</button>
+    <picker range-key="label" range="{{type}}" bindchange="continueOrdering">
+      <button wx:if="{{isOrdered}}" class="lz-btn" type="primary">继续点餐</button>
+    </picker>
   </view>
 </view>

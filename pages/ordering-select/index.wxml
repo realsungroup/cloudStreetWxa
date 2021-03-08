@@ -53,6 +53,6 @@
   </view>
   <view class="footer">
     <view class="order-info">合计：{{allCount}}份，￥{{allPrice}}元</view>
-    <view class="next-step">下一步</view>
+    <view bindtap="nextStep" class="next-step">下一步</view>
   </view>
 </view>

@@ -1,5 +1,5 @@
 // pages/ordering-home/index.js
-import { cloudRetrieve } from '../../utils/util';
+import { cloudRetrieve, save100 } from '../../utils/util';
 
 // 获取五天
 const getDates = date => {
@@ -123,7 +123,13 @@ Page({
     activeTab: 0,
     isOrdered: false,
     selectedDate: '',
-    loading: false
+    loading: false,
+    type: [
+      { label: "早餐", value: 1 },
+      { label: "午餐", value: 2 },
+      { label: "晚餐", value: 3 },
+      { label: "夜宵", value: 4 }
+    ]
   },
 
   /**
@@ -246,6 +252,46 @@ Page({
     const { selectedDate } = this.data;
     wx.navigateTo({
       url: `/pages/ordering-select/index?typeCode=${type}&selectedDate=${selectedDate}`,
-    })
+    });
+  },
+  continueOrdering: async function (e) {
+    const type = this.data.type[e.detail.value].value;
+    const { selectedDate } = this.data;
+    wx.navigateTo({
+      url: `/pages/ordering-select/index?typeCode=${type}&selectedDate=${selectedDate}`,
+    });
+  },
+  unsubscribe: async function (e) {
+    const { recid } = e.currentTarget.dataset;
+    try {
+      wx.showLoading();
+      const data = [
+        {
+          REC_ID: recid,
+          C3_529082071444: "Y",
+          _state: "modified",
+          _id: 1
+        }
+      ];
+      await save100({
+        resid: 529086370280,
+        data: JSON.stringify(data),
+      });
+      wx.hideLoading();
+      wx.showToast({
+        title: '退订成功',
+        success:()=>{
+          setTimeout(() => {
+            this._getDealData(this.data.activeTab);
+          }, 2000);
+        }
+      });
+    } catch (error) {
+      wx.hideLoading();
+      wx.showModal({
+        showCancel: false,
+        content: error.message
+      })
+    }
   }
 })

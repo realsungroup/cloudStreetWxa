@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "mp-navigation-bar": "weui-miniprogram/navigation-bar/navigation-bar"
+  },
+  "backgroundColor": "#f4f4f4",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": false
+}
