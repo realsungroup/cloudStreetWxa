@@ -50,6 +50,11 @@
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
+      <view class="list-item" bindtap="goMyPlate">我的餐盘
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
       <!-- 
       <view class="list-item">联系我们
       </view> -->

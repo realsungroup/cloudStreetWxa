@@ -188,5 +188,11 @@ Page({
     userLogined && wx.navigateTo({
       url: '/pages/ordering-home/index',
     });
+  },
+  goMyPlate: function () {
+    const { userLogined } = this.data;
+    userLogined && wx.navigateTo({
+      url: '/pages/my-plate/index',
+    });
   }
 })

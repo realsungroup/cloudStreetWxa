@@ -3,7 +3,7 @@ const cloud = require('wx-server-sdk')
 const got = require('got'); //引用 got
 
 cloud.init()
-const baseURL = "https://kingofmall.realsun.me:9092/";
+const baseURL = "https://kingofmall.realsun.me:9092";
 
 const tokenMap = {
 

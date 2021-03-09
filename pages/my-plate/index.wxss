@@ -1,0 +1,34 @@
+/* pages/my-plate/index.wxss */
+.my-plate-container {
+  height: 100vh;
+  background: #f3f3f3;
+}
+
+.tips {
+  padding: 12rpx 24rpx;
+}
+
+.list {
+  flex: 1;
+}
+
+.item {
+  display: flex;
+  padding: 12rpx 24rpx;
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1rpx solid #ececec;
+}
+.item:last-child{
+  border-bottom: none;
+}
+
+.item>image {
+  height: 120rpx;
+  width: 120rpx;
+  margin-right: 24rpx;
+}
+
+.item-center {
+  flex: 1;
+}

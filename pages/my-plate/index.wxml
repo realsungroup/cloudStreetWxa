@@ -1,0 +1,16 @@
+<!--pages/my-plate/index.wxml-->
+<view class="container my-plate-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="点餐"></mp-navigation-bar>
+  <view class="tips">默认显示一周的餐盘记录</view>
+  <view class="list">
+    <view data-item="{{item}}" bindtap="goDetail" wx:key="recId" wx:for="{{list}}" class="item">
+      <image src="{{item.imgUrl}}"></image>
+      <view class="item-center">
+        <view>{{item.type}}</view>
+        <view>{{item.timeSlot || ""}}</view>
+        <view>日期：{{item.time}}</view>
+      </view>
+      <view>{{item.select}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,38 @@
+<!--pages/ordering-detail/index.wxml-->
+<!--pages/ordering-pay/index.wxml-->
+<view class="container ordering-pay-container">
+  <mp-navigation-bar background="#FA541C" color="#fff" title="点餐"></mp-navigation-bar>
+  <view class="main">
+    <view class="section">
+      <view class="section__title">
+        <image class="section__title-image" src="/images/ycxx.png"></image> 用餐信息
+      </view>
+      <view class="sectioin__content">
+        <view>公司：{{data.company}}</view>
+        <view>餐厅：{{data.diningRoom}}</view>
+        <view>日期：{{data.time}}</view>
+        <view>餐别：{{data.type}}</view>
+        <view style="display:flex">用餐时段：
+          {{data.timeSlot}}
+        </view>
+      </view>
+
+    </view>
+    <view class="section">
+      <view class="section__title">
+        <image class="section__title-image" src="/images/wdcp.png"></image> 我的餐盘
+      </view>
+      <view class="sectioin__content">
+        <view class="food-item" wx:for="{{data.sub}}" wx:key="key">
+          <image src="{{item.imgUrl}}" />
+          <view class="food-item__main">
+            <view class="food-item-h1">{{item.h1}}</view>
+            <view class="food-item-h2">{{item.h2}}</view>
+            <view class="food-item-price">￥{{item.price}}</view>
+          </view>
+          <view>X {{item.count}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

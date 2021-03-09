@@ -28,7 +28,9 @@
     "pages/search-result/index",
     "pages/ordering-home/index",
     "pages/ordering-select/index",
-    "pages/ordering-pay/index"
+    "pages/ordering-pay/index",
+    "pages/my-plate/index",
+    "pages/ordering-detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
