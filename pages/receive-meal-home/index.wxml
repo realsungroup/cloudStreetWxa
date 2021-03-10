@@ -1,0 +1,24 @@
+<!--pages/receive-meal/index.wxml-->
+<view class="container receive-meal-home-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="领餐"></mp-navigation-bar>
+  <view wx:if="{{!loading && list.length>0}}" class="list">
+    <view data-item="{{item}}" bindtap="goDetail" wx:key="recId" wx:for="{{list}}" class="item">
+      <image src="{{item.imgUrl}}"></image>
+      <view class="item-center">
+        <view>{{item.type}} {{item.timeSlot || ""}}</view>
+        <view>{{item.time}}</view>
+        <view>{{item.diningRoom}}</view>
+      </view>
+      <view class="item-right">
+        {{item.select}}
+        <view data-item="{{item}}" catchtap="receiveMeal" class="receive-btn">领餐</view>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <view wx:if="{{!loading}}" class="empty-box">
+      <image src="/images/emptybox@2x.png" />
+      <view>没有可领记录</view>
+    </view>
+  </view>
+</view>

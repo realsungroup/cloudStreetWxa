@@ -173,6 +173,9 @@ Page({
   // 添加食物
   addCount(e) {
     const { fooddata } = e.currentTarget.dataset;
+    this.handleAddFood(fooddata);
+  },
+  handleAddFood: function (fooddata) {
     const { allCount, allPrice, foods, foodIndex } = this.data;
     const food = foods[foodIndex];
     // 将该种类的菜标记为已选择
@@ -183,13 +186,11 @@ Page({
         foodObj.count++;
       }
     });
-    this.setData(
-      {
-        allCount: allCount + 1,
-        allPrice: allPrice + fooddata.price,
-        foods
-      }
-    );
+    this.setData({
+      allCount: allCount + 1,
+      allPrice: allPrice + fooddata.price,
+      foods
+    });
   },
   // 减少食物
   decCount(e) {
@@ -244,6 +245,21 @@ Page({
       food.isActive = food.index === foodIndex ? true : false;
     });
     this.setData({ foodIndex });
+  },
+  goDetail: function (e) {
+    const { item } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: '/pages/food-detail/index',
+      success: (res) => {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          food: item,
+          addFood: () => {
+            this.handleAddFood(item);
+          }
+        })
+      },
+    })
   },
   nextStep: function () {
     const {

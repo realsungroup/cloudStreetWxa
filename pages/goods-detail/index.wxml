@@ -1,5 +1,5 @@
 <!--pages/goods-detail/index.wxml-->
-<scroll-view>
+<scroll-view style="padding-bottom:50px">
   <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
     <swiper-item wx:for="{{photos}}" wx:key="*this">
       <image src="{{item}}" background-size="cover"></image>
@@ -22,6 +22,11 @@
     <view class="goods-des__header">描述</view>
     <view class="goods-des__text">
       {{goods.goods_dec?goods.goods_dec : '暂无描述'}}
+    </view>
+  </view>
+  <view class="goods-imgs">
+    <view class="goods-img-container" wx:key="*this" wx:for="{{photos}}">
+      <image mode="widthFix" lazy-load="{{true}}" class="goods-img" src="{{item}}"></image>
     </view>
   </view>
   <view class="bottom-btn" wx:if="{{isService}}" bindtap="goAddOrder" class="lz-button--primary order-button">

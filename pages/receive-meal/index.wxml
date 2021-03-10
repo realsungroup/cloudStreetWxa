@@ -1,0 +1,23 @@
+<!--pages/receive-meal/index.wxml-->
+<view class="container receive-meal-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="领餐"></mp-navigation-bar>
+  <view>
+    <view class="item">
+      <image src="{{order.imgUrl}}"></image>
+      <view class="item-center">
+        <view>{{order.type}} {{order.timeSlot || ""}}</view>
+        <view>{{order.time}}</view>
+        <view>{{order.diningRoom}}</view>
+      </view>
+      <view class="item-right">
+        {{order.select}}
+      </view>
+    </view>
+  </view>
+  <view class="qrcode-container">
+    <canvas class='canvas' style="width:{{code_w}}px; height:{{code_w}}px;" canvas-id='canvas'></canvas>
+  </view>
+  <view class="footer">
+    <view bindtap="receiveMeal" class="footer-btn">领餐</view>
+  </view>
+</view>

@@ -1,0 +1,29 @@
+/* pages/food-detail/index.wxss */
+.food-detail-container {
+  height: 100vh;
+  background: #f3f3f3;
+}
+.content{
+  flex: 1;
+  overflow: auto;
+}
+.content > image{
+  width: 100%;
+}
+.food-main-info {
+  padding: 24rpx;
+  border-bottom: 1rpx solid #ececec;
+}
+
+.foodh1 {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.food-des {
+  padding: 12rpx 24rpx;
+  font-size: 30rpx;
+}
+.footer{
+  padding: 24rpx;
+}

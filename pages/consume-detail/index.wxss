@@ -1,0 +1,34 @@
+/* pages/consume-detail/index.wxss */
+.consume-detail-container {
+  height: 100vh;
+  background: #f3f3f3;
+}
+.picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  background: #ffffff;
+  width: 260rpx;
+  height: 56rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid #ececec;
+}
+
+.picker-text{
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 12rpx;
+}
+.picker-down-icon {
+  height: 32rpx;
+  width: 32rpx;
+}
+.select-time{
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 24rpx;
+}

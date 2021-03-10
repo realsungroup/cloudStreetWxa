@@ -1,0 +1,17 @@
+<!--pages/food-detail/index.wxml-->
+<view class="container food-detail-container">
+  <mp-navigation-bar background="#FA541C" color="#fff" title="{{food.h1}}"></mp-navigation-bar>
+  <view class="content">
+    <image mode="widthFix" src="{{food.imgUrl}}" />
+    <view class="food-main-info">
+      <view class="foodh1">{{food.h1}}</view>
+      <view class="price-color">￥{{food.price}}</view>
+    </view>
+    <view class="food-des">
+      {{food.h2}}
+    </view>
+  </view>
+  <view class="footer">
+    <button bindtap="addFood" class="lz-btn" type="primary">添加</button>
+  </view>
+</view>

@@ -1,0 +1,17 @@
+<!--pages/consume-detail/index.wxml-->
+<view class="container consume-detail-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="就餐明细"></mp-navigation-bar>
+  <view class="select-time">
+    <view>
+      时间：
+    </view>
+    <picker range-key="label" mode="selector" bindchange="timeIntervalsChange" value="{{timeIndex}}" range="{{times}}">
+      <view class="picker">
+        <view class="picker-text">
+          {{times[timeIndex].label || "请选择"}}
+        </view>
+        <image class="picker-down-icon" src="/images/down.png" />
+      </view>
+    </picker>
+  </view>
+</view>

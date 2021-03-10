@@ -133,7 +133,7 @@ Page({
   },
   callPhone: function () {
     wx.makePhoneCall({
-      phoneNumber: '13767267543',
+      phoneNumber: this.data.shop.shop_phone,
     })
   }
 })

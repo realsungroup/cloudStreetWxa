@@ -35,11 +35,11 @@
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
-      <view class="list-item" bindtap="scanRide">扫码骑行
+      <!-- <view class="list-item" bindtap="scanRide">扫码骑行
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
-      </view>
+      </view> -->
       <view class="list-item" bindtap="goAddressManage">我的订单
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
@@ -50,9 +50,23 @@
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
+      <view class="list-item" bindtap="goReceiveMealHome">领餐
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
       <view class="list-item" bindtap="goMyPlate">我的餐盘
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view>
+      <!-- <view class="list-item" bindtap="goConsumeDetail">就餐明细
+        <view>
+          <image class="right-arrow" src="/images/right_arrow.png" />
+        </view>
+      </view> -->
+      <view class="list-item" bindtap="writeOff">核销
+        <view>
         </view>
       </view>
       <!-- 

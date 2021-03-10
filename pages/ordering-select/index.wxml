@@ -28,7 +28,7 @@
     </scroll-view>
     <scroll-view scroll-y="{{true}}" class="foods">
       <block wx:if="{{foods[foodIndex]}}">
-        <view class="food-item" wx:key="key" wx:for="{{foods[foodIndex].foodList}}">
+        <view data-item="{{item}}" bindtap="goDetail" class="food-item" wx:key="key" wx:for="{{foods[foodIndex].foodList}}">
           <image class="food-img" src="{{item.imgUrl}}" />
           <view class="food-info">
             <view class="food-h1">
@@ -42,10 +42,10 @@
             </view>
           </view>
           <view class="food-right">
-            <image bindtap="decCount" data-fooddata="{{item}}" wx:if="{{item.count}}" class="food-item__action"
+            <image catchtap="decCount" data-fooddata="{{item}}" wx:if="{{item.count}}" class="food-item__action"
               src="/images/dec.png"></image>
             <view wx:if="{{item.count}}" class="food-count">{{item.count}}</view>
-            <image bindtap="addCount" data-fooddata="{{item}}" class="food-item__action" src="/images/add.png"></image>
+            <image catchtap="addCount" data-fooddata="{{item}}" class="food-item__action" src="/images/add.png"></image>
           </view>
         </view>
       </block>

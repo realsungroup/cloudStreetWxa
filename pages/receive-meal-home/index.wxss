@@ -1,15 +1,12 @@
-/* pages/my-plate/index.wxss */
-.my-plate-container {
+/* pages/receive-meal/index.wxss */
+.receive-meal-home-container {
   height: 100vh;
   background: #f3f3f3;
 }
 
-.tips {
-  padding: 12rpx 24rpx;
-}
-
 .list {
   flex: 1;
+  padding: 24rpx 0;
 }
 
 .item {
@@ -23,7 +20,7 @@
   border-bottom: none;
 }
 
-.item>image {
+.item > image {
   height: 120rpx;
   width: 120rpx;
   margin-right: 24rpx;
@@ -31,6 +28,19 @@
 
 .item-center {
   flex: 1;
+}
+.item-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.receive-btn{
+  width: 120rpx;
+  padding: 2rpx 12rpx;
+  background: #FA541C;
+  border-radius: 12rpx;
+  color: #ffffff;
+  text-align: center;
 }
 .empty-box {
   height: 200rpx;

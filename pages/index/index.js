@@ -101,7 +101,7 @@ Page({
     wx.stopPullDownRefresh();
   },
   onReachBottom: function () {
-    const { hasMore,loadingMore } = this.data;
+    const { hasMore, loadingMore } = this.data;
     hasMore && !loadingMore && this.fetchBusinessGoods();
   },
   onShow: function () {
@@ -408,9 +408,33 @@ Page({
       })
     }
   },
-  goSearch:function(){
+  goSearch: function () {
     wx.navigateTo({
       url: '/pages/search/index',
     })
-  }
+  },
+  goOrdering: function () {
+    const { loginedUser } = this.data;
+    if (loginedUser) {
+      wx.navigateTo({
+        url: '/pages/ordering-home/index',
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
+  },
+  goPickup: function () {
+    const { loginedUser } = this.data;
+    if (loginedUser) {
+      wx.navigateTo({
+        url: '/pages/receive-meal-home/index',
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/wxauth/index',
+      });
+    }
+  },
 })

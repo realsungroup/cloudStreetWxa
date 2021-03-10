@@ -1,14 +1,14 @@
 <!--pages/ordering-detail/index.wxml-->
 <!--pages/ordering-pay/index.wxml-->
 <view class="container ordering-pay-container">
-  <mp-navigation-bar background="#FA541C" color="#fff" title="点餐"></mp-navigation-bar>
+  <mp-navigation-bar background="#FA541C" color="#fff" title="详情"></mp-navigation-bar>
   <view class="main">
     <view class="section">
       <view class="section__title">
         <image class="section__title-image" src="/images/ycxx.png"></image> 用餐信息
       </view>
       <view class="sectioin__content">
-        <view>公司：{{data.company}}</view>
+        <!-- <view>公司：{{data.company}}</view> -->
         <view>餐厅：{{data.diningRoom}}</view>
         <view>日期：{{data.time}}</view>
         <view>餐别：{{data.type}}</view>
@@ -28,7 +28,7 @@
           <view class="food-item__main">
             <view class="food-item-h1">{{item.h1}}</view>
             <view class="food-item-h2">{{item.h2}}</view>
-            <view class="food-item-price">￥{{item.price}}</view>
+            <view class="food-item-price">￥{{item.foodPrice}}</view>
           </view>
           <view>X {{item.count}}</view>
         </view>

@@ -335,3 +335,26 @@ page {
   background: linear-gradient(to left, #FA541C, #FD8D3C);
   color: #FFFFFF;
 }
+.ordering-container{
+  display: flex;
+  justify-content: space-between;
+  padding:12rpx 24rpx;
+  background: #f1f1fa;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 0 0 4rpx;
+}
+.ordering-action{
+  display: flex;
+  align-items: center;
+}
+.ordering-action-icon{
+  width: 112rpx;
+  height: 112rpx;
+}
+.order-text--en{
+  font-size: 28rpx;
+  font-weight: 300;
+}
+.order-text--ecn{
+  font-size: 40rpx;
+  font-weight: bold;
+}

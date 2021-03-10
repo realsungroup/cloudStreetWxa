@@ -30,7 +30,11 @@
     "pages/ordering-select/index",
     "pages/ordering-pay/index",
     "pages/my-plate/index",
-    "pages/ordering-detail/index"
+    "pages/ordering-detail/index",
+    "pages/receive-meal-home/index",
+    "pages/receive-meal/index",
+    "pages/consume-detail/index",
+    "pages/food-detail/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

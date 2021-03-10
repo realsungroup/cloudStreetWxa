@@ -194,5 +194,20 @@ Page({
     userLogined && wx.navigateTo({
       url: '/pages/my-plate/index',
     });
+  },
+  goReceiveMealHome: function () {
+    const { userLogined } = this.data;
+    userLogined && wx.navigateTo({
+      url: '/pages/receive-meal-home/index',
+    });
+  },
+  goConsumeDetail: function () {
+    const { userLogined } = this.data;
+    userLogined && wx.navigateTo({
+      url: '/pages/consume-detail/index',
+    });
+  },
+  writeOff: function () {
+
   }
 })

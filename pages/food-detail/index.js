@@ -1,21 +1,25 @@
-// pages/ordering-detail/index.js
+// pages/food-detail/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    data: {}
+    food: {}
   },
-
+  addFood: () => { },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const eventChannel = this.getOpenerEventChannel()
+    const eventChannel = this.getOpenerEventChannel();
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
-    eventChannel.on('acceptDataFromOpenerPage', ({ data }) => {
-      this.setData({ data });
+    eventChannel.on('acceptDataFromOpenerPage', ({ food, addFood }) => {
+      this.setData({ food });
+      this.addFood = () => {
+        addFood();
+        wx.navigateBack({});
+      };
     });
   },
 
@@ -53,18 +57,4 @@ Page({
   onPullDownRefresh: function () {
 
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

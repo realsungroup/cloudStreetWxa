@@ -13,7 +13,7 @@
               <view class="content-name">{{content.type}}</view>
               <view class="content-action">点餐</view>
             </view>
-            <view wx:else class="content-item">
+            <view wx:else bindtap="goDetail" data-ordering="{{content}}" class="content-item">
               <image src="{{content.imgUrl}}" />
               <view class="content-name">
                 <view>
@@ -28,7 +28,7 @@
               </view>
               <view class="content-right">
                 <view>{{content.isPay?'支付成功' :'未支付'}}</view>
-                <view data-recid="{{content.recId}}" bindtap="unsubscribe" class="content-right-btn">退订</view>
+                <view data-recid="{{content.recId}}" catchtap="unsubscribe" class="content-right-btn">退订</view>
               </view>
             </view>
           </block>

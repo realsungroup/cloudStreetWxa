@@ -1,5 +1,5 @@
 // pages/ordering-home/index.js
-import { cloudRetrieve, save100 } from '../../utils/util';
+import { cloudRetrieve, save100, transformDate } from '../../utils/util';
 
 // 获取五天
 const getDates = date => {
@@ -98,6 +98,7 @@ const dealData = data => {
     obj.imgUrl = item["C3_514046415115"];
     obj.recId = item["REC_ID"];
     obj.isPay = item["C3_512262270614"] === "Y" ? true : false;
+    obj.time = transformDate(item['C3_512140206161'], '/');
     obj.sub = [];
     item.subdata.forEach(sub => {
       const o = {};
@@ -280,7 +281,7 @@ Page({
       wx.hideLoading();
       wx.showToast({
         title: '退订成功',
-        success:()=>{
+        success: () => {
           setTimeout(() => {
             this._getDealData(this.data.activeTab);
           }, 2000);
@@ -293,5 +294,14 @@ Page({
         content: error.message
       })
     }
+  },
+  goDetail: function (e) {
+    const { ordering } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: '/pages/ordering-detail/index',
+      success: (res) => {
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: { ...ordering } });
+      }
+    });
   }
 })
