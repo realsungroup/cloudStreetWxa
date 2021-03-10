@@ -10,7 +10,8 @@ Page({
   data: {
     userLogined: false,
     personalInfo: null,
-    avatarUrl: ''
+    avatarUrl: '',
+    canDisplay: false
   },
 
   /**
@@ -22,11 +23,19 @@ Page({
       navTop: app.globalData.navTop,
     });
     if (app.globalData.businessInfo[660914792669]) {
-      this.setData({ businessInfo: app.globalData.businessInfo[660914792669][0] })
+      const businessInfo = app.globalData.businessInfo[660914792669][0]
+      this.setData({
+        businessInfo,
+        canDisplay: businessInfo.business_fullname != '企业员工服务'
+      });
     }
     app.$watch('businessInfo', (val) => {
       if (val[660914792669].length) {
-        this.setData({ businessInfo: val[660914792669][0] })
+        const businessInfo = val[660914792669][0];
+        this.setData({
+          businessInfo,
+          canDisplay: businessInfo.business_fullname != '企业员工服务'
+        });
       }
     });
     this.setData({
@@ -208,6 +217,8 @@ Page({
     });
   },
   writeOff: function () {
-
+    wx.navigateTo({
+      url: '/pages/write-off-scan/index',
+    });
   }
 })

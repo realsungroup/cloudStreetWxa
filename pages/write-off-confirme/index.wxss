@@ -1,0 +1,76 @@
+/* pages/write-off-confirme/index.wxss */
+.write-off-confirme-container {
+  height: 100vh;
+  background: #f3f3f3;
+}
+.main{
+  flex: 1;
+}
+.item {
+  display: flex;
+  padding: 12rpx 24rpx;
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1rpx solid #ececec;
+}
+.item:last-child{
+  border-bottom: none;
+}
+
+.item > image {
+  height: 120rpx;
+  width: 120rpx;
+  margin-right: 24rpx;
+}
+
+.item-center {
+  flex: 1;
+}
+.item-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.food-item{
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #ececec;
+  padding: 24rpx;
+}
+.food-item:last-child{
+  border-bottom: none;
+}
+.food-item > image{
+  height: 120rpx;
+  width: 120rpx;
+}
+.food-item__main{
+  flex: 1;
+  margin-left: 24rpx;
+}
+.food-item-h1{
+  font-size: 32rpx;
+}
+.food-item-h2{
+  font-size: 24rpx;
+}
+.food-item-price{
+  font-size: 28rpx;
+  color: #FA541C;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+  padding: 24rpx;
+}
+.footer-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80rpx;
+  width: 240rpx;
+  background-color: #FA541C;
+  color: #ffffff;
+  border-radius: 12rpx;
+}

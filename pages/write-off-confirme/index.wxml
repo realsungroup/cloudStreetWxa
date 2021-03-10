@@ -1,0 +1,32 @@
+<!--pages/write-off-confirme/index.wxml-->
+<view class="container write-off-confirme-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="确认核销"></mp-navigation-bar>
+  <view class="main">
+    <view class="item">
+      <image src="{{order.imgUrl}}"></image>
+      <view class="item-center">
+        <view>{{order.type}} {{order.timeSlot || ""}}</view>
+        <view>{{order.time}}</view>
+        <view>{{order.diningRoom}}</view>
+      </view>
+      <view class="item-right">
+        {{order.select}}
+      </view>
+    </view>
+    <view style="margin-top:12rpx;background:#fff">
+      <view style="font-size:32rpx;font-weight:bold;padding: 12rpx 0 0 12rpx">餐盘</view>
+      <view class="food-item" wx:for="{{order.sub}}" wx:key="key">
+        <image src="{{item.imgUrl}}" />
+        <view class="food-item__main">
+          <view class="food-item-h1">{{item.h1}}</view>
+          <view class="food-item-h2">{{item.h2}}</view>
+          <view class="food-item-price">￥{{item.foodPrice}}</view>
+        </view>
+        <view>X {{item.count}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <view bindtap="confirmWriteOff" class="footer-btn">确认核销</view>
+  </view>
+</view>

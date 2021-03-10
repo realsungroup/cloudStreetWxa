@@ -13,6 +13,19 @@
         {{order.select}}
       </view>
     </view>
+    <view style="margin-top:12rpx;background:#fff">
+      <view style="font-size:32rpx;font-weight:bold;padding: 12rpx 0 0 12rpx">餐盘</view>
+      <view class="food-item" wx:for="{{order.sub}}" wx:key="key">
+        <image src="{{item.imgUrl}}" />
+        <view class="food-item__main">
+          <view class="food-item-h1">{{item.h1}}</view>
+          <view class="food-item-h2">{{item.h2}}</view>
+          <view class="food-item-price">￥{{item.foodPrice}}</view>
+        </view>
+        <view>X {{item.count}}</view>
+      </view>
+    </view>
+
   </view>
   <view class="qrcode-container">
     <canvas class='canvas' style="width:{{code_w}}px; height:{{code_w}}px;" canvas-id='canvas'></canvas>

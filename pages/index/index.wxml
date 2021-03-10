@@ -70,7 +70,7 @@
       </view> -->
     </view>
     <!-- <button bindtap="goRideDetail">运动详情</button> -->
-    <view class="ordering-container">
+    <view wx:if="{{businessInfo.business_fullname && businessInfo.business_fullname != '企业员工服务'}}"  class="ordering-container">
       <view bindtap="goOrdering"  class="ordering-action">
         <image class="ordering-action-icon" src="/images/ordering.png" />
         <view>

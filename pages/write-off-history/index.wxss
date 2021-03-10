@@ -1,0 +1,77 @@
+/* pages/write-off-history/index.wxss */
+.container {
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.weui-tabs-bar__wrp {
+  border-bottom: 1px solid #eee;
+  margin-top: 10px;
+}
+
+.weui-tabs-swiper {
+  width: 100%;
+  height: 100vh;
+}
+
+.tab-content {
+  overflow: scroll;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.weui-tabs-bar__title {
+  margin: 0px 10px;
+}
+
+.tab-bar-title__selected {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.lz-tabs {
+  flex: 1;
+}
+
+.order-item {
+  display: flex;
+  padding: 24rpx 0;
+  border-bottom: 1px solid #ececec;
+  margin: 0 24rpx;
+}
+
+.order-item-image {
+  height: 200rpx;
+  width: 200rpx;
+  margin-right: 24rpx;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.empty-box {
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-box>image {
+  height: 120rpx;
+  width: 120rpx;
+  margin: 24rpx 0;
+}
+
+.empty-box>text {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 400;
+}

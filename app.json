@@ -34,7 +34,10 @@
     "pages/receive-meal-home/index",
     "pages/receive-meal/index",
     "pages/consume-detail/index",
-    "pages/food-detail/index"
+    "pages/food-detail/index",
+    "pages/write-off-scan/index",
+    "pages/write-off-confirme/index",
+    "pages/write-off-history/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -51,12 +54,6 @@
         "text": "首页",
         "iconPath": "images/homepage.png",
         "selectedIconPath": "images/homepage_selected.png"
-      },
-      {
-        "pagePath": "pages/categories/index",
-        "text": "分类",
-        "iconPath": "images/category.png",
-        "selectedIconPath": "images/category_select.png"
       },
       {
         "pagePath": "pages/shops/index",

@@ -41,14 +41,15 @@ function getQueryObject(url = '') {
   return theRequest;
 }
 
-const cloudRetrieve = (data) => {
+const cloudRetrieve = (data,config = {}) => {
   const userInfo = wx.getStorageSync('wxUserInfo');
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'retrieve',
       data: {
         unionid: userInfo.unionId,
-        data
+        data,
+        ...config
       },
       success: res => {
         const response = res.result;
@@ -64,14 +65,15 @@ const cloudRetrieve = (data) => {
     });
   });
 }
-const save100 = (data) => {
+const save100 = (data, config = {}) => {
   const userInfo = wx.getStorageSync('wxUserInfo');
   return new Promise((resolve, reject) => {
     wx.cloud.callFunction({
       name: 'save100',
       data: {
         unionid: userInfo.unionId,
-        data
+        data,
+        ...config
       },
       success: res => {
         const response = res.result;

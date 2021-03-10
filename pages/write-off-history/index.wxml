@@ -1,0 +1,59 @@
+<!--pages/write-off-history/index.wxml-->
+<view class="container write-off-confirme-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="核销记录"></mp-navigation-bar>
+  <view class="content">
+    <mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" tabActiveTextColor="#FA541C" tabUnderlineColor="#FA541C"
+      swiperClass="weui-tabs-swiper" bindtabclick="onTabCLick" bindchange="onChange"
+      activeClass="tab-bar-title__selected" 
+      tabClass="lz-tabs"
+      swiperStyle="height: {{tabSwiperHeight}}px"
+      >
+      <view style="height: {{tabSwiperHeight}}px" class="tab-content" slot="tab-content-0">
+        <view class="empty-box" wx:if="{{!loadingData && undealed.data.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>暂无数据</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{undealed.data}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view style="height: {{tabSwiperHeight}}px" class="tab-content" slot="tab-content-1">
+        <view class="empty-box" wx:if="{{!loadingData && dealed.data.length==0}}">
+          <image src="/images/emptybox@2x.png" />
+          <view>暂无数据</view>
+        </view>
+        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{dealed.data}}" wx:key="REC_ID" class="order-item">
+          <image class="order-item-image" src="{{item.goods_photo}}" />
+          <view class="order-info">
+            <view>
+              订单编号：{{item.order_ID}}
+            </view>
+            <view>
+              订单状态：{{item.order_status}}
+            </view>
+            <view>
+              订单金额：<text class="price-color">￥{{item.order_allPrice}}</text>
+            </view>
+            <view>
+              下单时间：{{item.order_time}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </mp-tabs>
+  </view>
+</view>

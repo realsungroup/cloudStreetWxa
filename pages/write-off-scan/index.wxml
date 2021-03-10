@@ -1,0 +1,24 @@
+<!--pages/write-off-scan/index.wxml-->
+<view class="container write-off-scan-container">
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="核销"></mp-navigation-bar>
+  <view class="main">
+    <view wx:if="{{logined}}">
+      <button style="margin-bottom:24rpx" type="primary" bindtap="handleScan">扫码核销</button>
+      <button type="primary" bindtap="goHistory">核销记录</button>
+    </view>
+    <view wx:else class="form">
+      <view class="login-title">登录</view>
+      <view class="form-item">
+        <label>账号</label>
+        <input model:value="{{account}}" />
+      </view>
+      <view class="form-item">
+        <label>密码</label>
+        <input adjust-position="{{true}}" model:value="{{password}}" password="{{true}}" />
+      </view>
+      <view class="form-item">
+        <button bindtap="login" type="primary">登录</button>
+      </view>
+    </view>
+  </view>
+</view>
