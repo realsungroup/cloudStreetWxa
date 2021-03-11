@@ -1,6 +1,6 @@
 <!--pages/ordering-select/index.wxml-->
 <view class="container ordering-select-container">
-  <mp-navigation-bar background="#FA541C" color="#fff" title="点餐"></mp-navigation-bar>
+  <mp-navigation-bar background="#FA541C" color="#fff" title="预定"></mp-navigation-bar>
   <view class="header">
     <picker range-key="label" mode="selector" bindchange="companyChange" value="{{companyIndex}}" range="{{companies}}">
       <view class="picker">

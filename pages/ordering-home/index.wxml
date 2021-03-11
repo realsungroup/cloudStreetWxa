@@ -1,6 +1,6 @@
 <!--pages/ordering-home/index.wxml-->
 <view class="container ordering-home-container">
-  <mp-navigation-bar background="#ffffff" title="点餐"></mp-navigation-bar>
+  <mp-navigation-bar background="#ffffff" title="预定"></mp-navigation-bar>
   <view class="header"></view>
   <view class="content">
     <mp-tabs tabs="{{tabs}}" activeTab="{{activeTab}}" tabActiveTextColor="#FA541C" tabUnderlineColor="#FA541C"
@@ -11,7 +11,7 @@
             <view bindtap="goOrder" data-type="{{content.typeCode}}" wx:if="{{!isOrdered}}" class="content-item">
               <image src="{{content.imgUrl}}" />
               <view class="content-name">{{content.type}}</view>
-              <view class="content-action">点餐</view>
+              <view class="content-action">预定</view>
             </view>
             <view wx:else bindtap="goDetail" data-ordering="{{content}}" class="content-item">
               <image src="{{content.imgUrl}}" />

@@ -1,10 +1,10 @@
 <!--pages/ordering-pay/index.wxml-->
 <view class="container ordering-pay-container">
-  <mp-navigation-bar background="#FA541C" color="#fff" title="点餐"></mp-navigation-bar>
-  <view class="header">
+  <mp-navigation-bar background="#FA541C" color="#fff" title="支付"></mp-navigation-bar>
+  <!-- <view class="header">
     <view>{{enterpriceAccount.C3_554305328380}}元</view>
     <view>当前月累计消费（月）</view>
-  </view>
+  </view> -->
   <view class="main">
     <view class="section">
       <view class="section__title">
@@ -30,11 +30,11 @@
     </view>
     <view class="section">
       <view class="section__title">
-        <image class="section__title-image" src="/images/ycxx.png"></image> 用餐信息
+        <image class="section__title-image" src="/images/ycxx.png"></image> 预定信息
       </view>
       <view class="sectioin__content">
         <view>公司：{{company.label}}</view>
-        <view>餐厅：{{diningRoom.label}}</view>
+        <view>供应商：{{diningRoom.label}}</view>
         <view>日期：{{date}}</view>
         <view>餐别：{{type}}</view>
         <view style="display:flex">用餐时段：
@@ -53,7 +53,7 @@
     </view>
     <view class="section">
       <view class="section__title">
-        <image class="section__title-image" src="/images/wdcp.png"></image> 我的餐盘
+        <image class="section__title-image" src="/images/wdcp.png"></image> 我的预约
       </view>
       <view class="sectioin__content">
         <view class="food-item" wx:for="{{foodList}}" wx:key="key">

@@ -1,7 +1,7 @@
 <!--pages/my-plate/index.wxml-->
 <view class="container my-plate-container">
-  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="我的餐盘"></mp-navigation-bar>
-  <view class="tips">默认显示一周的餐盘记录</view>
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="我的预约"></mp-navigation-bar>
+  <view class="tips">默认显示一周的预约记录</view>
   <view wx:if="{{!loading && list.length>0}}" class="list">
     <view data-item="{{item}}" bindtap="goDetail" wx:key="recId" wx:for="{{list}}" class="item">
       <image src="{{item.imgUrl}}"></image>
@@ -16,7 +16,7 @@
   <view wx:else>
     <view wx:if="{{!loading}}" class="empty-box">
       <image src="/images/emptybox@2x.png" />
-      <view>一周内没有餐盘记录</view>
+      <view>一周内没有预约记录</view>
     </view>
   </view>
 </view>

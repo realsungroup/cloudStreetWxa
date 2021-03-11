@@ -1,6 +1,6 @@
 <!--pages/receive-meal/index.wxml-->
 <view class="container receive-meal-container">
-  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="领餐"></mp-navigation-bar>
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="领取"></mp-navigation-bar>
   <view>
     <view class="item">
       <image src="{{order.imgUrl}}"></image>
@@ -14,7 +14,7 @@
       </view>
     </view>
     <view style="margin-top:12rpx;background:#fff">
-      <view style="font-size:32rpx;font-weight:bold;padding: 12rpx 0 0 12rpx">餐盘</view>
+      <view style="font-size:32rpx;font-weight:bold;padding: 12rpx 0 0 12rpx">我的预约</view>
       <view class="food-item" wx:for="{{order.sub}}" wx:key="key">
         <image src="{{item.imgUrl}}" />
         <view class="food-item__main">
@@ -31,6 +31,6 @@
     <canvas class='canvas' style="width:{{code_w}}px; height:{{code_w}}px;" canvas-id='canvas'></canvas>
   </view>
   <view class="footer">
-    <view bindtap="receiveMeal" class="footer-btn">领餐</view>
+    <view bindtap="receiveMeal" class="footer-btn">领取</view>
   </view>
 </view>

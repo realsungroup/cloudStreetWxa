@@ -72,16 +72,14 @@
     <!-- <button bindtap="goRideDetail">运动详情</button> -->
     <view wx:if="{{businessInfo.business_fullname && businessInfo.business_fullname != '企业员工服务'}}"  class="ordering-container">
       <view bindtap="goOrdering"  class="ordering-action">
-        <image class="ordering-action-icon" src="/images/ordering.png" />
+        <image class="ordering-action-icon" src="/images/home-ordering.jpg" />
         <view>
-          <view class="order-text--en">Order</view>
-          <view class="order-text--cn">点餐</view>
+          <view class="order-text--cn">预定</view>
         </view>
       </view>
       <view bindtap="goPickup" class="ordering-action">
         <view>
-          <view class="order-text--en">Pick-up</view>
-          <view class="order-text--cn">取餐</view>
+          <view class="order-text--cn">领取</view>
         </view>
         <image class="ordering-action-icon" src="/images/pickup.png" />
       </view>

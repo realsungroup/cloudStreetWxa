@@ -1,6 +1,6 @@
 <!--pages/receive-meal/index.wxml-->
 <view class="container receive-meal-home-container">
-  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="领餐"></mp-navigation-bar>
+  <mp-navigation-bar loading="{{loading}}" background="#fff" color="#000" title="领取"></mp-navigation-bar>
   <view wx:if="{{!loading && list.length>0}}" class="list">
     <view data-item="{{item}}" bindtap="goDetail" wx:key="recId" wx:for="{{list}}" class="item">
       <image src="{{item.imgUrl}}"></image>
@@ -11,7 +11,7 @@
       </view>
       <view class="item-right">
         {{item.select}}
-        <view data-item="{{item}}" catchtap="receiveMeal" class="receive-btn">领餐</view>
+        <view data-item="{{item}}" catchtap="receiveMeal" class="receive-btn">领取</view>
       </view>
     </view>
   </view>

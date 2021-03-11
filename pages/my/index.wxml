@@ -45,17 +45,17 @@
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
-      <view wx:if="{{canDisplay}}" class="list-item" bindtap="goOrderingHome">点餐
+      <view wx:if="{{canDisplay}}" class="list-item" bindtap="goOrderingHome">预定
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
-      <view wx:if="{{canDisplay}}" class="list-item" bindtap="goReceiveMealHome">领餐
+      <view wx:if="{{canDisplay}}" class="list-item" bindtap="goReceiveMealHome">领取
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
-      <view wx:if="{{canDisplay}}" class="list-item" bindtap="goMyPlate">我的餐盘
+      <view wx:if="{{canDisplay}}" class="list-item" bindtap="goMyPlate">我的预定
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>

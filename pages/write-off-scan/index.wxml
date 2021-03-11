@@ -4,7 +4,7 @@
   <view class="main">
     <view wx:if="{{logined}}">
       <button style="margin-bottom:24rpx" type="primary" bindtap="handleScan">扫码核销</button>
-      <button type="primary" bindtap="goHistory">核销记录</button>
+      <!-- <button type="primary" bindtap="goHistory">核销记录</button> -->
     </view>
     <view wx:else class="form">
       <view class="login-title">登录</view>

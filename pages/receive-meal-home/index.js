@@ -76,7 +76,6 @@ Page({
         cmswhere: `C3_512140206161="${dateString}" and C3_512262270614="Y"`,
         subresid: 512140171786,
       });
-      console.log(data);
       const orderList = this.dealOrdersData(data);
       this.setData({ list: orderList, loading: false });
     } catch (error) {
