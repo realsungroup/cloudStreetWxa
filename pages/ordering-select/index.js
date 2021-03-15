@@ -244,7 +244,7 @@ Page({
     foods.forEach(food => {
       food.isActive = food.index === foodIndex ? true : false;
     });
-    this.setData({ foodIndex });
+    this.setData({ foodIndex, foods });
   },
   goDetail: function (e) {
     const { item } = e.currentTarget.dataset;

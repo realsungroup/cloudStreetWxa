@@ -82,7 +82,7 @@ Page({
     if (typeCode == 1) {
       return '早餐';
     } else if (typeCode == 2) {
-      return '中午';
+      return '午餐';
     } else if (typeCode == 3) {
       return '晚餐';
     } else if (typeCode == 4) {
@@ -140,10 +140,6 @@ Page({
       });
       // 午餐
     } else if (typeCode == 2) {
-      timeIntervals.push({
-        label: '',
-        value: ''
-      });
       timeData.forEach(time => {
         timeIntervals.push({
           label: time['C3_554579471647'],
@@ -169,12 +165,6 @@ Page({
   },
   confirmPay: async function () {
     const { foodList, selectedDate, typeCode, enterpriceAccount, timeIntervalIndex, timeIntervals } = this.data;
-    if (timeIntervalIndex == 0) {
-      return wx.showToast({
-        icon: 'none',
-        title: '请选择时段'
-      })
-    }
     try {
       wx.showLoading({ title: '', })
       const obj = {

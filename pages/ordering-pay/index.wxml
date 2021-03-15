@@ -42,7 +42,7 @@
             range="{{timeIntervals}}">
             <view class="picker">
               <view class="picker-text">
-                {{timeIntervals[timeIntervalIndex].label || "请选择"}}
+                {{timeIntervals[timeIntervalIndex].label}}
               </view>
               <image class="picker-down-icon" src="/images/down.png" />
             </view>

@@ -65,8 +65,8 @@ const getDates = date => {
       content: [
         // 默认 早餐 和 午餐
         // { id: 1, imgUrl: '/images/zc.png', type: "早餐", typeCode: 1 },
-        { id: 2, imgUrl: '/images/wc.png', type: "中午", typeCode: 2 },
-        // { id: 3, imgUrl: '/images/zc.png', type: "晚餐", typeCode: 3 },
+        { id: 2, imgUrl: '/images/wc.png', type: "午餐", typeCode: 2 },
+        { id: 3, imgUrl: '/images/zc.png', type: "晚餐", typeCode: 3 },
         // { id: 4, imgUrl: '/images/wc.png', type: "夜宵", typeCode: 4 }
       ],
       dateString: "" + y + prefix0(m) + prefix0(d)
@@ -127,7 +127,7 @@ Page({
     loading: false,
     type: [
       // { label: "早餐", value: 1 },
-      { label: "中午", value: 2 },
+      { label: "午餐", value: 2 },
       // { label: "晚餐", value: 3 },
       // { label: "夜宵", value: 4 }
     ]
@@ -201,8 +201,8 @@ Page({
         const newContent = [
           // 默认 早餐 和 午餐
           // { id: 1, imgUrl: '/images/zc.png', type: "早餐", typeCode: 1 },
-          { id: 2, imgUrl: '/images/wc.png', type: "中午", typeCode: 2 },
-          // { id: 3, imgUrl: '/images/zc.png', type: "晚餐", typeCode: 3 },
+          { id: 2, imgUrl: '/images/wc.png', type: "午餐", typeCode: 2 },
+          { id: 3, imgUrl: '/images/zc.png', type: "晚餐", typeCode: 3 },
           // { id: 4, imgUrl: '/images/wc.png', type: "夜宵", typeCode: 4 }
         ];
         let index = tabs.length;
