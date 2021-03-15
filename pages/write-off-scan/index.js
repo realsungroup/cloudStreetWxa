@@ -98,7 +98,7 @@ Page({
       success: (res) => {
         wx.navigateTo({
           url: '/pages/write-off-confirme/index?recid=' + res.result,
-        })
+        });
       }
     })
   },

@@ -8,6 +8,11 @@
   flex-direction: column;
   height: 100%;
 }
+.select-date{
+  display: flex;
+  padding: 0rpx 24rpx;
+  align-items: center;
+}
 
 .weui-tabs-bar__wrp {
   border-bottom: 1px solid #eee;
@@ -74,4 +79,29 @@
   font-size: 28rpx;
   color: #333333;
   font-weight: 400;
+}
+
+.picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24rpx;
+  background: #ffffff;
+  width: 260rpx;
+  height: 56rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid #ececec;
+}
+
+.picker-text {
+  flex: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 12rpx;
+}
+
+.picker-down-icon {
+  height: 32rpx;
+  width: 32rpx;
 }

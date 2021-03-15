@@ -48,10 +48,14 @@ Page({
   getData: async function (recid) {
     try {
       this.setData({ loading: true });
+      const token = wx.getStorageSync('restaurant-manager-token');
       const { data } = await cloudRetrieve({
-        resid: 546782725601,
+        resid: 668699951366,
         subresid: 512140171786,
         cmswhere: `REC_ID = '${recid}'`,
+      }, {
+        token,
+        baseUrl: 'https://finisar.realsun.me:9092'
       });
       if (data.length == 1) {
         const orderList = this.dealOrdersData(data);
