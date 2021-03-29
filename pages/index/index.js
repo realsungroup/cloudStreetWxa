@@ -80,9 +80,9 @@ Page({
       if (val) {
         this.getAccountInfo();
         this.fetchOrders();
-        // this.fetchOrdersTimer = setInterval(() => {
-        //   this.fetchOrders();
-        // }, 5000);
+        this.fetchOrdersTimer = setInterval(() => {
+          this.fetchOrders();
+        }, 5000);
       } else {
         clearInterval(this.fetchOrdersTimer);
         this.setData({
@@ -142,10 +142,11 @@ Page({
   fetchOrders: async function () {
     try {
       const orders = await getOrdersApi();
+      const currentOrder = orders.data[0];
       if (orders.data.length) {
         this.setData({
           hasOrder: true,
-          currentOrder: orders.data[0],
+          currentOrder: { ...currentOrder, showRefundBtn: dayjs().isBefore(dayjs(currentOrder.starttime)) },
           orders: orders.data,
         })
       } else {
@@ -304,9 +305,16 @@ Page({
   },
   refund: function () {
     const { currentOrder } = this.data;
-    if (!currentOrder.paywxTransid) {
+    if (!currentOrder.paywxTransid ) {
       return wx.showToast({
-        title: '无法退款',
+        title: '订单未支付',
+        icon: 'none',
+        duration: 1500
+      });
+    }
+    if ( dayjs().isAfter(dayjs(currentOrder.starttime))) {
+      return wx.showToast({
+        title: '已超过订单开始时间',
         icon: 'none',
         duration: 1500
       });

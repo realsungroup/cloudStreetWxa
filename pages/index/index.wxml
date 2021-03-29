@@ -64,7 +64,7 @@
                   class="lz-button--primary order-button ">
                   付款
                 </button>
-                <button wx:if="{{currentOrder.paywxTransid && !currentOrder.refundwxTransid}}" bindtap="refund"
+                <button wx:if="{{currentOrder.paywxTransid && !currentOrder.refundwxTransid && currentOrder.showRefundBtn}}" bindtap="refund"
                   size="mini" class="lz-button--primary order-button ">
                   退款
                 </button>
