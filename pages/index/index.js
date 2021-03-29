@@ -133,6 +133,7 @@ Page({
           loadingMore: false
         });
       }
+      this.setData({ loadingMore: false })
     } catch (error) {
       console.error(error);
       this.setData({ loadingMore: false })

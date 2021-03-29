@@ -56,18 +56,6 @@
         "selectedIconPath": "images/homepage_selected.png"
       },
       {
-        "pagePath": "pages/shops/index",
-        "text": "商铺",
-        "iconPath": "images/shop.png",
-        "selectedIconPath": "images/shop_select.png"
-      },
-      {
-        "pagePath": "pages/cart/index",
-        "text": "购物车",
-        "iconPath": "images/cart.png",
-        "selectedIconPath": "images/cart_selected.png"
-      },
-      {
         "pagePath": "pages/my/index",
         "text": "我的",
         "iconPath": "images/user.png",

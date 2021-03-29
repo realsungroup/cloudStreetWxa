@@ -13,6 +13,20 @@
       <view bindtap="goSearch" class="home__search">
         <image style="height:48rpx;width:48rpx" src="/images/search.png" />搜索商品</view>
     </view>
+    <view wx:if="{{businessInfo.business_fullname && businessInfo.business_fullname != '企业员工服务'}}"  class="ordering-container">
+      <view bindtap="goOrdering"  class="ordering-action">
+        <image class="ordering-action-icon" src="/images/home-ordering.jpg" />
+        <view>
+          <view class="order-text--cn">预定</view>
+        </view>
+      </view>
+      <view bindtap="goPickup" class="ordering-action">
+        <view>
+          <view class="order-text--cn">领取</view>
+        </view>
+        <image class="ordering-action-icon" src="/images/pickup.png" />
+      </view>
+    </view>
     <view class="page-section  swiper">
       <!-- <swiper indicator-dots autoplay circular vertical interval="{{interval}}" duration="{{duration}}"
         previous-margin="{{previousMargin}}px" next-margin="{{nextMargin}}px">
@@ -70,20 +84,7 @@
       </view> -->
     </view>
     <!-- <button bindtap="goRideDetail">运动详情</button> -->
-    <view wx:if="{{businessInfo.business_fullname && businessInfo.business_fullname != '企业员工服务'}}"  class="ordering-container">
-      <view bindtap="goOrdering"  class="ordering-action">
-        <image class="ordering-action-icon" src="/images/home-ordering.jpg" />
-        <view>
-          <view class="order-text--cn">预定</view>
-        </view>
-      </view>
-      <view bindtap="goPickup" class="ordering-action">
-        <view>
-          <view class="order-text--cn">领取</view>
-        </view>
-        <image class="ordering-action-icon" src="/images/pickup.png" />
-      </view>
-    </view>
+   
     <view class="goods-list">
       <view class="list-title-tag">
         <text>热门推荐</text>

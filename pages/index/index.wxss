@@ -141,8 +141,8 @@ page {
 
 .home-tip-container {
   position: relative;
-  top: -64rpx;
-  margin: 0 24rpx;
+  /* top: -64rpx; */
+  margin: 24rpx;
 }
 
 .lz-card {

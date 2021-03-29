@@ -124,7 +124,9 @@ Page({
               // 设备当前订单
               const deviceOrder = deviceState[661964402374][0];
               if (this.data.loginedUser && (deviceOrder.userid === this.data.loginedUser.UserInfo.EMP_ID)) {
-                this.setData({ scanDevice: data });
+                wx.redirectTo({
+                  url: '/pages/ride-detail/index?orderid=' + deviceOrder.orderid,
+                });
               } else {
                 wx.showModal({
                   showCancel: false,
