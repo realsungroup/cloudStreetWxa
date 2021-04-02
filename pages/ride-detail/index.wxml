@@ -39,7 +39,7 @@
       </view>
     </view>
   </view>
-  <view wx:if="{{!order.goliveid}}" class="card">
+  <view wx:if="{{!order.goliveid && order.leftminutes > 0}}" class="card">
     <view class="card-title">您已经可以开始扫码使用设备了</view>
     <view bindtap="handleScan" class="scan-container">
       <image class="scan-icon" src="/images/scan_big.png" />
@@ -50,7 +50,7 @@
       实际结束时间会根据您的实际开始时间计算。
     </view>
   </view>
-  <view wx:if="{{order.goliveid && (order.leftminutes == 0)}}" class="card">
+  <view wx:if="{{order.leftminutes <= 0}}" class="card">
     <view>
       <view class="card-title">本次预约已经结束</view>
       <view style="display:flex;justify-content:center">

@@ -80,7 +80,7 @@ Page({
       if (res.data.length) {
         const data = res.data[0]
         this.setData({ order: data });
-        this.createDashboard(data.leftminutes);
+        this.createDashboard(data.leftminutes / 60);
         if (res.data[0].goliveid) {
           try {
             const resp = await startWebSocketService(data.certfile, data.certpass);
@@ -108,8 +108,8 @@ Page({
       });
       if (res.data) {
         const data = JSON.parse(res.data);
-        this.createDashboard(data.leftminutes);
-        // console.log(dayjs().format('HH:mm:ss'), data);
+        this.createDashboard(data.leftminutes / 60);
+        console.log(dayjs().format('HH:mm:ss'), data);
         this.setData({ order: { ...this.data.order, ...data } });
       }
     });
@@ -148,7 +148,7 @@ Page({
     ctx.setTextAlign("center");
     ctx.setTextBaseline("middle");
     ctx.setFillStyle("#FA541C");
-    ctx.fillText(leftTime, 60, 66);
+    ctx.fillText(leftTime.toFixed(1), 60, 66);
 
     ctx.setFontSize(14);
     ctx.setTextAlign("center");
@@ -169,14 +169,20 @@ Page({
     try {
       await lockDeviceApi({ goliveid: this.data.order.goliveid });
     } catch (error) {
-
+      wx.showModal({
+        showCancel: false,
+        content: error.message
+      })
     }
   },
   unlockDevice: async function () {
     try {
       await unlockDeviceApi({ goliveid: this.data.order.goliveid });
     } catch (error) {
-
+      wx.showModal({
+        showCancel: false,
+        content: error.message
+      })
     }
   },
   handleScan: function () {

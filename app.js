@@ -74,6 +74,7 @@ App({
         }
       });
       const storageUserInfo = wx.getStorageSync('userInfo');
+      this.setGlobalData({loginedUser: storageUserInfo});
       storageUserInfo && this._userLogin(storageUserInfo.UserInfo.EMP_OPENID);
     } catch (error) {
       console.error(error);

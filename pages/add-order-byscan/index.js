@@ -21,11 +21,16 @@ Page({
   onLoad: function (options) {
     const { q, timeid } = options;
     if (app.globalData.loginedUser) {
-      this.afterLogined(timeid, q);
       this.setData({ loginedUser: app.globalData.loginedUser })
     }
-    app.$watch('loginedUser', (val,old) => {
-      this.setData({ loginedUser: val });
+    if (app.globalData.miniProgramLogined) {
+      this.afterLogined(timeid, q);
+    }
+    app.$watch('loginedUser', (val, old) => {
+      this.setData({ loginedUser: val })
+    });
+    app.$watch('miniProgramLogined', (val, old) => {
+      this.setData({ miniProgramLogined: val });
       if (val && !old) {
         this.afterLogined(timeid, q);
       }
