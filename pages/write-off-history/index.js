@@ -14,11 +14,13 @@ Page({
     selectedDate: dayjs().format('YYYY-MM-DD'),
     undealed: {
       data: [],
-      hasMore: true
+      currentPage: 0,
+      totalPage: 10,
     },
     dealed: {
       data: [],
-      hasMore: true
+      currentPage: 0,
+      totalPage: 10,
     },
     loading: true
   },
@@ -37,7 +39,8 @@ Page({
       { title: '已核销' },
     ]
     this.setData({ tabs, tabSwiperHeight });
-    this.getUndealed();
+    this.getUndealed(0);
+    this.getDealed(0);
   },
 
   /**
@@ -51,13 +54,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const { activeTab } = this.data;
+    const { activeTab, undealed, dealed } = this.data;
     switch (activeTab) {
       case 0:
-        this.getUndealed();
+        this.getUndealed(undealed.currentPage);
         break;
       case 1:
-        this.getDealed();
+        this.getDealed(dealed.currentPage);
         break;
       default:
         break;
@@ -91,7 +94,7 @@ Page({
   onReachBottom: function () {
 
   },
-  getDealed: async function () {
+  getDealed: async function (pageIndex = 0) {
     const { selectedDate } = this.data;
     try {
       const token = wx.getStorageSync('restaurant-manager-token');
@@ -99,6 +102,8 @@ Page({
       const res = await cloudRetrieve({
         resid: '668700234824',
         subresid: '512140171786',
+        pageSize: 10,
+        pageIndex,
         cmswhere: `C3_512140206161 = '${dayjs(selectedDate).format('YYYYMMDD')}'`
       }, {
         token,
@@ -106,7 +111,9 @@ Page({
       });
       this.setData({
         'dealed.data': res.data,
-        'tabs[1].title': `已核销(${res.data.length})`,
+        'dealed.totalPage': Math.ceil(res.total / 10),
+        'dealed.currentPage': pageIndex,
+        'tabs[1].title': `已核销(${res.total})`,
         loading: false
       })
     } catch (error) {
@@ -114,14 +121,19 @@ Page({
       this.setData({ loading: false });
     }
   },
-  getUndealed: async function () {
-    const { selectedDate } = this.data;
+  getUndealed: async function (pageIndex = 0) {
+    const { selectedDate, loading } = this.data;
+    if (loading) {
+      return;
+    }
     try {
       this.setData({ loading: true });
       const token = wx.getStorageSync('restaurant-manager-token');
       const res = await cloudRetrieve({
         resid: '668699951366',
         subresid: '512140171786',
+        pageSize: 10,
+        pageIndex,
         cmswhere: `C3_512140206161 = '${dayjs(selectedDate).format('YYYYMMDD')}'`
       }, {
         token,
@@ -129,7 +141,9 @@ Page({
       });
       this.setData({
         'undealed.data': res.data,
-        'tabs[0].title': `未核销(${res.data.length})`,
+        'undealed.totalPage': Math.ceil(res.total / 10),
+        'undealed.currentPage': pageIndex,
+        'tabs[0].title': `未核销(${res.total})`,
         loading: false
       });
     } catch (error) {
@@ -143,21 +157,28 @@ Page({
       const { undealed, dealed } = this.data;
       switch (index) {
         case 0:
-          !undealed.data.length && this.getUndealed();
+          !undealed.data.length && this.getUndealed(0);
           break;
         case 1:
-          !dealed.data.length && this.getDealed();
+          !dealed.data.length && this.getDealed(0);
           break;
         default:
           break;
       }
     });
   },
+  handleScrolltolower: function () {
+    this.data.undealed.hasMore && this.getUndealed()
+  },
   selectedDateChange: function (e) {
     const { value } = e.detail;
-    this.setData({ selectedDate: value }, () => {
-      this.getUndealed();
-      this.getDealed();
+    this.setData({
+      selectedDate: value,
+      'undealed.currentPage': 0,
+      'dealed.currentPage': 0,
+    }, () => {
+      this.getUndealed(0);
+      this.getDealed(0);
     });
   },
   goDetail: function (e) {
@@ -165,5 +186,74 @@ Page({
     wx.navigateTo({
       url: '/pages/write-off-confirme/index?recid=' + recid,
     });
-  }
+  },
+  firstPage: function (e) {
+    const { type } = e.currentTarget.dataset;
+    switch (type) {
+      case "undealed":
+        this.getUndealed(0);
+        break;
+      case "dealed":
+        this.getDealed(0);
+        break;
+      default:
+        break;
+    }
+  },
+  prePage: function (e) {
+    const { undealed, dealed } = this.data;
+    const { type } = e.currentTarget.dataset;
+    switch (type) {
+      case "undealed":
+        if (undealed.currentPage > 0) {
+          this.getUndealed(undealed.currentPage - 1);
+        } else {
+          wx.showToast({
+            title: '已经是第一页了',
+            icon: "none"
+          })
+        }
+        break;
+      case "dealed":
+        if (dealed.currentPage > 0) {
+          this.getDealed(dealed.currentPage - 1);
+        } else {
+          wx.showToast({
+            title: '已经是第一页了',
+            icon: "none"
+          })
+        }
+        break;
+      default:
+        break;
+    }
+  },
+  nextPage: function (e) {
+    const { undealed, dealed } = this.data;
+    const { type } = e.currentTarget.dataset;
+    switch (type) {
+      case "undealed":
+        if (undealed.totalPage - 1 > undealed.currentPage) {
+          this.getUndealed(undealed.currentPage + 1);
+        } else {
+          wx.showToast({
+            title: '没有下一页了',
+            icon: "none"
+          })
+        }
+        break;
+      case "dealed":
+        if (dealed.totalPage - 1 > dealed.currentPage) {
+          this.getDealed(dealed.currentPage + 1);
+        } else {
+          wx.showToast({
+            title: '没有下一页了',
+            icon: "none"
+          })
+        }
+        break;
+      default:
+        break;
+    }
+  },
 })

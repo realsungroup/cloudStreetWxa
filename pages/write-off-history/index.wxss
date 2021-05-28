@@ -105,3 +105,14 @@
   height: 32rpx;
   width: 32rpx;
 }
+.pagination{
+  display: flex;
+  align-items: center;
+}
+.pagination-btn{
+  border-radius: 8rpx;
+  background: #FA541C;
+  color: #ffffff;
+  padding: 8rpx 12rpx;
+  margin: 12rpx;
+}

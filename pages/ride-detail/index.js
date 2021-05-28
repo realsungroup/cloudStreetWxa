@@ -86,9 +86,7 @@ Page({
             const resp = await startWebSocketService(data.certfile, data.certpass);
             this._connetSocket(res.data[0].webSocketAdress)
           } catch (error) {
-
           }
-
         };
       }
     } catch (error) {
@@ -177,7 +175,15 @@ Page({
   },
   unlockDevice: async function () {
     try {
-      await unlockDeviceApi({ goliveid: this.data.order.goliveid });
+      const res = await getOrderByIdApi(this.data.order.orderid);
+      if(res.data.length){
+        const data = res.data[0]
+        if(data.leftminutes>0){
+          await unlockDeviceApi({ goliveid: this.data.order.goliveid });
+        }
+        this.setData({order:data})
+        this.createDashboard(data.leftminutes / 60);
+      }
     } catch (error) {
       wx.showModal({
         showCancel: false,

@@ -39,13 +39,19 @@
             </view>
           </view>
         </view>
+        <view class="pagination" wx:if="{{!loadingData && undealed.data.length > 0}}">
+          <view class="pagination-btn" data-type="undealed" bindtap="firstPage">首页</view>
+          <view class="pagination-btn" data-type="undealed" bindtap="prePage">上一页</view>
+          <view class="pagination-btn" data-type="undealed" bindtap="nextPage">下一页</view>
+          <view>当前第{{undealed.currentPage+1}}页</view>
+        </view>
       </view>
       <view style="height: {{tabSwiperHeight}}px" class="tab-content" slot="tab-content-1">
         <view class="empty-box" wx:if="{{!loadingData && dealed.data.length==0}}">
           <image src="/images/emptybox@2x.png" />
           <view>暂无数据</view>
         </view>
-        <view bindtap="handleClick" data-order-id="{{item.order_ID}}" wx:for="{{dealed.data}}" wx:key="REC_ID"
+        <view data-order-id="{{item.order_ID}}" wx:for="{{dealed.data}}" wx:key="REC_ID"
           class="order-item">
           <image class="order-item-image" src="{{item.C3_514046415115}}" />
           <view class="order-info">
@@ -62,6 +68,12 @@
               金额：<text class="price-color">￥{{item.C3_512140208817}}</text>
             </view>
           </view>
+        </view>
+        <view class="pagination" wx:if="{{!loadingData && dealed.data.length > 0}}">
+          <view class="pagination-btn" data-type="dealed" bindtap="firstPage">首页</view>
+          <view class="pagination-btn" data-type="dealed" bindtap="prePage">上一页</view>
+          <view class="pagination-btn" data-type="dealed" bindtap="nextPage">下一页</view>
+          <view>当前第{{dealed.currentPage+1}}页</view>
         </view>
       </view>
     </mp-tabs>
