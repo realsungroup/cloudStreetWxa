@@ -12,7 +12,8 @@ Page({
     minutesArr: [5, 10, 20, 30, 40, 50, 60, 120, 240, 360],
     value: undefined,
     scanDevice: {},//扫到的设备信息
-    loginedUser: null
+    loginedUser: null,
+    adding: false
   },
 
   /**
@@ -171,7 +172,10 @@ Page({
     this.setData({ value })
   },
   addOrder: async function () {
-    const { scanDevice } = this.data;
+    const { scanDevice ,adding} = this.data;
+    if(adding){
+      return;
+    }
     if (!app.globalData.loginedUser) {
       return wx.showModal({
         showCancel: false,
@@ -194,16 +198,15 @@ Page({
           icon: 'none'
         })
       }
+      this.setData({adding:true});
+      wx.showLoading({
+        title: '下单并支付',
+      })
       const { value, minutesArr } = this.data;
       const good_id = scanDevice[660929208133][0].shopservice_id;
       const starttime = dayjs().format('YYYY-MM-DD HH:mm:ss');
       const endtime = dayjs().add(minutesArr[value], 'minute').format('YYYY-MM-DD HH:mm:ss');
       try {
-        wx.showToast({
-          title: '下单并支付',
-          icon: 'loading',
-          duration: 0
-        })
         // 下单
         const orderRes = await addOrderApi({
           starttime,
@@ -226,12 +229,15 @@ Page({
             wx.requestPayment({
               ...payment,
               success: async (res) => {
+                this.setData({adding:false});
+                wx.hideLoading();
                 wx.redirectTo({
                   url: '/pages/ride-detail/index?orderid=' + order.orderid,
                 });
               },
               fail(res) {
-                console.error('pay fail', res);
+                this.setData({adding:false});
+                wx.hideLoading();
                 wx.showToast({
                   title: '用户取消支付',
                   icon: 'none'
@@ -239,9 +245,19 @@ Page({
               }
             })
           },
-          fail: console.error,
+          fail: (error)=>{
+            this.setData({adding:false});
+            wx.hideLoading();
+            wx.showModal({
+              showCancel: false,
+              content: error.message,
+              title: '提示'
+            });
+          },
         })
       } catch (error) {
+        this.setData({adding:false});
+        wx.hideLoading();
         wx.showModal({
           showCancel: false,
           content: error.message,
