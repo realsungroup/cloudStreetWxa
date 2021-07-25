@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    minutesArr: [5, 10, 20, 30, 40, 50, 60, 120, 240, 360],
+    minutesArr: [30],
     value: undefined,
     scanDevice: {},//扫到的设备信息
     loginedUser: null,
