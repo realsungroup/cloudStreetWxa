@@ -10,7 +10,7 @@ App({
   globalData: {
     businessInfo: {},
     miniProgramLogined: false,
-    hasAuth: false,
+    wxUserInfo: null,
     userLogined: false,
     loginedUser: null,
     personalInfo: {},
@@ -29,43 +29,6 @@ App({
       },
     });
     await this._miniProgramLogin();
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          this.setGlobalData({ hasAuth: true });
-          wx.login({
-            success: async res => {
-              const code = res.code;
-              if (code) {
-                wx.getUserInfo({
-                  success: async (res) => {
-                    const { iv, encryptedData } = res
-                    try {
-                      const result = await getWXUserInfo({
-                        code,
-                        AppId: this.globalData.businessInfo.wxa_appid,
-                        AppSecret: this.globalData.businessInfo.wxa_appsecrect,
-                        iv: iv,
-                        encrypteddata: encryptedData
-                      });
-                      const openId = result.openId;
-                      const unionId = result.unionId;
-                      if (openId && unionId) {
-                        wx.setStorageSync('wxUserInfo', result);
-                      }
-                    } catch (error) {
-                      console.log(error)
-                    }
-                  }
-                })
-              }
-            },
-          })
-        } else {
-          this.setGlobalData({ hasAuth: false })
-        }
-      },
-    });
 
     try {
       this.$watch('userLogined', (val, old) => {
@@ -74,6 +37,10 @@ App({
         }
       });
       const storageUserInfo = wx.getStorageSync('userInfo');
+      const wxUserInfo = wx.getStorageSync('wxUserInfo');
+      if(wxUserInfo){
+        this.setGlobalData({'wxUserInfo': wxUserInfo})
+      }
       this.setGlobalData({loginedUser: storageUserInfo});
       storageUserInfo && this._userLogin(storageUserInfo.UserInfo.EMP_OPENID);
     } catch (error) {

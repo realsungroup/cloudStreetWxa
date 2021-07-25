@@ -4,7 +4,7 @@
     <view class="tip-text">
       请完成微信授权以继续使用
     </view>
-    <button type="primary" style="width:auto" size="default" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+    <button type="primary" style="width:auto" size="default" bindtap="getUserInfo">
       微信授权用户信息
     </button>
   </view>

@@ -11,7 +11,8 @@ Page({
     userLogined: false,
     personalInfo: null,
     avatarUrl: '',
-    canDisplay: false
+    canDisplay: false,
+    wxUserInfo: null
   },
 
   /**
@@ -39,16 +40,21 @@ Page({
       }
     });
     this.setData({
-      userLogined: app.globalData.userLogined
+      userLogined: app.globalData.userLogined,
+      personalInfo: app.globalData.personalInfo,
+      wxUserInfo: app.globalData.wxUserInfo
     });
     app.$watch('userLogined', (val) => {
       this.setData({
         userLogined: val
       })
     });
-    this.setData({
-      personalInfo: app.globalData.personalInfo
+    app.$watch('wxUserInfo', (val) => {
+      this.setData({
+        wxUserInfo: val
+      })
     });
+
     app.$watch('personalInfo', (val) => {
       this.setData({
         personalInfo: val
@@ -57,79 +63,20 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    !this.data.avatarUrl && wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl
-              })
-            }
-          })
-        }
-      },
-    });
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   handleLogin: function () {
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.navigateTo({
-            url: '/pages/login/index',
-          })
-        } else {
-          wx.navigateTo({
-            url: '/pages/wxauth/index',
-          })
-        }
-      },
-    })
+    if (this.data.wxUserInfo) {
+      wx.navigateTo({
+        url: '/pages/login/index',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/wxauth/index',
+      })
+    }
   },
   gotoUserInfo: function () {
     const { userLogined } = this.data;

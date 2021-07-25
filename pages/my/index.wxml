@@ -12,7 +12,7 @@
 
     <view wx:if="{{userLogined}}" class="lz-my__header">
       <view class="lz-my__header-left">
-        <image class="user-avatar" src="{{avatarUrl}}" />
+        <image class="user-avatar" src="{{wxUserInfo.avatarUrl}}" />
       </view>
       <view class="lz-my__header-right">
         <view class="user-name">{{personalInfo.nickname}}</view>

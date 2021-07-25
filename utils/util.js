@@ -89,6 +89,38 @@ const save100 = (data, config = {}) => {
     });
   });
 }
+
+const getWXUserInfo = ()=>{
+  return new Promise((resolve, reject)=>{
+    wx.cloud.callFunction({
+      name: 'getWxUserInfo',
+      success(res){
+        const response = res.result;
+        resolve(response)        
+      },
+      fail(err){
+        reject(err)
+      }
+    })
+  })
+}
+const getWXPhone = (cloudID)=>{
+  return new Promise((resolve, reject)=>{
+    wx.cloud.callFunction({
+      name: 'getWxPhone',
+      data:{
+        cloudID
+      },
+      success(res){
+        const response = res.result;
+        resolve(response)        
+      },
+      fail(err){
+        reject(err)
+      }
+    })
+  })
+}
 /**
  * 返回数组（数组中元素为对象）中存在值为 val 的对象的下标（类似 Array.prototype.indexOf）
  * @param {Array} arr 数组，数组元素为对象
@@ -125,5 +157,7 @@ module.exports = {
   cloudRetrieve,
   indexOfObj,
   transformDate,
-  save100
+  save100,
+  getWXUserInfo,
+  getWXPhone
 }

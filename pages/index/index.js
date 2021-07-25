@@ -12,8 +12,6 @@ Page({
     businessInfo: {},
     goods: [],
     miniProgramLogined: false,
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     hasOrder: false,
     orders: [],
     currentOrder: null,
@@ -53,14 +51,6 @@ Page({
       this.setData({ miniProgramLogined: val });
       if (val && !old) {
         this.fetchBusinessGoods(0);
-      }
-    });
-    if (app.globalData.hasAuth) {
-      this.setData({ hasUserInfo: true })
-    }
-    app.$watch('hasAuth', (val) => {
-      if (val) {
-        this.setData({ hasUserInfo: true })
       }
     });
     if (app.globalData.businessInfo[660914792669]) {
