@@ -42,11 +42,11 @@ const register = ({ phoneNumber, unionid, wxappid, openid, nickname, dept_id }) 
     userid: openid,
     nickname, // 昵称
     validresid: 616852937051,
-    unionid,
-    openid,
-    wxappid,
+    unionid:unionid,
+    openid:openid,
+    wxappid:wxappid,
     newpass: openid.substring(0, 8),
-    dept_id,//商家编号
+    dept_id:dept_id,//商家编号
     coderequired: false,
     validcode: ''
   };
