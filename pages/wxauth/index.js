@@ -50,6 +50,7 @@ Page({
                 userinfo.openId = result.openid
                 userinfo.appid = result.appid
                 userinfo.unionId = result.unionid
+                userinfo.avatarUrl = userinfo.avatarUrl
                 app.setGlobalData({'wxUserInfo': userinfo})
                 wx.setStorageSync('wxUserInfo', userinfo);
                 wx.redirectTo({

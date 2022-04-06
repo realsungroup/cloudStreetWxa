@@ -10,7 +10,6 @@ Page({
   data: {
     userLogined: false,
     personalInfo: null,
-    avatarUrl: '',
     canDisplay: false,
     wxUserInfo: null
   },
@@ -95,7 +94,8 @@ Page({
     app.setGlobalData({
       userLogined: false,
       loginedUser: null,
-      personalInfo: {}
+      personalInfo: {},
+      wxUserInfo: null
     });
   },
   scanRide: function () {

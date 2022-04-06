@@ -13,6 +13,7 @@ Page({
     value: undefined,
     scanDevice: {},//扫到的设备信息
     loginedUser: null,
+    avatarUrl:null,
     adding: false
   },
 
@@ -23,12 +24,14 @@ Page({
     const { q, timeid } = options;
     if (app.globalData.loginedUser) {
       this.setData({ loginedUser: app.globalData.loginedUser })
+      this.setData({ avatarUrl: app.globalData.wxUserInfo.avatarUrl })
     }
     if (app.globalData.miniProgramLogined) {
       this.afterLogined(timeid, q);
     }
     app.$watch('loginedUser', (val, old) => {
       this.setData({ loginedUser: val })
+      this.setData({avatarUrl:app.globalData.wxUserInfo.avatarUrl})
     });
     app.$watch('miniProgramLogined', (val, old) => {
       this.setData({ miniProgramLogined: val });
@@ -206,6 +209,7 @@ Page({
       const good_id = scanDevice[660929208133][0].shopservice_id;
       const starttime = dayjs().format('YYYY-MM-DD HH:mm:ss');
       const endtime = dayjs().add(minutesArr[value], 'minute').format('YYYY-MM-DD HH:mm:ss');
+      let userHeaderUrl = this.data.avatarUrl
       try {
         // 下单
         const orderRes = await addOrderApi({
@@ -214,6 +218,7 @@ Page({
           good_id,
           goliveid: scanDevice.goliveid,
           C3_658000358736: 'Y',
+          userHeaderUrl
         });
         const order = orderRes.data[0];
         // 支付
