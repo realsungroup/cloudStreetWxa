@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": false,
     "postcss": true,
@@ -40,9 +40,9 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.18.1",
-  "appid": "wx70d3b74160c4e9af",
-  "projectname": "bicycle-mall",
+  "libVersion": "2.21.0",
+  "appid": "wxbb36d2901639c824",
+  "projectname": "lafit-bicycle-mall",
   "debugOptions": {
     "hidedInDevtools": []
   },
