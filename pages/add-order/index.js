@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    minutesArr: [30],
+    minutesArr: [30,60],
     value: [0],
     good_id: '',
     adding:false,
