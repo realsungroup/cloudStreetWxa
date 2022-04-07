@@ -7,7 +7,7 @@
       swiperClass="weui-tabs-swiper" bindchange="onTabChange" activeClass="tab-bar-title__selected" tabClass="lz-tabs">
       <block wx:for="{{tabs}}" wx:key="title">
         <view class="tab-content" data-set="{{item}}" slot="tab-content-{{index}}">
-          <block wx:if="{{!loading}}" wx:for="{{item.content}}" wx:key="id" wx:for-item="content">
+          <!-- <block wx:if="{{!loading}}" wx:for="{{item.content}}" wx:key="id" wx:for-item="content">
             <view bindtap="goOrder" data-type="{{content.typeCode}}" wx:if="{{!isOrdered}}" class="content-item">
               <image src="{{content.imgUrl}}" />
               <view class="content-name">{{content.type}}</view>
@@ -31,7 +31,7 @@
                 <view data-recid="{{content.recId}}" catchtap="unsubscribe" class="content-right-btn">退订</view>
               </view>
             </view>
-          </block>
+          </block> -->
         </view>
       </block>
     </mp-tabs>

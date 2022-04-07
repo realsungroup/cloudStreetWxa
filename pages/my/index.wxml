@@ -35,12 +35,12 @@
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view>
-      <!-- <view class="list-item" bindtap="scanRide">扫码骑行
+      <view class="list-item" bindtap="scanRide">扫码骑行
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
-      </view> -->
-      <view class="list-item" bindtap="goAddressManage">我的订单
+      </view>
+       <!-- <view class="list-item" bindtap="goAddressManage">商品订单
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
@@ -59,17 +59,17 @@
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
-      </view>
+      </view> -->
       <!-- <view class="list-item" bindtap="goConsumeDetail">就餐明细
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
       </view> -->
-      <view wx:if="{{canDisplay}}" class="list-item" bindtap="writeOff">核销
+      <!-- <view wx:if="{{canDisplay}}" class="list-item" bindtap="writeOff">核销
         <view>
           <image class="right-arrow" src="/images/right_arrow.png" />
         </view>
-      </view>
+      </view> -->
       <!-- 
       <view class="list-item">联系我们
       </view> -->

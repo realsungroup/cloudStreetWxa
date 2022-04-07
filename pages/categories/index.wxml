@@ -1,7 +1,7 @@
 <!--pages/categories/index.wxml-->
 <view class="container  category-page-container">
   <mp-navigation-bar loading="{{loading}}" background="#ffffff" title="分类" back="{{false}}"></mp-navigation-bar>
-  <view class="content">
+  <!-- <view class="content">
     <scroll-view class="left">
       <view bindtap="changeLv1" data-index="{{index}}"
         class="lv1Categories-item {{selectedLv1== index ? 'selected' :''}}" wx:key="REC_ID" wx:for="{{lv1Categoryies}}">
@@ -22,5 +22,5 @@
         </view>
       </view>
     </scroll-view>
-  </view>
+  </view> -->
 </view>
