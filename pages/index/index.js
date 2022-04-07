@@ -213,7 +213,7 @@ Page({
               wx.showModal({
                 showCancel: false,
                 title: '提示',
-                content: '二维码已过期，请重新扫码'
+                content: '设备id无效'
               });
             }
           } catch (error) {

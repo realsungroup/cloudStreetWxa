@@ -101,17 +101,17 @@ Page({
       } else {
         wx.showModal({
           showCancel: false,
-          content: '二维码不正确，请重新扫码',
+          content: '系统中无此设备id',
           title: '提示',
         });
       }
     } else {
       wx.showModal({
         showCancel: false,
-        content: '二维码不正确，请重新扫码',
-        title: '提示',
-      });
-    }
+          content: '二维码不正确，请重新扫码',
+          title: '提示',
+        });
+      }
   },
 
   fetchData: async function (timeid) {
@@ -158,7 +158,7 @@ Page({
         wx.showModal({
           showCancel: false,
           title: '提示',
-          content: '二维码已过期，请重新扫码'
+          content: '设备id无效'
         });
       }
     } catch (error) {

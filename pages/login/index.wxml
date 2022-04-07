@@ -1,6 +1,6 @@
 <!--pages/login/index.wxml-->
 <view class="login-page">
   <button type="primary" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
-    微信登录
+    手机号授权
   </button>
 </view>
