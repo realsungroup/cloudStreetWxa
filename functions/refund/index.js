@@ -7,8 +7,8 @@ cloud.init()
 exports.main = async (event, context) => {
   const { out_refund_no, transaction_id, out_trade_no, refund_fee, totalFee } = event;
   const res = await cloud.cloudPay.refund({
-    "subMchId": "1510068581",
-    "envId": "cloud1-0giyut3vc851a989",
+    "subMchId": "1355621402",
+    "envId": "openshopwx-anj96",
     "functionName": "refundNotice",
     "refund_fee": refund_fee,
     "totalFee": totalFee,
