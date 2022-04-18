@@ -10,9 +10,9 @@ exports.main = async (event, context) => {
     "body": goods_name,
     "outTradeNo": orderid,
     "spbillCreateIp": "127.0.0.1",
-    "subMchId": "1355621402",
+    "subMchId": "1598432261",
     "totalFee": totalFee,
-    "envId": "openshopwx-anj96",
+    "envId": "openshopwx-5gxvh2aj75d30bf6",
     "functionName": "receiveWxpaymentNotice"
   })
   return res;

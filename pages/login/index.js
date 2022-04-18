@@ -71,7 +71,7 @@ Page({
                   unionid: wxUserInfo.unionId,
                   openid: wxUserInfo.openId,
                   nickname: wxUserInfo.nickName,
-                  wxappid: 'wx70d3b74160c4e9af',
+                  wxappid: 'wxbfc5d7fa9ae0bb2d',
                   phoneNumber: result.data.phoneNumber,
                   dept_id: business_ID
                 })
