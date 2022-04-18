@@ -32,8 +32,8 @@ exports.main = async (event, context) => {
         'Accept': "application/json",
       },
       body: JSON.stringify({ //把json数据（对象）解析成字符串
-        Appid: "wxbfc5d7fa9ae0bb2d",
-        AppSecret: "Z0+wGnwlSrWSb7LdE24xq4vI+lv4i9FHvhzp35IQoMPK5zYHNCHG6w==",
+        Appid: "wx70d3b74160c4e9af",
+        AppSecret: "H60ZNuT/a/Kq7bnvSnYIoi3eedgIVyuuwxPcpuByx7HZ7AhppMFuzA==",
         loginmethod: "appid"
       })
     })

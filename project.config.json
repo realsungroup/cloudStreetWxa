@@ -5,66 +5,56 @@
     "include": []
   },
   "setting": {
-    "urlCheck": false,
-    "scopeDataCheck": false,
-    "coverView": true,
+    "urlCheck": true,
     "es6": true,
     "enhance": false,
     "postcss": true,
-    "compileHotReLoad": false,
-    "lazyloadPlaceholderEnable": false,
     "preloadBackgroundData": false,
     "minified": true,
     "newFeature": true,
+    "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
     "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
-    "useIsolateContext": true,
+    "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
     "useApiHostProcess": true,
-    "showShadowRootInWxmlPanel": true,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "disableUseStrict": false,
-    "ignoreUploadUnusedFiles": true,
-    "minifyWXML": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
+    "enableEngineNative": false,
+    "bundle": false,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "lazyloadPlaceholderEnable": false,
+    "disableUseStrict": false,
     "showES6CompileOption": false,
     "useCompilerPlugins": false,
+    "ignoreUploadUnusedFiles": true,
     "useStaticServer": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.21.0",
-  "appid": "wxbfc5d7fa9ae0bb2d",
-  "projectname": "gzzh-bicycle",
+  "libVersion": "2.18.1",
+  "appid": "wx70d3b74160c4e9af",
+  "projectname": "bicycle-mall",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionRoot": "functions/",
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
-  "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
-    "game": {
-      "currentL": -1,
-      "list": []
-    },
-    "miniprogram": {
-      "list": []
-    }
-  },
+  "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
