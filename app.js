@@ -2,7 +2,7 @@
 import { getBusinessInfo, getWXUserInfo, getPersonalinfo, miniProgramLogin, userLogin, addPersonalinfo, getAfterSaleReasons } from './utils/http/http.services';
 
 wx.cloud.init({
-  env: 'cloud1-0giyut3vc851a989',
+  env: 'openshopwx-anj96',
   traceUser: true,
 });
 
@@ -51,8 +51,8 @@ App({
     try {
       const res = await miniProgramLogin({
         data: {
-          Appid: 'wxbb36d2901639c824',
-          AppSecret: '/CKlDPoXtKfQs8gxI3rh0DBSmkIfII3qbCSKBUpch0o8M46oO5tbcg==',
+          Appid: 'wx70d3b74160c4e9af',
+          AppSecret: 'H60ZNuT/a/Kq7bnvSnYIoi3eedgIVyuuwxPcpuByx7HZ7AhppMFuzA==',
           loginmethod: 'appid'
         }
       })
